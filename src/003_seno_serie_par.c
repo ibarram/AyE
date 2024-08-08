@@ -22,7 +22,19 @@ int main(int argc, char *argv[]) {
 
     // Convierte los argumentos de la línea de comandos a sus respectivos tipos
     x = atof(argv[1]);
-    n = atol(argv[2]);
+    //n = atol(argv[2]);
+    int s=1;
+    if(argv[2]=='-')
+        s=-1;
+    int i=0;
+    n = 0;
+    while(*(argv[2]+i)>="0"&&*(argv[2]+i)<="9")
+    {
+        n*=10;
+        n+=(*(argv[2]+i)-"0");
+        i++;
+    }
+    printf("%d\n", n);
 
     // Inicializa las variables para la serie de Taylor
     for (i = 0, fct = x, sx = 0; i < n; i++) {
