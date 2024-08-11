@@ -11,9 +11,11 @@
  * @return 0 si el programa finaliza correctamente, 1 si hay un error en los argumentos.
  */
 int main(int argc, char *argv[]) {
-    double x, sx, fct;
+    double x, sx, fct, pt=0.1;
     long int n, i;
 
+    for(i=0; i<argc; i++)
+        printf("%s\n", argv[i]);
     // Verifica que se pasen exactamente dos argumentos: el valor de x y el número de términos n
     if (argc != 3) {
         fprintf(stderr, "Uso: %s <valor de x> <número de términos>\n", argv[0]);
@@ -21,20 +23,48 @@ int main(int argc, char *argv[]) {
     }
 
     // Convierte los argumentos de la línea de comandos a sus respectivos tipos
-    x = atof(argv[1]);
-    //n = atol(argv[2]);
+    //x = atof(argv[1]);
     int s=1;
-    if(argv[2]=='-')
-        s=-1;
-    int i=0;
-    n = 0;
-    while(*(argv[2]+i)>="0"&&*(argv[2]+i)<="9")
+    i=0;
+    if(*argv[1]=='-')
     {
-        n*=10;
-        n+=(*(argv[2]+i)-"0");
+        s=-1;
         i++;
     }
-    printf("%d\n", n);
+    x = 0;
+    while(*(argv[1]+i)>='0'&&*(argv[1]+i)<='9')
+    {
+        x*=10;
+        x+=(*(argv[1]+i)-'0');
+        i++;
+    }
+    if(*(argv[1]+i)=='.')
+    {
+        i++;
+        while(*(argv[1]+i)>='0'&&*(argv[1]+i)<='9')
+        {
+            x+=((*(argv[1]+i)-'0')*pt);
+            pt*=0.1;
+            i++;
+        }
+    }
+    x*=s;
+    //n = atol(argv[2]);
+    s=1;
+    i=0;
+    if(*argv[2]=='-')
+    {
+        s=-1;
+        i++;
+    }
+    n = 0;
+    while(*(argv[2]+i)>='0'&&*(argv[2]+i)<='9')
+    {
+        n*=10;
+        n+=(*(argv[2]+i)-'0');
+        i++;
+    }
+    n*=s;
 
     // Inicializa las variables para la serie de Taylor
     for (i = 0, fct = x, sx = 0; i < n; i++) {
