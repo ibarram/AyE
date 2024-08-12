@@ -114,11 +114,19 @@ La evaluación de los códigos serán realizados mediante la siguiente rúbrica:
 
 |Número|Medida|Ponderación|Criterio|
 |---|---|---|---|
-|1|Desemepeño|16%|Valorado por el número de casos resueltos correctamente, medido por el porcentaje de casos correctos|
-|2|Tiempo|16%|Valorado por la tiempo de CPU utilizado en ms, medido por la diferencia entre el tiempo y el mínimo tiempo logrado por el grupo, la diferencia es multiplicada por la desviación absoluta media de los tiempos del grupo|
-|3|Memoria|16%|Valorado por la cantidad de memoria utilizada en KB, medido por la diferencia entre la memoria utilizada y la mínima memoria utilizada por el grupo, la diferencia es dividida por la desviación absoluta media de la memoria utilizada por el grupo|
-|4|Código fuente|16%|Valorado por el tamaño del código fuente en B, medido por la diferencia entre el tamaño del código fuente implementado y el tamaño menor de la implementación del grupo, la diferencia es dividida por la desviación absoluta media del tamaño de los códigos fuentes implementados por el grupo|
-|5|Posición|16%|Valorado por la posición en la que es sometida la solución al problema, mediada por el ordenamiento cronológico de las soluciones sometidas, se reduce en 1.5% por cada posición|
-|6|Reporte|16%|Valorado si el reporte contiene todos los elementos solicitados y el contenido refleja cuantitativa y cualitativamente los cinco puntos de valoración|
+|1|Desemepeño|16.7%|Valorado por el número de casos resueltos correctamente, medido por el porcentaje de casos correctos|
+|2|Tiempo|16.7%|Valorado por la tiempo de CPU utilizado en ms, medido por la diferencia entre el tiempo y el mínimo tiempo logrado por el grupo, la diferencia es multiplicada por la desviación absoluta media de los tiempos del grupo|
+|3|Memoria|16.7%|Valorado por la cantidad de memoria utilizada en KB, medido por la diferencia entre la memoria utilizada y la mínima memoria utilizada por el grupo, la diferencia es dividida por la desviación absoluta media de la memoria utilizada por el grupo|
+|4|Código fuente|16.7%|Valorado por el tamaño del código fuente en B, medido por la diferencia entre el tamaño del código fuente implementado y el tamaño menor de la implementación del grupo, la diferencia es dividida por la desviación absoluta media del tamaño de los códigos fuentes implementados por el grupo|
+|5|Posición|16.6%|Valorado por la posición en la que es sometida la solución al problema, mediada por el ordenamiento cronológico de las soluciones sometidas, se reduce en 1.5% por cada posición|
+|6|Reporte|16.6%|Valorado si el reporte contiene todos los elementos solicitados y el contenido refleja cuantitativa y cualitativamente los cinco puntos de valoración|
 
+Los elementos mínimos de los reportes son:
+1. **Introducción**
+2. **Objetivos**
+3. **Procedimiento (Algoritmo+Estrcutura de datos)**
+4. **Resultados y análisis**
+5. **Tabla comparativa**
+6. **Conclusiones**
+7. **Bibliografía**
 
