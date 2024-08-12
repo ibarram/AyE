@@ -98,4 +98,9 @@ La UDA de Algoritmos y Estructuras de Datos sirve para conocer los elementos est
 
 ## Evaluación
 
-ww
+La evaluación de la Unidad de Aprendizaje será desarrollada de acuerdo a la siguiente tabla:
+
+|Número|Elemento|Porcentaje|
+|---|---|---|
+|1|Primer práctica|15%|
+|2|Primera evaluación|15%|
