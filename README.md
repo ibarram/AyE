@@ -109,4 +109,10 @@ La evaluación de la Unidad de Aprendizaje será desarrollada de acuerdo a la si
 |5|Tercera evaluación|15%|
 |6|Proyecto final|15%|
 |7|Presentación|10%|
-|---|---|---|
+
+La evaluación de los códigos serán realizados mediante la siguiente rúbrica:
+
+|Número|Medida|Ponderación|Criterio|
+|---|---|---|---|
+|1|Desemepeño|16%|Valorado por el número de casos resueltos correctamente, medido por el porcentaje de casos correctos|
+|2|Tiempo|16%|Valorado por la tiempo de CPU utilizado en ms, medido por la diferencia entre el tiempo y el mínimo tiempo logrado por el grupo, la diferencia es multiplicada por la desviación absoluta media de los tiempos del grupo|
