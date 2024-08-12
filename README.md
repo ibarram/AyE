@@ -33,9 +33,9 @@
 
  * [Contenido](#Contenido)
 
- * [Perceptrón simple](#Perceptrón-simple)
+ * [Competencia de la Unidad de Aprendizaje](#Competencia-de-la-Unidad-de-Aprendizaje)
 
- * [Publicaciones](#Publicaciones)
+ * [Evaluación](#Evaluacion)
 
  * [Citando las notas](#citando-las-notas)
 
@@ -80,7 +80,7 @@ Ubicada en la currícula dentro del Área Básica Común, esta unidad de aprendi
 	* **Ordenamiento por intercambio directo**
 	* **Ordenamiento por selección directa**
 	* **Ordenamiento por selección directa**
-	* **Otros medotos de ordenamiento**
+	* **Otros métodos de ordenamiento**
 5. **Algoritmos de búsqueda**
 	* **Búsqueda secuencial**
 	* **Búsqueda binaria**
@@ -90,13 +90,12 @@ Ubicada en la currícula dentro del Área Básica Común, esta unidad de aprendi
 	* **Complejidad en el espacio**
 	* **Eficiencia de algoritmos**
 
-1. **Neuronas Artificiales (Nodos):** Cada neurona artificial es una unidad de procesamiento que toma una o más entradas, realiza una suma ponderada de esas entradas y luego aplica una función de activación antes de emitir una salida. La función de activación introduce no linealidad en el modelo y es crucial para que la red pueda aprender y modelar relaciones complejas en los datos.
+## Competencia de la Unidad de Aprendizaje
 
-2. **Capas:** Las neuronas se organizan en capas en la red neuronal. Las capas se dividen típicamente en tres tipos:
-    * **Capa de Entrada:** Recibe las señales de entrada y transmite estas señales a la capa oculta.
-    * **Capas Ocultas (Hidden Layers):** Estas capas intermedias procesan la información y realizan cálculos para aprender representaciones más abstractas y complejas de los datos.
-    * **Capa de Salida:** Produce la salida final de la red, que puede ser una clasificación, una predicción numérica o cualquier otro tipo de resultado deseado.
+Selecciona la combinación adecuada de estructuras de datos y algoritmos que sirva para optimizar los recursos de cómputo necesario. Aplica estas elecciones de diseño en el desarrollo de ingeniería de datos y sistemas inteligentes que contribuyen a la solución de problemas de ingeniería. Exhibe actitudes como el trabajo en equipos multi-disciplinarios.
 
-3. **Conexiones Ponderadas:** Cada conexión entre neuronas tiene un peso asociado que determina la importancia relativa de la entrada en la neurona receptora. Estos pesos se ajustan durante el proceso de entrenamiento para aprender la relación entre las entradas y las salidas deseadas.
+La UDA de Algoritmos y Estructuras de Datos sirve para conocer los elementos estructurales de la programación así como el análisis de su interacción en los algoritmos. El análisis de la complejidad de los algoritmos y de los requerimientos de recursos asociados con las estructuras de datos permite optimizar el desempeño de los sistemas aplicados a la ingeniería de datos e inteligencia artificial.
 
-4. **Aprendizaje:** Las redes neuronales artificiales aprenden ajustando los pesos de las conexiones a través de un proceso llamado entrenamiento. Esto se hace mediante algoritmos de optimización, como el descenso de gradiente, que minimizan una función de pérdida o error que cuantifica la diferencia entre las salidas predichas y las salidas reales.
+## Evaluación
+
+ww
