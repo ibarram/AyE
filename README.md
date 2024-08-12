@@ -145,19 +145,14 @@ Los elementos mínimos de los reportes son:
 	* **Verificar la confiabilidad, relevancia y actualización de la fuente de información**
 
 ## Bibliografía
-- Chavan, S. (2017). C Recipes. Apress. ISBN: 978-1-4842-2967-5. SpringerLink(https://link.springer.com/book/10.1007/978-1-4842-2967-5)
-
-	\item Cormen,T.H., Leiserson, C.E., Rivest, R.L. \& Stein, C. (2009) Introduction to Algorithms (3rd Edition) MIT Press.
-	\item Sedgewick, R. \& Wayne, K.(2011)Algorithms (4 Ed.)Addisson Wesley Professional.
-	\item Skienna, S.S. (2008) The Algorithm Design Manual (2nd. Ed.)Springer Verlag.
-	\item Heineman,G., Police, G. \& Selkow, S.(2008) Algorithms in a Nutshell,  O?Reilly.
-	\item Kleinberg,J. \& Tardos, E. (2005) Algorithm Design, Addison Wesley.
-	\item Toppo, N. \& Dewan, H., Pointers in C, (1st Ed.), Apress (SpringerLink).
-	\item Kalicharan, N. (2017), Advanced Topics in C, (1st Ed.) Apress (SpringerLink).
-	\item Art\'iculos selectos de revistas de ciencias computacionales.
-
-
-- Smith, J. (2020). *Título del libro*. Editorial. ISBN.
-- Doe, J., & Roe, R. (2018). *Título del artículo*. *Journal Name*, 12(3), 45-67. doi:10.xxxx/xxxxxx
-- [Autor, A. A. (Año). Título del recurso en línea. Recuperado de https://link-al-recurso.com](https://link-al-recurso.com)
+- Cormen, T. H. Leiserson, C. E. Rivest, R. L., Stein, C. (2022). Introduction to Algorithms. MIT Press. ISBN: 978-0-2620-4630-5.
+- Sedgewick, R. Wayne, K. (2011). Algorithms. Addisson Wesley Professional. 
+- Skienna, S. S. (2008). The Algorithm Design Manual. Springer Verlag. ISBN: 978-3-0305-4255-9.
+- Heineman, G. Police, G. Selkow, S. (2008). Algorithms in a Nutshell. O'Reilly Media, Inc. ISBN: 978-0-5965-1624-6.
+- Kleinberg, J. Tardos, E. (2005). Algorithm Design. Addison Wesley. ISBN: 978-0-3212-9535-4.
+- Mailund, T. (2021). Pointers in C Programming. Apress. ISBN: 978-1-4842-6926-8. SpringerLink(https://link.springer.com/book/10.1007/978-1-4842-6927-5).
+- Chavan, S. (2017). C Recipes. Apress. ISBN: 978-1-4842-2967-5. SpringerLink(https://link.springer.com/book/10.1007/978-1-4842-2967-5).
+- Toppo, N. Dewan, H. Pointers in C. (2013). Apress. ISBN: 978-1-4302-5911-4. SpringerLink(https://link.springer.com/book/10.1007/978-1-4302-5912-1).
+- Kalicharan, N. (2013). Advanced Topics in C. Apress. ISBN: 
+978-1-4302-6400-2 . SpringerLink(https://link.springer.com/book/10.1007/978-1-4302-6401-9).
 
