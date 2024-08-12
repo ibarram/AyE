@@ -123,10 +123,24 @@ La evaluación de los códigos serán realizados mediante la siguiente rúbrica:
 
 Los elementos mínimos de los reportes son:
 1. **Introducción**
+	*	**Fundamentación de la tarea, práctica o proyecto**
 2. **Objetivos**
+	* **Objetivo general y específico**
 3. **Procedimiento (Algoritmo+Estrcutura de datos)**
+	* **Diagrama de datos**
+	* **Diagarama de flujo**
+	* **Pseudo-código**
+	* **Flujo de información y sinergía de datos**
 4. **Resultados y análisis**
+	* **Gráfica o tablas de resultados con explicación**
+	* **Análisis de desempeño, precisión, eficiencia, repetibilidad y complejidad**
 5. **Tabla comparativa**
+	* **Análisis de eficiencia y desemeño**
+	* **Comparativa con integrantes y entre el grupo**
+	* **Comparativa con el estado del arte**
 6. **Conclusiones**
+	* **Conclusiones generales y personales**
 7. **Bibliografía**
+	* **Formato APA o IEEE**
+	* **Verificar la confiabilidad, relevancia y actualización de la fuente de información**
 
