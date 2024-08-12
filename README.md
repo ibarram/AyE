@@ -102,5 +102,11 @@ La evaluación de la Unidad de Aprendizaje será desarrollada de acuerdo a la si
 
 |Número|Elemento|Porcentaje|
 |---|---|---|
-|1|Primer práctica|15%|
-|2|Primera evaluación|15%|
+|1|Primera evaluación|15%|
+|2|Primer práctica|15%|
+|3|Segunda evaluación|15%|
+|4|Segunda práctica|15%|
+|5|Tercera evaluación|15%|
+|6|Proyecto final|15%|
+|7|Presentación|10%|
+|---|---|---|
