@@ -29,13 +29,13 @@
 
 <details><summary>Table of Contents</summary><p>
  
- * [Introducción](#Resumen)
+ * [Introducción](#Introduccion)
 
  * [Contenido](#Contenido)
 
  * [Competencia de la Unidad de Aprendizaje](#Competencia-de-la-Unidad-de-Aprendizaje)
 
- * [Evaluación](#Evaluacion)
+ * [Evaluación](#Evaluación)
 
  * [Citando las notas](#citando-las-notas)
 
