@@ -14,7 +14,7 @@
   <h3 align="center">Algoritmos y Estructuras de Datos (IILI06004)</h3>
 
   <p align="center">
-    .
+    Licenciatura en Ingeniería de Datos e Inteligencia Artificial ()
     <br />
     <a href="https://github.com/ibarram/AyE"><strong>Explorar la documentación »</strong></a>
     <br />
@@ -37,7 +37,7 @@
 
  * [Evaluación](#Evaluación)
 
- * [Citando las notas](#citando-las-notas)
+ * [Bibliografía](#Bibliografía)
 
  * [Contacto](#Contacto)
 
@@ -144,6 +144,12 @@ Los elementos mínimos de los reportes son:
 	* **Formato APA o IEEE**
 	* **Verificar la confiabilidad, relevancia y actualización de la fuente de información**
 
+## Contacto
+
+[Dr. M.-A. Ibarra-Manzano](mailto:ibarram@ugto.mx?subject=[GitHub]%2020242%20AyE) - [DICIS-UG][http://www.posgrados.ugto.mx/Profesores/Perfil.aspx?id=20150] - [ORCID: 0000-0003-4317-0248](https://orcid.org/0000-0003-4317-0248) - [SCOPUS: 15837259000](https://www.scopus.com/authid/detail.uri?authorId=15837259000)
+
+Unidad de Aprendizaje Link: [20241AyE](https://github.com/ibarram/AyE/)
+
 ## Bibliografía
 - Cormen, T. H. Leiserson, C. E. Rivest, R. L., Stein, C. (2022). Introduction to Algorithms. MIT Press. ISBN: 978-0-2620-4630-5.
 - Sedgewick, R. Wayne, K. (2011). Algorithms. Addisson Wesley Professional. 
@@ -155,4 +161,3 @@ Los elementos mínimos de los reportes son:
 - Toppo, N. Dewan, H. Pointers in C. (2013). Apress. ISBN: 978-1-4302-5911-4. SpringerLink(https://link.springer.com/book/10.1007/978-1-4302-5912-1).
 - Kalicharan, N. (2013). Advanced Topics in C. Apress. ISBN: 
 978-1-4302-6400-2 . SpringerLink(https://link.springer.com/book/10.1007/978-1-4302-6401-9).
-
