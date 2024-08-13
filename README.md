@@ -37,9 +37,11 @@
 
  * [Evaluación](#Evaluación)
 
- * [Bibliografía](#Bibliografía)
+ * [Presentaciones](Presentaciones)
 
  * [Contacto](#Contacto)
+
+ * [Bibliografía](#Bibliografía)
 
  * [Licencia](#licencia)
 
@@ -64,6 +66,8 @@ La UDA de Algoritmos y Estructuras de Datos se imparte en el 3er. semestre del p
 Ubicada en la currícula dentro del Área Básica Común, esta unidad de aprendizaje contribuye al desarrollo de la comprensión lógica de los fenómenos naturales mediante el análisis cuantitativo y la aplicación de una metodología científica.
 
 ## Contenido
+
+El [contenido](doc/pdf/Temario.pdf) de la Unidad de Aprendizaje es el siguinte:
 
 1. **Conceptos fundamentales de algoritmos**
 	* **Conceptos y propuedades de los algoritmos**
@@ -143,6 +147,19 @@ Los elementos mínimos de los reportes son:
 7. **Bibliografía**
 	* **Formato APA o IEEE**
 	* **Verificar la confiabilidad, relevancia y actualización de la fuente de información**
+
+## Presentaciones
+Las presentaciones de la Unidad de Aprendizaje estan disponibles en formato PDF para su descarga.
+
+|Archivo|Descripción|Tamaño|Enlace|
+|---|---|---|---|
+|0_Presentacion.pdf|.|.|.|
+|1_Cenceptos.pdf|Conceptos fundamentales de algoritmos|.|.|
+|2_Recursividad.pdf|Recursividad|.|.|
+|3_Estructuras.pdf|Estructuras de datos fundamentales|.|.|
+|4_AlgOrdenamiento.pdf|Algoritmos de ordenamiento|.|.|
+|5_AlgoBusqueda.pdf|Algoritmos de Búsqueda|.|.|
+|6_Analisis.pdf|Análisis de algoritmos|.|.|
 
 ## Contacto
 
