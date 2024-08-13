@@ -14,7 +14,7 @@
   <h3 align="center">Algoritmos y Estructuras de Datos (IILI06004)</h3>
 
   <p align="center">
-    Licenciatura en Ingeniería de Datos e Inteligencia Artificial ()
+    Licenciatura en Ingeniería de Datos e Inteligencia Artificial (IS75LI0801)
     <br />
     <a href="https://github.com/ibarram/AyE"><strong>Explorar la documentación »</strong></a>
     <br />
