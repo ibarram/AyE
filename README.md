@@ -146,7 +146,7 @@ Los elementos mínimos de los reportes son:
 
 ## Contacto
 
-[Dr. M.-A. Ibarra-Manzano](mailto:ibarram@ugto.mx?subject=[GitHub]%2020242%20AyE) - [DICIS-UG][http://www.posgrados.ugto.mx/Profesores/Perfil.aspx?id=20150] - [ORCID: 0000-0003-4317-0248](https://orcid.org/0000-0003-4317-0248) - [SCOPUS: 15837259000](https://www.scopus.com/authid/detail.uri?authorId=15837259000)
+[Dr. M.-A. Ibarra-Manzano](mailto:ibarram@ugto.mx?subject=[GitHub]%2020242%20AyE) - [DICIS-UG](http://www.posgrados.ugto.mx/Profesores/Perfil.aspx?id=20150) - [ORCID: 0000-0003-4317-0248](https://orcid.org/0000-0003-4317-0248) - [SCOPUS: 15837259000](https://www.scopus.com/authid/detail.uri?authorId=15837259000)
 
 Unidad de Aprendizaje Link: [20241AyE](https://github.com/ibarram/AyE/)
 
