@@ -50,4 +50,4 @@ lib$(EJ07l).so: $(EJ07l).o
 #	$(CC) -c $(EJ07l).c -fPIC -o $(EJ07l).o
 
 clean:
-	rm -f $(EJ01) $(EJ02) $(EJ03) $(EJ04) $(EJ05) $(EJ06) $(EJ07)e $(EJ07l).o lib$(EJ07l).a $(EJ07)d lib$(EJ07l).sa
+	rm -f $(EJ01) $(EJ02) $(EJ03) $(EJ04) $(EJ05) $(EJ06) $(EJ07)e $(EJ07l).o lib$(EJ07l).a $(EJ07)d lib$(EJ07l).so
