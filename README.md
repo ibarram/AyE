@@ -155,7 +155,7 @@ Las presentaciones de la Unidad de Aprendizaje estan disponibles en formato PDF 
 |---|---|---|---|
 |0_Presentacion.pdf|Presentación de la Unidad de Aprendizaje|389 KB|[Download](/doc/slide/0_Presentacion.pdf)|
 |1_Cenceptos.pdf|Conceptos fundamentales de algoritmos|1.01 MB|[Download](doc/slide/1_Conceptos.pdf)|
-|2_Recursividad.pdf|Recursividad|1.50 MB|[Download](doc/slide/2_Recursividad.pdf|
+|2_Recursividad.pdf|Recursividad|1.50 MB|[Download](doc/slide/2_Recursividad.pdf)|
 |3_Estructuras.pdf|Estructuras de datos fundamentales|.|.|
 |4_AlgOrdenamiento.pdf|Algoritmos de ordenamiento|.|.|
 |5_AlgoBusqueda.pdf|Algoritmos de Búsqueda|.|.|
