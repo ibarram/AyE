@@ -1,18 +1,49 @@
 CC = gcc
-SOURCE = libarram.c
-OBJ = libarram.o
 LIB = libarram
-MAIN = 008_choco.c
-TARGET = 008_choco
+001 = 001_seno_serie_ini
+002 = 002_seno_serie_opt
+003 = 003_seno_serie_par
+004 = 004_billetes
+005 = 005_distancia
+006 = 006_mochila
+007 = 007_libreria
+008 = 008_choco
+009 = 009_expo
 
-all: lib$(LIB).a $(MAIN)
-	$(CC) $(MAIN) -L. -l$(LIB) -o $(TARGET)
+all: $(001) $(002) $(003) $(004) $(005) $(006) $(007) $(008) $(009)
 
-lib$(LIB).a: $(OBJ)
-	ar rcs lib$(LIB).a $(OBJ)
+$(001): $(001).c
+	$(CC) -o $(001) $(001).c
 
-$(OBJ): $(SOURCE)
-	$(CC) -c $(SOURCE) -o $(OBJ)
+$(002): $(002).c
+	$(CC) -o $(002) $(002).c
+
+$(003): $(003).c
+	$(CC) -o $(003) $(003).c
+
+$(004): $(004).c
+	$(CC) -o $(004) $(004).c
+
+$(005): $(005).c
+	$(CC) -o $(005) $(005).c
+
+$(006): $(006).c
+	$(CC) -o $(006) $(006).c
+
+$(007): $(007).c lib$(LIB).a
+	$(CC) $(007).c -L. -l$(LIB) -o $(007)
+
+$(008): $(008).c lib$(LIB).a
+	$(CC) $(008).c -L. -l$(LIB) -o $(008)
+
+$(009): $(009).c lib$(LIB).a
+	$(CC) $(009).c -L. -l$(LIB) -o $(009)
+
+lib$(LIB).a: $(LIB).o
+	ar rcs lib$(LIB).a $(LIB).o
+
+$(LIB).o: $(LIB).c
+	$(CC) -c $(LIB).c -o $(LIB).o
 
 clean:
-	rm -f $(OBJ) lib$(LIB).a $(TARGET)
+	rm -f $(001) $(002) $(003) $(004) $(005) $(006) $(007) $(008) $(009) lib$(LIB).a $(LIB).o
