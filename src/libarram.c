@@ -1,3 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int imprimir2(float x[], int n)
+{
+	printf("%f\n", x[0]);
+	if(n-1)
+		return imprimir2(x+1, n-1);
+	else
+		return 0;
+}
+
+float suma_x(float x[], int n)
+{
+	//return n-1?x[0]+suma_x(x+1,n-1):x[0];
+	if(n-1)
+		return x[0]+suma_x(x+1,n-1);
+	else
+		return x[0];
+}
+
+float media2(float x[], int n)
+{
+	return suma_x(x, n)/n;
+}
+
+float media1(float x[], int n)
+{
+	int i;
+	float md;
+	for(i=1, md=x[0]; i<n; i++)
+		md+=x[i];
+	return md/n;
+}
+
+float suma_x2(float x[], float md, int n)
+{
+	if(n-1)
+		return (x[0]-md)*(x[0]-md)+suma_x2(x+1, md, n-1);
+	else
+		return (x[0]-md)*(x[0]-md);
+}
+
+float varianza2(float x[], int n)
+{
+	float md;
+	md = media2(x, n);
+	return suma_x2(x, md, n)/(n-1);
+}
+
+float varianza1(float x[], int n)
+{
+	int i;
+	float md, vr;
+	for(i=0, md = media1(x, n), vr=0; i<n; i++)
+		vr+=((x[i]-md)*(x[i]-md));
+	return vr/(n-1);
+}
+
+void generar(float x[], int n, float min, float max)
+{
+	int i;
+	for(i=0; i<n; i++)
+		x[i] = (max-min)*((float)rand())/RAND_MAX+min;
+}
+
+void imprimir(float x[], int n)
+{
+	int i;
+	for(i=0; i<n; i++)
+		printf("x[%d] = %f\n", i+1, x[i]);
+}
+
 float suma(float a, float b)
 {
 	return a+b;
