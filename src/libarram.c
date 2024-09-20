@@ -1,5 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
+#define PI 3.141592653589793
+
+float dist_norm(float md, float de)
+{
+	float U1, U2, Z1;
+	U1 = (float)rand()/RAND_MAX;
+	U2 = (float)rand()/RAND_MAX;
+	Z1 = sqrt(-2*log(U1))*sin(2*PI*U2);
+	return (Z1*de+md);
+}
 
 int imprimir2(float x[], int n)
 {

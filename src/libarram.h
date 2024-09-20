@@ -1,6 +1,7 @@
 #ifndef LIBARRAM_H
 #define LIBARRAM_H
 
+float dist_norm(float md, float de);
 float suma_x2(float x[], float md, int n);
 float varianza2(float x[], int n);
 float varianza1(float x[], int n);
