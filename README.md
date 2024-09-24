@@ -33,13 +33,13 @@
 
  * [Contenido](#Contenido)
 
- * [Competencia de la Unidad de Aprendizaje](##listado-de-c%C3%B3digos-desarrollados-durante-la-uda)
+ * [Competencia de la Unidad de Aprendizaje](#Competencia-de-la-Unidad-de-Aprendizaje)
 
  * [Evaluación](#Evaluación)
 
- * [Presentaciones](Presentaciones)
+ * [Presentaciones](#Presentaciones)
 
- * [Listado de Códigos Desarrollados durante la UDA](#listado-de-c%C3%B3digos-desarrollados-durante-la-uda)
+ * [Listado de Códigos Desarrollados durante la UDA](#listado-de-códigos-desarrollados-durante-la-uda)
 
  * [Contacto](#Contacto)
 

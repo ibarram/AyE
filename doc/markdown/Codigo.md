@@ -22,22 +22,39 @@
 
 <details><summary>Table of Contents</summary><p>
  
- * [Introducción](#Introducción)
+ * [Conceptos fundamentales de algoritmos](#Conceptos-fundamentales-de-algoritmos)
 
- * [Contenido](#Contenido)
+ * [Recursividad](#Recursividad)
 
- * [Competencia de la Unidad de Aprendizaje](##listado-de-c%C3%B3digos-desarrollados-durante-la-uda)
+ * [Estructuras de datos fundamentales](#Estructuras-de-datos-fundamentales)
 
- * [Evaluación](#Evaluación)
+ * [Algoritmos de ordenamiento](#Algoritmos-de-ordenamiento)
 
- * [Presentaciones](Presentaciones)
+ * [Algoritmos de búsqueda](#Algoritmos-de-búsqueda)
 
- * [Listado de Códigos Desarrollados durante la UDA](#listado-de-c%C3%B3digos-desarrollados-durante-la-uda)
-
- * [Contacto](#Contacto)
-
- * [Bibliografía](#Bibliografía)
-
- * [Licencia](#licencia)
+ * [Análisis de algoritmos](#Análisis-de-algoritmos)
 
 </p></details><p></p>
+
+## Conceptos fundamentales de algoritmos
+
+
+
+## Recursividad
+
+
+
+## Estructuras de datos fundamentales
+
+
+
+## Algoritmos de ordenamiento
+
+
+
+## Algoritmos de búsqueda
+
+
+
+## Análisis de algoritmos
+
