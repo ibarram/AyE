@@ -161,6 +161,21 @@ Las presentaciones de la Unidad de Aprendizaje estan disponibles en formato PDF 
 |5_AlgoBusqueda.pdf|Algoritmos de Búsqueda|.|.|
 |6_Analisis.pdf|Análisis de algoritmos|.|.|
 
+## Listado de Códigos Desarrollados durante la UDA
+
+A lo largo de esta UDA, hemos implementado diversos algoritmos y estructuras de datos fundamentales para resolver problemas relacionados con el análisis, manipulación y optimización de datos. Estos códigos cubren una variedad de temas clave, que incluyen:
+
+* **Algoritmos de búsqueda y ordenamiento.**
+* **Estructuras de datos dinámicas como pilas y colas.**
+* **Algoritmos recursivos y simulaciones de procesos.**
+* **Aplicaciones de distribuciones estadísticas y análisis de tiempo de ejecución.**
+
+En esta sección, encontrarás un listado completo de los códigos desarrollados, junto con una pequeña descripción de cada uno, su ubicación en el repositorio y ejemplos de cómo ejecutarlos.
+
+Puedes consultar el listado completo de códigos y sus explicaciones en el siguiente archivo:
+
+[Consulta el listado completo de códigos aquí]().
+
 ## Contacto
 
 [Dr. M.-A. Ibarra-Manzano](mailto:ibarram@ugto.mx?subject=[GitHub]%2020242%20AyE) - [DICIS-UG](http://www.posgrados.ugto.mx/Profesores/Perfil.aspx?id=20150) - [ORCID: 0000-0003-4317-0248](https://orcid.org/0000-0003-4317-0248) - [SCOPUS: 15837259000](https://www.scopus.com/authid/detail.uri?authorId=15837259000)
