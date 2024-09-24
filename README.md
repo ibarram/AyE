@@ -45,7 +45,7 @@
 
  * [Bibliografía](#Bibliografía)
 
- * [Licencia](#licencia)
+ * [Licencia](https://github.com/ibarram/AyE/blob/main/LICENSE)
 
 </p></details><p></p>
 
