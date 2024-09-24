@@ -33,7 +33,7 @@
 
  * [Contenido](#Contenido)
 
- * [Competencia de la Unidad de Aprendizaje](#Competencia-de-la-Unidad-de-Aprendizaje)
+ * [Competencia de la Unidad de Aprendizaje](##listado-de-c%C3%B3digos-desarrollados-durante-la-uda)
 
  * [Evaluación](#Evaluación)
 
