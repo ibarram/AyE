@@ -38,7 +38,7 @@
 
 ## Conceptos fundamentales de algoritmos
 
-### 1. Cálculo de Seno con Serie de Taylor (Inicial): [001_seno_serie_ini.c](blob/main/src/001_seno_serie_ini.c)
+### 1. Cálculo de Seno con Serie de Taylor (Inicial): [001_seno_serie_ini.c](./src/001_seno_serie_ini.c)
    - **Descripción**: Este código calcula la aproximación del seno de un número en radianes utilizando la **serie de Taylor**. El número de términos de la serie es configurable.
    - **Temas clave**: Serie de Taylor, funciones trigonométricas, precisión de cálculos numéricos.
    - **Ubicación**: `src/001_seno_serie_ini.c`
@@ -68,4 +68,30 @@
 
 
 ## Análisis de algoritmos
+
+## **Makefile**
+
+El archivo **Makefile** permite compilar todos los programas de manera más sencilla:
+
+```makefile
+CC = gcc
+CFLAGS = -lm
+TARGETS = piezas medidas calidad productos
+
+all: $(TARGETS)
+
+piezas: 011_piezas.c libarram.c
+  $(CC) -o piezas 011_piezas.c libarram.c $(CFLAGS)
+
+medidas: 012_Medidas.c libarram.c
+  $(CC) -o medidas 012_Medidas.c libarram.c $(CFLAGS)
+
+calidad: 014_Calidad.c libarram.c
+  $(CC) -o calidad 014_Calidad.c libarram.c $(CFLAGS)
+
+productos: 256_productos.c libarram.c
+  $(CC) -o productos 256_productos.c libarram.c $(CFLAGS)
+
+clean:
+  rm -f $(TARGETS)
 
