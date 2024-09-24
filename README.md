@@ -84,7 +84,7 @@ El [contenido](doc/pdf/Temario.pdf) de la Unidad de Aprendizaje es el siguinte:
 	* **Estructuras de datos abstractas**
 4. **Algoritmos de ordenamiento**
 	* **Ordenamiento por intercambio directo**
-	* **Ordenamiento por selección directa**
+	* **Ordenamiento por inserción directa**
 	* **Ordenamiento por selección directa**
 	* **Otros métodos de ordenamiento**
 5. **Algoritmos de búsqueda**
@@ -177,7 +177,7 @@ En esta sección, encontrarás un listado completo de los códigos desarrollados
 
 Puedes consultar el listado completo de códigos y sus explicaciones en el siguiente archivo:
 
-[Consulta el listado completo de códigos aquí]().
+[Consulta el listado completo de códigos aquí](doc/markdown/Codigo.md).
 
 ## Contacto
 
