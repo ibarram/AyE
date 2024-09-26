@@ -18,15 +18,27 @@ int main(int argc, char*argv[])
 	for(i=0; i<NE; i++)
 	{
 		E[i][0] = i*(N/NE)+rand()%(N/NE);
-		j = 1;
-		flag = 0;
-		do{
-			aux = i*(N/NE)+rand()%(N/NE);
-			for(k=0; k<j-1; k++)
-		}while(flag);
-		E[i][j] = aux;
+		for(j=1; j<NE; j++)
+		{
+			do{
+				flag = 0;
+				aux = i*(N/NE)+rand()%(N/NE);
+				for(k=0; k<j-1; k++)
+					if(aux==E[i][k])
+					{
+						flag = 1;
+						break;
+					}
+			}while(flag);
+			E[i][j] = aux;
+		}
 	}
 	for(i=0; i<NE; i++)
-		printf("%d. %d - %d\n", i+1, C[E[i]], E[i]);
+	{
+		printf("%d. ", i+1);
+		for(j=0; j<NE; j++)
+			printf("%d, %.0f, %d\t", E[i][j], P[E[i][j]], C[E[i][j]]);
+		printf("\n");
+	}
 	return 0;
 }
