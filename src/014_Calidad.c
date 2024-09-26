@@ -9,7 +9,7 @@
 int main(int argc, char*argv[])
 {
 	float P[N];
-	int C[N], E[NE][NE], i, j, k, aux, flag;
+	int C[N], E[NE][NE], i, j, k, aux, flag, L[NE];
 	srand(time(NULL));
 	for(i=0; i<N; i++)
 		P[i] = (100.0*rand())/RAND_MAX;
@@ -34,11 +34,18 @@ int main(int argc, char*argv[])
 		}
 	}
 	for(i=0; i<NE; i++)
+		for(j=0, L[i]=0; j<NE; j++)
+			if(!C[E[i][j]])
+				L[i]++;
+	for(i=0; i<NE; i++)
 	{
 		printf("%d. ", i+1);
 		for(j=0; j<NE; j++)
 			printf("%d, %.0f, %d\t", E[i][j], P[E[i][j]], C[E[i][j]]);
 		printf("\n");
 	}
+	for(i=0; i<NE; i++)
+		printf("L[%d] = %d\t", i+1, L[i]);
+	printf("\n");
 	return 0;
 }
