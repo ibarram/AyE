@@ -20,5 +20,7 @@ float exp1(float x, int n);
 float fct(float x, int n);
 float exp3(float x, int n);
 float exp4(float x, int n);
+int validar(char email[]);
+int isce(char c, char c_val[]);
 
 #endif

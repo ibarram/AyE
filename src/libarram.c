@@ -1,8 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
+#include <ctype.h>
 
 #define PI 3.141592653589793
+#define EMAIL_MX 255
+#define EMAIL_PL 63
+char c_val[] = "!#$%&'*+/=?^_{|}~";
 
 float dist_norm(float md, float de)
 {
@@ -140,3 +145,33 @@ float exp4(float x, int n)
 	}
 }
 
+int isce(char c, char c_val[])
+{
+	if(c==c_val[0])
+		return 1;
+	else if(c_val[0]!='\0')
+		return isce(c,c_val+1);
+	else
+		return 0;
+}
+
+int validar(char email[])
+{
+	int nc, da, i, nce;
+	char *bc;
+	nc = strlen(email);
+	nce = strlen(c_val);
+	if(nc>EMAIL_MX)
+		return 0;
+	bc = strchr(email, '@');
+	if(bc==NULL)
+		return 0;
+	da = (int)(bc-email);
+	if(da>EMAIL_PL)
+		return 0;
+	for(i=0; i<da; i++)
+		if(!isalnum(email[i])&&!isce(email[i],c_val))
+			return 0;
+	return 1;
+}
+	
