@@ -56,6 +56,8 @@
 
 <img src="../img/Fig_TB_01_1.jpg" alt="Figura de la función seno" width="300" /> <img src="../img/Fig_TB_01_2.jpg" alt="Figura del tiempo de procesamiento" width="300" /> <img src="../img/Fig_TB_01_3.jpg" alt="Figura del error de calculo" width="300" />
 
+<img src="../img/Fig_TB_02_1.jpg" alt="Figura de la función seno" width="300" /> <img src="../img/Fig_TB_02_2.jpg" alt="Figura del tiempo de procesamiento" width="300" /> <img src="../img/Fig_TB_02_3.jpg" alt="Figura del error de calculo" width="300" />
+
 ## Recursividad
 
 
