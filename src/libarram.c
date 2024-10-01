@@ -3,11 +3,7 @@
 #include <math.h>
 #include <string.h>
 #include <ctype.h>
-
-#define PI 3.141592653589793
-#define EMAIL_MX 255
-#define EMAIL_PL 63
-char c_val[] = "!#$%&'*+/=?^_{|}~";
+#include "libarram.h"
 
 float dist_norm(float md, float de)
 {
@@ -145,14 +141,24 @@ float exp4(float x, int n)
 	}
 }
 
-int isce(char c, char c_val[])
+int isce(char c)
 {
-	if(c==c_val[0])
+	static int i = 0;
+	if(c==CE[i])
+	{
+		i=0;
 		return 1;
-	else if(c_val[0]!='\0')
-		return isce(c,c_val+1);
+	}
+	else if(CE[i]!='\0')
+	{
+		i++;
+		return isce(c);
+	}
 	else
+	{
+		i=0;
 		return 0;
+	}
 }
 
 int validar(char email[])
@@ -160,7 +166,6 @@ int validar(char email[])
 	int nc, da, i, nce;
 	char *bc;
 	nc = strlen(email);
-	nce = strlen(c_val);
 	if(nc>EMAIL_MX)
 		return 0;
 	bc = strchr(email, '@');
@@ -170,7 +175,7 @@ int validar(char email[])
 	if(da>EMAIL_PL)
 		return 0;
 	for(i=0; i<da; i++)
-		if(!isalnum(email[i])&&!isce(email[i],c_val))
+		if(!isalnum(email[i])&&!isce(email[i]))
 			return 0;
 	return 1;
 }

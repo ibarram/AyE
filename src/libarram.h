@@ -1,6 +1,12 @@
 #ifndef LIBARRAM_H
 #define LIBARRAM_H
 
+#define PI 3.141592653589793
+#define EMAIL_MX 255
+#define EMAIL_PL 63
+#define N_CE 19
+#define CE (char[N_CE]){'!','#','$','%','&','\'','*','+','/','=','?','^','_','{','|','}','~','"','\0'}
+
 float dist_norm(float md, float de);
 float suma_x2(float x[], float md, int n);
 float varianza2(float x[], int n);
@@ -21,6 +27,6 @@ float fct(float x, int n);
 float exp3(float x, int n);
 float exp4(float x, int n);
 int validar(char email[]);
-int isce(char c, char c_val[]);
+int isce(char c);
 
 #endif
