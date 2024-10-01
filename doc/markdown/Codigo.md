@@ -41,7 +41,7 @@
 ### 1. Cálculo de Seno con Serie de Taylor (Inicial): [001_seno_serie_ini.c](../../src/001_seno_serie_ini.c)
    - **Descripción**: Este código calcula la aproximación del seno de un número en radianes utilizando la **serie de Taylor**. El número de términos de la serie es configurable.
 
-   $$sen(x)=\sum_{i=1}^{n}{\frac{x^{2i-1}}{(2i-1)!}}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+...$$
+   $$sen(x)=\sum_{i=1}^{n}{(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+...$$
 
    - **Temas clave**: Serie de Taylor, funciones trigonométricas, precisión de cálculos numéricos.
    - **Ubicación**: `src/001_seno_serie_ini.c`
