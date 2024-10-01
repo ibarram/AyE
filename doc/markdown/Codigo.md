@@ -43,7 +43,7 @@
 
    $$sen(x)=\sum_{i=1}^{n}{(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+...$$
 
-   - **Temas clave**: Serie de Taylor, funciones trigonométricas, precisión de cálculos numéricos.
+   - **Temas clave**: Serie de Taylor, Funciones Trigonométricas, Bucles, Ciclos, Bifurcaciones.
    - **Ubicación**: `src/001_seno_serie_ini.c`
    - **Compilación**:
      ```bash
