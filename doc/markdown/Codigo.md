@@ -54,7 +54,7 @@
      ./001_seno_serie_ini
      ```
 
-<img src="github/ibarram/AyE/doc/img/Fig_TB_01_1.jpg" alt="Figura de la función seno" width="400" />
+<img src="../img/Fig_TB_01_1.jpg" alt="Figura de la función seno" width="400" />
 
 ## Recursividad
 
