@@ -78,23 +78,77 @@ El archivo **Makefile** permite compilar todos los programas de manera más senc
 
 ```makefile
 CC = gcc
-CFLAGS = -lm
-TARGETS = piezas medidas calidad productos
+LIB = libarram
+001 = 001_seno_serie_ini
+002 = 002_seno_serie_opt
+003 = 003_seno_serie_par
+004 = 004_billetes
+005 = 005_distancia
+006 = 006_mochila
+007 = 007_libreria
+008 = 008_choco
+009 = 009_expo
+010 = 010_pseudoalea
+011 = 011_piezas
+012 = 012_Medidas
+256 = 256_productos
+014 = 014_Calidad
+015 = 015_email
 
-all: $(TARGETS)
+all: $(001) $(002) $(003) $(004) $(005) $(006) $(007) $(008) $(009) $(010) $(011) $(012) $(256) $(014) $(015)
 
-piezas: 011_piezas.c libarram.c
-  $(CC) -o piezas 011_piezas.c libarram.c $(CFLAGS)
+$(001): $(001).c
+  $(CC) -o $(001) $(001).c
 
-medidas: 012_Medidas.c libarram.c
-  $(CC) -o medidas 012_Medidas.c libarram.c $(CFLAGS)
+$(002): $(002).c
+  $(CC) -o $(002) $(002).c
 
-calidad: 014_Calidad.c libarram.c
-  $(CC) -o calidad 014_Calidad.c libarram.c $(CFLAGS)
+$(003): $(003).c
+  $(CC) -o $(003) $(003).c
 
-productos: 256_productos.c libarram.c
-  $(CC) -o productos 256_productos.c libarram.c $(CFLAGS)
+$(004): $(004).c
+  $(CC) -o $(004) $(004).c
+
+$(005): $(005).c
+  $(CC) -o $(005) $(005).c
+
+$(006): $(006).c
+  $(CC) -o $(006) $(006).c
+
+$(007): $(007).c lib$(LIB).a
+  $(CC) $(007).c -L. -l$(LIB) -o $(007)
+
+$(008): $(008).c lib$(LIB).a
+  $(CC) $(008).c -L. -l$(LIB) -o $(008)
+
+$(009): $(009).c lib$(LIB).a
+  $(CC) $(009).c -L. -l$(LIB) -o $(009)
+
+lib$(LIB).a: $(LIB).o
+  ar rcs lib$(LIB).a $(LIB).o
+
+$(LIB).o: $(LIB).c
+  $(CC) -c $(LIB).c -o $(LIB).o
+
+$(010): $(010).c
+  $(CC) -o $(010) $(010).c
+
+$(011): $(011).c
+  $(CC) -o $(011) $(011).c
+
+$(012): $(012).c
+  $(CC) $(012).c -L. -l$(LIB) -o $(012)
+
+$(256): $(256).c lib$(LIB).a
+  $(CC) $(256).c -L. -l$(LIB) -o $(256)
+
+$(014): $(014).c
+  $(CC) -o $(014) $(014).c
+
+$(015): $(015).c lib$(LIB).a
+  $(CC) $(015).c -L. -l$(LIB) -o $(015)
 
 clean:
-  rm -f $(TARGETS)
+  rm -f $(001) $(002) $(003) $(004) $(005) $(006) $(007) $(008) $(009) lib$(LIB).a $(LIB).o $(010) $(011) $(012) $(256) $(014) $(015)
+
 
