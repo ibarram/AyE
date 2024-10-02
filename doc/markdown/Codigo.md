@@ -64,8 +64,14 @@
 </p>
 
 
-
-<img src="../img/Fig_TB_02_1.jpg" alt="Figura de la función seno" width="300" /> <img src="../img/Fig_TB_02_2.jpg" alt="Figura del tiempo de procesamiento" width="300" /> <img src="../img/Fig_TB_02_3.jpg" alt="Figura del error de calculo" width="300" />
+<p align="center">
+  <img src="../img/Fig_TB_02_1.jpg" alt="Figura 1" width="300"/>
+  <img src="../img/Fig_TB_02_2.jpg" alt="Figura 2" width="300"/>
+  <img src="../img/Fig_TB_02_3.jpg" alt="Figura 3" width="300"/>
+</p>
+<p align="center">
+  <strong>Figura 1: (a) grafica de los puntos de la función seno, (b) grafica del tiempo de procesamiento contra el numero de terminos en octavas, (c) grafica del error en el calculo de la función seno.</strong>
+</p>
 
 ## Recursividad
 
