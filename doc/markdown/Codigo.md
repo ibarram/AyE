@@ -110,6 +110,12 @@
      ./003_seno_serie_par x n
      ```
 
+     donde $$x$$ es el valor que se desea calcular en radianes y $$n$$ es el número de terminos. Por ejemplo, si deseamos obtener la función $$sin(1.2)$$ con $$100$$ términos usariamos el siguiente comando:
+
+       ```bash
+     ./003_seno_serie_par 1.2 100
+     ```
+
 ## Recursividad
 
 
