@@ -41,7 +41,11 @@
 ### 1. Cálculo de Seno con Serie de Taylor (Inicial): [001_seno_serie_ini.c](../../src/001_seno_serie_ini.c)
    - **Descripción**: Este código calcula la aproximación del seno de $$x$$ en radianes utilizando la **serie de Taylor**. El número $$n$$ de términos de la serie es configurable.
 
+   Utiliza la serie siguiente:
+
    $$sen(x)=\sum_{i=1}^{n}{(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+...$$
+
+   Cada termino es obtenido de la siguiente forma:
 
    $$(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}=(-1\times-1\times-1\times\dotsm-1\times-1)\frac{x\times x\times x\times\dotsm x\times x}{1\times2\times3\times\dotsm\times(2(i-1))\times (2i-1)}$$
 
@@ -56,6 +60,8 @@
      ./001_seno_serie_ini
      ```
 
+     La siguiente figura muestra la simulación para $$1000$$ puntos de la señal seno generados mediante una distribución uniforme discreta en el rango de $$[0, 2\pi]$$.
+
 <p align="center">
   <img src="../img/Fig_TB_01_1.jpg" alt="Figura 1" width="300"/>
   <img src="../img/Fig_TB_01_2.jpg" alt="Figura 2" width="300"/>
@@ -66,9 +72,13 @@
 </p>
 
 ### 2. Cálculo de Seno con Serie de Taylor (Optimizada): [002_seno_serie_opt.c](../../src/002_seno_serie_opt.c)
-   - **Descripción**: Este código calcula la aproximación del seno de $$x$$ en radianes utilizando la **serie de Taylor**. El número $$n$$ de términos de la serie es configurable.
+   - **Descripción**: Este código calcula la aproximación del seno de $$x$$ en radianes utilizando la **serie de Taylor**. El número $$n$$ de términos de la serie es configurable. Realiza un ajuste el los terminos para garantizar la convergencia y reducir el tiempo de cómputo.
+
+   Utiliza la siguiente serie:
 
    $$sen(x)=\sum_{i=1}^{n}{(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+...$$
+
+   Realiza el termino mediante la siguiente optimización:
 
    $$(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}=(2\times((i+1)\bmod 2)-1)\times x\times\frac{x}{2}\times\frac{x}{3}\times\dotsm\times\frac{x}{2(i-1)}\times\frac{x}{2i-1}$$
 
@@ -93,7 +103,7 @@
 </p>
 
 ### 3. Cálculo de Seno con Serie de Taylor (Optimizada): [003_seno_serie_par.c](../../src/003_seno_serie_par.c)
-   - **Descripción**: Este código calcula la aproximación del seno de $$x$$ en radianes utilizando la **serie de Taylor**. El número $$n$$ de términos de la serie es configurable.
+   - **Descripción**: Este código calcula la aproximación del seno de $$x$$ en radianes utilizando la **serie de Taylor**. El número $$n$$ de términos de la serie es configurable. Ambos parámetros, tanto $$x$$ como $$n$$ son capturados mediante argumentos de entrada.
 
    $$sen(x)=\sum_{i=1}^{n}{(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+...$$
 
