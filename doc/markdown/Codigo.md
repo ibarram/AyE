@@ -93,7 +93,7 @@
      ./002_seno_serie_opt
      ```
 
-     Se realizaron $$1000$$ simulaciones, cada valor de $$x$$ fue generado mediante una distribución uniforme discreta en el rango de $$[-\pi,\pi]$$, para las primeras $$15$$ octavas.
+     Se realizaron $$1000$$ simulaciones, cada valor de $$x$$ fue generado mediante una distribución uniforme discreta en el rango de $$[-\pi,\pi]$$, para las primeras $$15$$ octavas para el valor de $$n$$.
 
 <p align="center">
   <img src="../img/Fig_TB_02_1.jpg" alt="Figura 1" width="300"/>
