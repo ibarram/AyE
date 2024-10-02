@@ -39,7 +39,7 @@
 ## Conceptos fundamentales de algoritmos
 
 ### 1. Cálculo de Seno con Serie de Taylor (Inicial): [001_seno_serie_ini.c](../../src/001_seno_serie_ini.c)
-   - **Descripción**: Este código calcula la aproximación del seno de **x** en radianes utilizando la **serie de Taylor**. El número de términos de la serie es configurable.
+   - **Descripción**: Este código calcula la aproximación del seno de $$x$$ en radianes utilizando la **serie de Taylor**. El número $$n$$ de términos de la serie es configurable.
 
    $$sen(x)=\sum_{i=1}^{n}{(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+...$$
 
@@ -55,6 +55,23 @@
      ```
 
 <img src="../img/Fig_TB_01_1.jpg" alt="Figura de la función seno" width="300" /> <img src="../img/Fig_TB_01_2.jpg" alt="Figura del tiempo de procesamiento" width="300" /> <img src="../img/Fig_TB_01_3.jpg" alt="Figura del error de calculo" width="300" />
+
+
+<h2>Figura 1</h2>
+<img src="../img/Fig_TB_01_1.jpg" alt="Figura 1" width="400"/>
+<p><strong>Figura 1</strong>: Diagrama de flujo del proceso de análisis de datos.</p>
+<hr>
+
+<h2>Figura 2</h2>
+<img src="../img/Fig_TB_01_2.jpg" alt="Figura 2" width="400"/>
+<p><strong>Figura 2</strong>: Resultado de la segmentación de imágenes utilizando el algoritmo X.</p>
+<hr>
+
+<h2>Figura 3</h2>
+<img src="../img/Fig_TB_01_3.jpg" alt="Figura 3" width="400"/>
+<p><strong>Figura 3</strong>: Gráfico de los resultados del modelo predictivo.</p>
+<hr>
+
 
 <img src="../img/Fig_TB_02_1.jpg" alt="Figura de la función seno" width="300" /> <img src="../img/Fig_TB_02_2.jpg" alt="Figura del tiempo de procesamiento" width="300" /> <img src="../img/Fig_TB_02_3.jpg" alt="Figura del error de calculo" width="300" />
 
