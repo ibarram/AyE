@@ -67,8 +67,10 @@
 
 <div style="display: flex; justify-content: space-around;">
     <div style="text-align: center;">
-        <img src="../img/Fig_TB_01_1.jpg" alt="(a)" width="200"/>
-        <p><strong>(a)</strong></p>
+      <img src="../img/Fig_TB_01_1.jpg" alt="Figura 1" width="200"/>
+      <img src="../img/Fig_TB_01_2.jpg" alt="Figura 2" width="200"/>
+      <img src="../img/Fig_TB_01_3.jpg" alt="Figura 3" width="200"/>
+      <p><strong>(a)</strong></p>
     </div>
     <div style="text-align: center;">
         <img src="../img/Fig_TB_01_2.jpg" alt="(b)" width="200"/>
