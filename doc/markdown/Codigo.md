@@ -43,7 +43,7 @@
 
    $$sen(x)=\sum_{i=1}^{n}{(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+...$$
 
-   $$\frac{x^{2i-1}}{(2i-1)!}=\frac{x\times x\times x\times x\dotsm x}{1\times2\times3\times\dotsm\times i}$$
+   $$\frac{x^{2i-1}}{(2i-1)!}=\frac{x\times x\times x\times x\dotsm x\times x}{1\times2\times3\times\dotsm\times(2(i-1))\times (2i-1)}$$
 
    - **Temas clave**: Serie de Taylor, Funciones Trigonométricas, Bucles, Ciclos, Bifurcaciones.
    - **Ubicación**: `src/001_seno_serie_ini.c`
