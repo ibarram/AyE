@@ -60,9 +60,24 @@
   <img src="../img/Fig_TB_01_3.jpg" alt="Figura 3" width="300"/>
 </p>
 <p align="center">
-  <strong>Figura 1: (a) grafica de los puntos de la función seno, (b) grafica del tiempo de procesamiento contra el numero de terminos en octavas, (c) grafica del error en el calculo de la función seno.</strong>
+  <strong>Figura 1: (a) Grafica de los puntos de la función seno, (b) Grafica del tiempo de procesamiento contra el numero de terminos en octavas, (c) Grafica del error en el calculo de la función seno.</strong>
 </p>
 
+### 2. Cálculo de Seno con Serie de Taylor (Optimizada): [002_seno_serie_opt.c](../../src/002_seno_serie_opt.c)
+   - **Descripción**: Este código calcula la aproximación del seno de $$x$$ en radianes utilizando la **serie de Taylor**. El número $$n$$ de términos de la serie es configurable.
+
+   $$sen(x)=\sum_{i=1}^{n}{(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+...$$
+
+   - **Temas clave**: Serie de Taylor, Funciones Trigonométricas, Precisión, Optimización, Bucles, Ciclos, Bifurcaciones.
+   - **Ubicación**: `src/002_seno_serie_opt.c`
+   - **Compilación**:
+     ```bash
+     make 002_seno_serie_opt
+     ```
+   - **Uso**:
+     ```bash
+     ./002_seno_serie_opt
+     ```
 
 <p align="center">
   <img src="../img/Fig_TB_02_1.jpg" alt="Figura 1" width="300"/>
@@ -70,7 +85,7 @@
   <img src="../img/Fig_TB_02_3.jpg" alt="Figura 3" width="300"/>
 </p>
 <p align="center">
-  <strong>Figura 1: (a) grafica de los puntos de la función seno, (b) grafica del tiempo de procesamiento contra el numero de terminos en octavas, (c) grafica del error en el calculo de la función seno.</strong>
+  <strong>Figura 2: (a) Grafica de los puntos de la función seno, (b) Grafica del tiempo de procesamiento contra el numero de terminos en octavas, (c) Grafica del error en el calculo de la función seno.</strong>
 </p>
 
 ## Recursividad
