@@ -67,16 +67,16 @@
 
 <div style="display: flex; justify-content: space-around;">
     <div style="text-align: center;">
-        <img src="../img/Fig_TB_01_1.jpg" alt="Figura 1" width="200"/>
-        <p><strong>Figura 1</strong>: Diagrama de flujo del proceso de análisis de datos.</p>
+        <img src="../img/Fig_TB_01_1.jpg" alt="(a)" width="200"/>
+        <p><strong>(a)</strong></p>
     </div>
     <div style="text-align: center;">
-        <img src="../img/Fig_TB_01_2.jpg" alt="Figura 2" width="200"/>
-        <p><strong>Figura 2</strong>: Resultado de la segmentación de imágenes utilizando el algoritmo X.</p>
+        <img src="../img/Fig_TB_01_2.jpg" alt="(b)" width="200"/>
+        <p><strong>(b)</strong></p>
     </div>
     <div style="text-align: center;">
-        <img src="../img/Fig_TB_01_3.jpg" alt="Figura 3" width="200"/>
-        <p><strong>Figura 3</strong>: Gráfico de los resultados del modelo predictivo.</p>
+        <img src="../img/Fig_TB_01_3.jpg" alt="(c)" width="200"/>
+        <p><strong>(c)</strong></p>
     </div>
 </div>
 
