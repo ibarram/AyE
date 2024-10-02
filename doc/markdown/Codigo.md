@@ -55,31 +55,13 @@
      ```
 
 <p align="center">
-  <img src="../img/Fig_TB_01_1.jpg" alt="Figura 1" width="200"/>
-  <img src="../img/Fig_TB_01_2.jpg" alt="Figura 2" width="200"/>
-  <img src="../img/Fig_TB_01_3.jpg" alt="Figura 3" width="200"/>
-  <strong>Figura 1</strong> | <strong>Figura 2</strong> | <strong>Figura 3</strong>  
+  <img src="../img/Fig_TB_01_1.jpg" alt="Figura 1" width="300"/>
+  <img src="../img/Fig_TB_01_2.jpg" alt="Figura 2" width="300"/>
+  <img src="../img/Fig_TB_01_3.jpg" alt="Figura 3" width="300"/>
 </p>
-
 <p align="center">
-  <strong>Figura 1</strong> | <strong>Figura 2</strong> | <strong>Figura 3</strong>
+  <strong>Figura 1: (a) grafica de los puntos de la función seno, (b) grafica del tiempo de procesamiento contra el numero de terminos en octavas, (c) grafica del error en el calculo de la función seno.</strong>
 </p>
-
-
-<div style="display: flex; justify-content: space-around;">
-    <div style="text-align: center;">
-      <img src="../img/Fig_TB_01_1.jpg" alt="Figura 1" width="200"/>
-      <img src="../img/Fig_TB_01_2.jpg" alt="Figura 2" width="200"/>
-      <img src="../img/Fig_TB_01_3.jpg" alt="Figura 3" width="200"/>
-    </div>
-    <div style="text-align: center;">
-      <strong>Figura 1</strong> | <strong>Figura 2</strong> | <strong>Figura 3</strong>
-    </div>
-    <div style="text-align: center;">
-        <img src="../img/Fig_TB_01_3.jpg" alt="(c)" width="200"/>
-        <p><strong>(c)</strong></p>
-    </div>
-</div>
 
 
 
