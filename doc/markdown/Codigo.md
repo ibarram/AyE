@@ -43,7 +43,7 @@
 
    $$sen(x)=\sum_{i=1}^{n}{(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+...$$
 
-   $$(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}=(-1\times-1\times-1\times\dotsm-1\times-1)\frac{x\times x\times x\times x\dotsm x\times x}{1\times2\times3\times\dotsm\times(2(i-1))\times (2i-1)}$$
+   $$(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}=(-1\times-1\times-1\times\dotsm-1\times-1)\frac{x\times x\times x\times\dotsm x\times x}{1\times2\times3\times\dotsm\times(2(i-1))\times (2i-1)}$$
 
    - **Temas clave**: Serie de Taylor, Funciones Trigonométricas, Bucles, Ciclos, Bifurcaciones.
    - **Ubicación**: `src/001_seno_serie_ini.c`
@@ -69,6 +69,8 @@
    - **Descripción**: Este código calcula la aproximación del seno de $$x$$ en radianes utilizando la **serie de Taylor**. El número $$n$$ de términos de la serie es configurable.
 
    $$sen(x)=\sum_{i=1}^{n}{(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+...$$
+
+   $$(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}=(2\times((i+1)\%2)-1)\times x\times\frac{x}{2}\times\frac{x}{3}\times\dotsm\times\frac{x}{2(i-1)}\times\frac{x}{2i-1}$$
 
    - **Temas clave**: Serie de Taylor, Funciones Trigonométricas, Precisión, Optimización, Bucles, Ciclos, Bifurcaciones.
    - **Ubicación**: `src/002_seno_serie_opt.c`
