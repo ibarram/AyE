@@ -150,8 +150,22 @@
    | 2   | 1   | 4   | 5   | -1            | 1     | -1  | -1                 | -1     |
    | 2   | 3   | 20  | 8   | -4            | -1    | 4   | 4                  | 4      |
 
+   - **Temas clave**: Operaciones aritméticas básicas, Control de flujo, Argumentos en línea de comandos, Bifurcaciones.
+   - **Ubicación**: `src/004_billetes.c`
+   - **Compilación**:
+     ```bash
+     make 004_billetes
+     ```
+   - **Uso**:
+     ```bash
+     ./004_billetes A B S N
+     ```
 
+     donde $A$ y $B$ son los valores de los billetes, $S$ es el monto total que debe obtenerse con $N$ billetes extactamente. Por ejemplo, si deseamos obetener $20$ dólares con montos de $2$ y $3$ dólares con excatamente $8$ billetes se usuaria el siguiente comando:
 
+       ```bash
+     ./004_billetes 2 3 20 8
+     ```
 
 ## Recursividad
 
