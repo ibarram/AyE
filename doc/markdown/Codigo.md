@@ -139,7 +139,14 @@
 
    $$X\equiv\lfloor X\rfloor$$
 
-   $$0\leq X \geq N$$
+   $$0\leq X \leq N$$
+
+   | Nombre    | Edad | País        |
+|:----------|-----:|:-----------:|
+| Juan      |   25 | México      |
+| María     |   30 | España      |
+| John      |   22 | Estados Unidos |
+
 
 ## Recursividad
 
