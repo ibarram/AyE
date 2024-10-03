@@ -161,6 +161,17 @@ int isce(char c)
 	}
 }
 
+int ispnt(char c)
+{
+	static int i=-1;
+	i++;
+	printf("i=%d\n", i);
+	if(c=='.'&&i)
+		return 1;
+	else
+		return 0;
+}
+
 int validar(char email[])
 {
 	int nc, da, i, nce;
@@ -175,7 +186,7 @@ int validar(char email[])
 	if(da>EMAIL_PL)
 		return 0;
 	for(i=0; i<da; i++)
-		if(!isalnum(email[i])&&!isce(email[i]))
+		if(!ispnt(email[i])&&!isalnum(email[i])&&!isce(email[i]))
 			return 0;
 	return 1;
 }

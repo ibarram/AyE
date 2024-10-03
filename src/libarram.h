@@ -28,5 +28,6 @@ float exp3(float x, int n);
 float exp4(float x, int n);
 int validar(char email[]);
 int isce(char c);
+int ispnt(char c);
 
 #endif
