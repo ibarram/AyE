@@ -141,11 +141,13 @@
 
    $$0\leq X \leq N$$
 
-   | Nombre    | Edad | País        |
-|:----------|-----:|:-----------:|
-| Juan      |   25 | México      |
-| María     |   30 | España      |
-| John      |   22 | Estados Unidos |
+   La siguiente tabla muestra cuatro ejemplos de pruebas y los resultados de los mismos
+
+   | $$A$$ | $$B$$ | $$S$$ | $$N$$ | $$S-N\times B$$ | $$A-B$$ | $$X$$ | $$\lfloor X\rfloor$$ | Salida |
+   |:-----:|:-----:|:-----:||:----:|:---------------:|:-------:|:-----:|:--------------------:|:------:|
+   | 1     | 2     | 7     | 5     | -3              | -1      | 3     | 3                    | 3      |
+
+
 
 
 ## Recursividad
