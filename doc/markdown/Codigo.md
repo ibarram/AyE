@@ -104,7 +104,7 @@
   <strong>Figura 2: (a) Grafica de los puntos de la función seno, (b) Grafica del tiempo de procesamiento contra el numero de terminos en octavas, (c) Grafica del error en el calculo de la función seno.</strong>
 </p>
 
-### 3. Cálculo de Seno con Serie de Taylor (Optimizada): [003_seno_serie_par.c](../../src/003_seno_serie_par.c)
+### 3. Cálculo de Seno con Serie de Taylor (Optimizada) con entradas por argumentos: [003_seno_serie_par.c](../../src/003_seno_serie_par.c)
    - **Descripción**: Este código calcula la aproximación del seno de $$x$$ en radianes utilizando la **serie de Taylor**. El número $$n$$ de términos de la serie es configurable. Ambos parámetros, tanto $$x$$ como $$n$$ son capturados mediante argumentos de entrada.
 
    $$sen(x)=\sum_{i=1}^{n}{(-1)^{i+1}\frac{x^{2i-1}}{(2i-1)!}}=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+...$$
@@ -127,6 +127,8 @@
        ```bash
      ./003_seno_serie_par 1.2 100
      ```
+
+### 4. Billetes (Banknotes): [004_billetes.c](../../src/004_billetes.c)
 
 ## Recursividad
 
