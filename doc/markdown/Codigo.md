@@ -129,6 +129,17 @@
      ```
 
 ### 4. Billetes (Banknotes): [004_billetes.c](../../src/004_billetes.c)
+   - **Descripción**: Este código calcula la cantidad X de billetes de valor de A dólares, considere que solo se tiene billetes de valor A y B, ambas cantidades son siempre diferentes. Además que solo se cuenta con exactamente N billetes en total. Si no es posible encontrar una solución el programa regresa el valor de -1. Los cuatro valores son capturados desde argumentos de entrada en el orden: A, B, S y N.
+
+   El problema es solucionado mediante la implementación de la ecuación:
+
+   $$X=\frac{S-N\times B}{A-B}$$
+
+   Sin embargo, es necesario considerar las siguientes restricciones:
+
+   $$X\equiv\lfloor X\rfloor$$
+
+   $$0\leq X \geq N$$
 
 ## Recursividad
 

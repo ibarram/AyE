@@ -30,7 +30,7 @@ long int s2l(char *str)
 /**
  * Función principal: main
  * ----------------------------
- *   El programa calcula la cantidad de billetes de valor A para pagar la cantidad S.
+ *   El programa calcula la cantidad X de billetes de valor A para pagar la cantidad S.
  *   Considera que solo tiene dos cantidades A y B y ambas son diferentes, además que
  *   solo cuenta con N billetes exactamente para pagar. En el caso que el problema no
  *   tenga solución regresa el valor de -1.
