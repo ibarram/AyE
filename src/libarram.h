@@ -6,6 +6,8 @@
 #define EMAIL_PL 63
 #define N_CE 19
 #define CE (char[N_CE]){'!','#','$','%','&','\'','*','+','/','=','?','^','_','{','|','}','~','"','\0'}
+#define NS 256
+#define INTER(x,y){x^=y;y^=x;x^=y;}
 
 float dist_norm(float md, float de);
 float suma_x2(float x[], float md, int n);
@@ -29,5 +31,8 @@ float exp4(float x, int n);
 int validar(char email[]);
 int isce(char c);
 int ispnt(char c);
+int KSA(unsigned char *clave, unsigned char *S);
+int PRGA(unsigned char *S, unsigned char *msg, unsigned char *msg2);
+int RC4_cod(unsigned char *clave, unsigned char *msg, unsigned char *msg2);
 
 #endif

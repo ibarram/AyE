@@ -163,11 +163,18 @@ int isce(char c)
 
 int ispnt(char c)
 {
-	static int i=-1;
+	static int i=-1, j=-1;
 	i++;
-	printf("i=%d\n", i);
 	if(c=='.'&&i)
-		return 1;
+	{
+		if((j+1)==i)
+			return 0;
+		else
+		{
+			j = i;
+			return 1;
+		}
+	}
 	else
 		return 0;
 }
@@ -190,4 +197,41 @@ int validar(char email[])
 			return 0;
 	return 1;
 }
-	
+
+int KSA(unsigned char *clave, unsigned char *S)
+{
+	unsigned int i, j, NC;
+	for(i=0; i<NS; i++)
+		S[i]=i;
+	NC = strlen(clave);
+	for(i=0, j=0; i<NS; i++)
+	{
+		j = (j+S[i]+clave[i%NC])%NS;
+		if(i!=j)
+			INTER(S[i], S[j]);
+	}
+	return 0;
+}
+
+int PRGA(unsigned char *S, unsigned char *msg, unsigned char *msg2)
+{
+	unsigned int i, j, k, NM;
+	NM = strlen(msg);
+	for(k=0, i=0, j=0; k<NM; k++)
+	{
+		i = (i+1)%NS;
+		j = (j+S[i])%NS;
+		if(i!=j)
+			INTER(S[i], S[j]);
+		msg2[k]=msg[k]^(S[(S[i]+S[j])%NS]);
+	}
+	msg2[k]='\0';
+}
+
+int RC4_cod(unsigned char *clave, unsigned char *msg, unsigned char *msg2)
+{
+	unsigned char S[NS];
+	KSA(clave, S);
+	PRGA(S, msg, msg2);
+	return 0;
+}
