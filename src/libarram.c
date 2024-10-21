@@ -235,3 +235,70 @@ int RC4_cod(unsigned char *clave, unsigned char *msg, unsigned char *msg2)
 	PRGA(S, msg, msg2);
 	return 0;
 }
+
+Z capturarZ(void)
+{
+	Z Z1;
+	printf("Real: ");
+	scanf("%f", &(Z1.a));
+	printf("Imaginaria: ");
+	scanf("%f", &(Z1.b));
+	return Z1;
+}
+
+Z sumaZ(Z Z1, Z Z2)
+{
+	Z Z3;
+	Z3.a = Z1.a+Z2.a;
+	Z3.b = Z1.b+Z2.b;
+	return Z3;
+}
+
+Z multiplicaZ(Z Z1, Z Z2)
+{
+	Z Z3;
+	Z3.a = Z1.a*Z2.a-Z1.b*Z2.b;
+	Z3.b = Z1.a*Z2.b+Z1.b*Z2.a;
+	return Z3;
+}
+
+Z conjZ(Z Z1)
+{
+	Z Z3;
+	Z3.a = Z1.a;
+	Z3.b = -Z1.b;
+	return Z3;
+}
+
+Z invZ(Z Z1)
+{
+	Z Z3;
+	float r = Z1.a*Z1.a+Z1.b*Z1.b;
+	if(r)
+	{
+		Z3.a = Z1.a/r;
+		Z3.b = -Z1.b/r;
+	}
+	else
+	{
+		Z3.a = 0;
+		Z3.b = 0;
+	}
+	return Z3;
+}
+
+Z divZ(Z Z1, Z Z2)
+{
+	return multiplicaZ(Z1, invZ(Z2));
+}
+
+float magZ(Z Z1)
+{
+	return sqrt(pow(Z1.a,2)+pow(Z1.b,2));
+}
+
+float angZ(Z Z1)
+{
+	return atanf(Z1.b/Z1.a);
+}
+
