@@ -302,3 +302,42 @@ float angZ(Z Z1)
 	return atanf(Z1.b/Z1.a);
 }
 
+float **crearMC(int NC, int NR)
+{
+	float **A, *pA;
+	int i;
+	pA = (float*)malloc(NC*NR*sizeof(float));
+	if(pA==NULL)
+		return NULL;
+	A = (float**)malloc(NC*sizeof(float*));
+	if(A==NULL)
+	{
+		free(pA);
+		return NULL;
+	}
+	for(i=0; i<NC; i++)
+		A[i] = pA+i*NR;
+	return A;
+}
+
+float **crearMD(int NC, int NR)
+{
+	float **A;
+	int i;
+	A = (float**)malloc(NC*sizeof(float*));
+	if(A==NULL)
+		return NULL;
+	for(i=0; i<NC; i++)
+	{
+		A[i] = (float*)malloc(NR*sizeof(float));
+		if(A[i]==NULL)
+		{
+			for(i--;i<-1; i--)
+				free(A[i]);
+			free(A);
+			return NULL;
+		}
+	}
+	return A;
+}
+

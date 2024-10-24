@@ -54,5 +54,7 @@ Z invZ(Z Z1);
 Z divZ(Z Z1, Z Z2);
 float magZ(Z Z1);
 float angZ(Z Z1);
+float **crearMC(int NC, int NR);
+float **crearMD(int NC, int NR);
 
 #endif
