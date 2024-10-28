@@ -1,4 +1,4 @@
-r#ifndef LIBARRAM_H
+#ifndef LIBARRAM_H
 #define LIBARRAM_H
 
 #define PI 3.141592653589793
