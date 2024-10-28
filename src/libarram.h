@@ -1,6 +1,4 @@
-#ifndef LIBARRAM_H
-#define LIBARRAM_H
-
+#pragma once
 #define PI 3.141592653589793
 #define EMAIL_MX 255
 #define EMAIL_PL 63
@@ -8,19 +6,16 @@
 #define CE (char[N_CE]){'!','#','$','%','&','\'','*','+','/','=','?','^','_','{','|','}','~','"','\0'}
 #define NS 256
 #define INTER(x,y){x^=y;y^=x;x^=y;}
-
 typedef struct Z
 {
-	float a;
-	float b;
+	float a, b;
 }Z;
-
-typedef union dato{
+typedef union data
+{
 	float f;
 	int i;
 	char c[4];
-}dato;
-
+}data;
 float dist_norm(float md, float de);
 float suma_x2(float x[], float md, int n);
 float varianza2(float x[], int n);
@@ -46,9 +41,10 @@ int ispnt(char c);
 int KSA(unsigned char *clave, unsigned char *S);
 int PRGA(unsigned char *S, unsigned char *msg, unsigned char *msg2);
 int RC4_cod(unsigned char *clave, unsigned char *msg, unsigned char *msg2);
-Z capturarZ(void);
-Z sumaZ(Z Z1, Z Z2);
-Z multiplicaZ(Z Z1, Z Z2);
+Z captureZ(void);
+Z sumZ(Z Z1, Z Z2);
+Z multZ(Z Z1, Z Z2);
+void printZ(char* name, Z var);
 Z conjZ(Z Z1);
 Z invZ(Z Z1);
 Z divZ(Z Z1, Z Z2);
@@ -56,5 +52,9 @@ float magZ(Z Z1);
 float angZ(Z Z1);
 float **crearMC(int NC, int NR);
 float **crearMD(int NC, int NR);
-
-#endif
+int freeMC(float **A);
+int freeMD(float** A, int NC);
+int freeMD2(float** A, int NC);
+int multiplicarM(float** A,float**B,float**C,int NC,int NR,int MC,int MR);
+void imprimirM(float **A,int NC,int MR);
+void capturarM(float **A,int NC,int MR);

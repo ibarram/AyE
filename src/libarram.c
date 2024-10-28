@@ -236,72 +236,56 @@ int RC4_cod(unsigned char *clave, unsigned char *msg, unsigned char *msg2)
 	return 0;
 }
 
-Z capturarZ(void)
+Z captureZ()
 {
 	Z Z1;
 	printf("Real: ");
-	scanf("%f", &(Z1.a));
-	printf("Imaginaria: ");
-	scanf("%f", &(Z1.b));
+	scanf_s("%f", &(Z1.a));
+	printf("\nImaginaria: ");
+	scanf_s("%f", &(Z1.b));
 	return Z1;
 }
-
-Z sumaZ(Z Z1, Z Z2)
+Z sumZ(Z Z1, Z Z2)
 {
-	Z Z3;
-	Z3.a = Z1.a+Z2.a;
-	Z3.b = Z1.b+Z2.b;
-	return Z3;
+	return (Z){Z1.a+Z2.a, Z1.b + Z2.b};
+}
+Z multZ(Z Z1, Z Z2)
+{
+	return (Z){Z1.a*Z2.a, Z1.b * Z2.b};
 }
 
-Z multiplicaZ(Z Z1, Z Z2)
-{
-	Z Z3;
-	Z3.a = Z1.a*Z2.a-Z1.b*Z2.b;
-	Z3.b = Z1.a*Z2.b+Z1.b*Z2.a;
-	return Z3;
+void printZ(char* name, Z var){
+	printf("%s = %f%+fi\n",name, var.a, var.b);
+
 }
 
 Z conjZ(Z Z1)
 {
-	Z Z3;
-	Z3.a = Z1.a;
-	Z3.b = -Z1.b;
-	return Z3;
+	return (Z){Z1.a, -Z1.b};
 }
-
 Z invZ(Z Z1)
 {
-	Z Z3;
 	float r = Z1.a*Z1.a+Z1.b*Z1.b;
 	if(r)
-	{
-		Z3.a = Z1.a/r;
-		Z3.b = -Z1.b/r;
-	}
-	else
-	{
-		Z3.a = 0;
-		Z3.b = 0;
-	}
-	return Z3;
+		return (Z){Z1.a/r,-Z1.b/r};
+	return (Z){0,0};
 }
 
 Z divZ(Z Z1, Z Z2)
 {
-	return multiplicaZ(Z1, invZ(Z2));
+	return multZ(Z1,invZ(Z2));
+	
 }
 
 float magZ(Z Z1)
 {
-	return sqrt(pow(Z1.a,2)+pow(Z1.b,2));
+	return Z1.a*Z1.a+Z1.b*Z1.b;
 }
 
 float angZ(Z Z1)
 {
 	return atanf(Z1.b/Z1.a);
 }
-
 float **crearMC(int NC, int NR)
 {
 	float **A, *pA;
@@ -341,3 +325,63 @@ float **crearMD(int NC, int NR)
 	return A;
 }
 
+int freeMD(float** A, int NC)
+{
+	for(int i = 0; i < NC; i++)
+		free(A[i]);
+	free(A);
+}
+
+int freeMD2(float** A, int NC)
+{
+	NC--;
+	free(A[NC]);
+	if(NC)
+		return freeMD2(A,NC);
+	free(A);
+	return 0;
+}
+
+int freeMC(float **A)
+{
+	free(A[0]);
+	free(A);
+}
+int multiplicarM(float** A,float**B,float**C,int NC,int NR,int MC,int MR)
+{
+	int i, j, k;
+	if(NC!=MR)
+	{
+		printf("no se puede realizar la multiplicacion");
+		return 1;
+	}
+	for(i = 0; i < NR; i++)
+		for(j = 0 ; j < MC; j++)
+			for(k = 0, C[j][i] = 0; k<NC; k++)
+				C[j][i] += A[k][i] * B[j][k];
+	return 0;
+
+}
+void imprimirM(float **A,int NC,int MR)
+{
+	int i, j;
+	for(i = 0; i<MR; i++)
+	{
+		for(j = 0; j<NC; j++)
+			printf("%.4f\t",A[j][i]);
+		printf("\n");
+	}
+}
+
+void capturarM(float **A,int NC,int MR)
+{
+	int i, j;
+	for(i = 0; i<MR; i++)
+	{
+		for(j = 0; j<NC; j++)
+		{
+			printf("A[%d][%d] = ", i,j);
+			scanf_s("%f",(*(A+j) + i));
+		}
+	}
+}
