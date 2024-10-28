@@ -301,7 +301,6 @@ float angZ(Z Z1)
 {
 	return atanf(Z1.b/Z1.a);
 }
-
 float **crearMC(int NC, int NR)
 {
 	float **A, *pA;
@@ -341,3 +340,63 @@ float **crearMD(int NC, int NR)
 	return A;
 }
 
+int freeMD(float** A, int NC)
+{
+	for(int i = 0; i < NC; i++)
+		free(A[i]);
+	free(A);
+}
+
+int freeMD2(float** A, int NC)
+{
+	NC--;
+	free(A[NC]);
+	if(NC)
+		return freeMD2(A,NC);
+	free(A);
+	return 0;
+}
+
+int freeMC(float **A)
+{
+	free(A[0]);
+	free(A);
+}
+int multiplicarM(float** A,float**B,float**C,int NC,int NR,int MC,int MR)
+{
+	int i, j, k;
+	if(NC!=MR)
+	{
+		printf("no se puede realizar la multiplicacion");
+		return 1;
+	}
+	for(i = 0; i < NR; i++)
+		for(j = 0 ; j < MC; j++)
+			for(k = 0, C[j][i] = 0; k<NC; k++)
+				C[j][i] += A[k][i] * B[j][k];
+	return 0;
+
+}
+void imprimirM(float **A,int NC,int MR)
+{
+	int i, j;
+	for(i = 0; i<MR; i++)
+	{
+		for(j = 0; j<NC; j++)
+			printf("%.4f\t",A[j][i]);
+		printf("\n");
+	}
+}
+
+void capturarM(float **A,int NC,int MR)
+{
+	int i, j;
+	for(i = 0; i<MR; i++)
+	{
+		for(j = 0; j<NC; j++)
+		{
+			printf("A[%d][%d] = ", i,j);
+			scanf_s("%f",(*(A+j) + i));
+		}
+	}
+}

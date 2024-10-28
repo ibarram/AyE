@@ -1,4 +1,4 @@
-#ifndef LIBARRAM_H
+r#ifndef LIBARRAM_H
 #define LIBARRAM_H
 
 #define PI 3.141592653589793
@@ -54,7 +54,13 @@ Z invZ(Z Z1);
 Z divZ(Z Z1, Z Z2);
 float magZ(Z Z1);
 float angZ(Z Z1);
-float **crearMC(int NC, int NR);
-float **crearMD(int NC, int NR);
+float** crearMC(int NC, int NR);
+float** crearMD(int NC, int NR);
+int freeMC(float** A);
+int freeMD(float** A, int NC);
+int freeMD2(float** A, int NC);
+int multiplicarM(float** A, float** B, float** C, int NC, int NR, int MC, int MR);
+void imprimirM(float** A, int NC, int MR);
+void capturarM(float** A, int NC, int MR);
 
 #endif
