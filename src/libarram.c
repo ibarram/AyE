@@ -203,7 +203,7 @@ int KSA(unsigned char *clave, unsigned char *S)
 	unsigned int i, j, NC;
 	for(i=0; i<NS; i++)
 		S[i]=i;
-	NC = strlen(clave);
+	NC = strlen((char*)clave);
 	for(i=0, j=0; i<NS; i++)
 	{
 		j = (j+S[i]+clave[i%NC])%NS;
@@ -216,7 +216,7 @@ int KSA(unsigned char *clave, unsigned char *S)
 int PRGA(unsigned char *S, unsigned char *msg, unsigned char *msg2)
 {
 	unsigned int i, j, k, NM;
-	NM = strlen(msg);
+	NM = strlen((char*)msg);
 	for(k=0, i=0, j=0; k<NM; k++)
 	{
 		i = (i+1)%NS;
@@ -226,6 +226,7 @@ int PRGA(unsigned char *S, unsigned char *msg, unsigned char *msg2)
 		msg2[k]=msg[k]^(S[(S[i]+S[j])%NS]);
 	}
 	msg2[k]='\0';
+	return 0;
 }
 
 int RC4_cod(unsigned char *clave, unsigned char *msg, unsigned char *msg2)
@@ -302,34 +303,34 @@ float angZ(Z Z1)
 	return atanf(Z1.b/Z1.a);
 }
 
-float **crearMC(int NC, int NR)
+float **crearMC(int NR, int NC)
 {
 	float **A, *pA;
 	int i;
 	pA = (float*)malloc(NC*NR*sizeof(float));
 	if(pA==NULL)
 		return NULL;
-	A = (float**)malloc(NC*sizeof(float*));
+	A = (float**)malloc(NR*sizeof(float*));
 	if(A==NULL)
 	{
 		free(pA);
 		return NULL;
 	}
-	for(i=0; i<NC; i++)
-		A[i] = pA+i*NR;
+	for(i=0; i<NR; i++)
+		A[i] = pA+i*NC;
 	return A;
 }
 
-float **crearMD(int NC, int NR)
+float **crearMD(int NR, int NC)
 {
 	float **A;
 	int i;
-	A = (float**)malloc(NC*sizeof(float*));
+	A = (float**)malloc(NR*sizeof(float*));
 	if(A==NULL)
 		return NULL;
-	for(i=0; i<NC; i++)
+	for(i=0; i<NR; i++)
 	{
-		A[i] = (float*)malloc(NR*sizeof(float));
+		A[i] = (float*)malloc(NC*sizeof(float));
 		if(A[i]==NULL)
 		{
 			for(i--;i<-1; i--)
@@ -341,3 +342,87 @@ float **crearMD(int NC, int NR)
 	return A;
 }
 
+int liberarC(float **A)
+{
+	free(A[0]);
+	free(A);
+	return 0;
+}
+
+int liberarD(float **A, int NR)
+{
+	int i;
+	for(i=0; i<NR; i++)
+		free(A[i]);
+	free(A);
+	return 0;
+}
+
+int liberarD2(float **A, int NR)
+{
+	free(A[NR-1]);
+	if(NR-1)
+		return liberarD2(A, NR-1);
+	else
+	{
+		free(A);
+		return 0;
+	}
+}
+
+/*
+int multiplicar(float **A, float **B, float **C, int NR, int NC, int MR, int MC)
+{
+	int i, j, k;
+	float aux1, aux2, aux3;
+	if(NC!=MR)
+		return 1;
+	for(i=0; i<NR; i++)
+		for(j=0; j<MC; j++)
+			for(k=0, aux3=0; k<NC; k++) // *(*(C+j)+i)=0
+			{
+				aux1 = A[i][k];
+				aux2 = B[k][j];
+				aux3 += aux1*aux2;
+				printf("aux1 = %.2f\taux2 = %.2f\taux3 = %.2f\n", aux1, aux2, aux3);
+				printf("%p\n", A[i]);
+				printf("%p\n", B[k]);
+				printf("%p\n", C[i]);
+				C[i][j] = aux3;
+			}
+	return 0;
+}
+*/
+int multiplicar(float **A, float **B, float **C, int NR, int NC, int MR, int MC)
+{
+	int i, j, k;
+	if(NC!=MR)
+		return 1;
+	for(i=0; i<NR; i++)
+		for(j=0; j<MC; j++)
+			for(k=0, C[i][j]=0; k<NC; k++) // *(*(C+j)+i)=0
+				C[i][j] += A[i][k]*B[k][j];
+	return 0;
+}
+
+void capturarM(float **A, int NR, int NC)
+{
+	int i, j;
+	for(i=0; i<NR; i++)
+		for(j=0; j<NC; j++)
+		{
+			printf("A[%d][%d] = ", i+1, j+1);
+			scanf("%f", A[i]+j); // &(*(*(A+j)+i))=&(*(A[j]+i))=A[j]+i
+		}
+}
+
+void imprimirM(float **A, int NR, int NC)
+{
+	int i, j;
+	for(i=0; i<NR; i++)
+	{
+		for(j=0; j<NC; j++)
+			printf("%.4f\t", A[i][j]);
+		printf("\n");
+	}
+}

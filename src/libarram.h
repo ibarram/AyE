@@ -54,7 +54,13 @@ Z invZ(Z Z1);
 Z divZ(Z Z1, Z Z2);
 float magZ(Z Z1);
 float angZ(Z Z1);
-float **crearMC(int NC, int NR);
-float **crearMD(int NC, int NR);
+float **crearMC(int NR, int NC);
+float **crearMD(int NR, int NC);
+int liberarC(float **A);
+int liberarD(float **A, int NR);
+int liberarD2(float **A, int NR);
+int multiplicar(float **A, float **B, float **C, int NR, int NC, int MR, int MC);
+void capturarM(float **A, int NR, int NC);
+void imprimirM(float **A, int NR, int NC);
 
 #endif
