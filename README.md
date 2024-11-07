@@ -164,6 +164,15 @@ Las presentaciones de la Unidad de Aprendizaje estan disponibles en formato PDF 
 |5_AlgoBusqueda.pdf|Algoritmos de Búsqueda|.|.|
 |6_Analisis.pdf|Análisis de algoritmos|.|.|
 
+## Archivos de bases de datos
+
+Los archivos usados en la Unidad de Aprendizaje estan disponible para su descarga.
+
+|Archivo|Descripción|Tamaño|Enlace|
+|---|---|---|---|
+|edr_valor_00.csv|Archivo CSV de datos del INEGI sobre defunciones registradas|69.4 MB|[Download](https://ugtomx-my.sharepoint.com/:x:/g/personal/ibarram_ugto_mx/EbGwL_DJSGpLoAuOf0VD4tkBSsL4n8Fs-z1K_YOQfnMs3Q?e=xwuDfZ)|
+|1_Cenceptos.pdf|Conceptos fundamentales de algoritmos|1.01 MB|[Download](doc/slide/1_Conceptos.pdf)|
+
 ## Listado de Códigos Desarrollados durante la UDA
 
 A lo largo de esta UDA, hemos implementado diversos algoritmos y estructuras de datos fundamentales para resolver problemas relacionados con el análisis, manipulación y optimización de datos. Estos códigos cubren una variedad de temas clave, que incluyen:
