@@ -171,7 +171,6 @@ Los archivos usados en la Unidad de Aprendizaje estan disponible para su descarg
 |Archivo|Descripción|Tamaño|Enlace|
 |---|---|---|---|
 |edr_valor_00.csv|Archivo CSV de datos del INEGI sobre defunciones registradas|69.4 MB|[Download](https://ugtomx-my.sharepoint.com/:x:/g/personal/ibarram_ugto_mx/EbGwL_DJSGpLoAuOf0VD4tkBSsL4n8Fs-z1K_YOQfnMs3Q?e=xwuDfZ)|
-|1_Cenceptos.pdf|Conceptos fundamentales de algoritmos|1.01 MB|[Download](doc/slide/1_Conceptos.pdf)|
 
 ## Listado de Códigos Desarrollados durante la UDA
 
