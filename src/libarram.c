@@ -426,3 +426,102 @@ void imprimirM(float **A, int NR, int NC)
 		printf("\n");
 	}
 }
+
+long int num_registros(char *file_name)
+{
+	FILE *fp;
+	int nc, ncl, flag;
+	char c;
+	long int nr;
+	fp = fopen(file_name, "rt");
+	if(fp==NULL)
+		return 0;
+	fflush(fp);
+	nc=0;
+	do{
+		c = getc(fp);
+		if(c==',')
+			nc++;
+	}while(c!='\n');
+	c = getc(fp);
+	ncl = 0;
+	nr = 0;
+	flag = 1;
+	while(c!=EOF)
+	{
+		if((c==',')&flag)
+			ncl++;
+		if(c=='"')
+			flag = !flag;
+		if(c=='\n')
+		{
+			if(ncl==nc)
+				nr++;
+			ncl = 0;
+		}
+		c = getc(fp);
+	}
+	fclose(fp);
+	return  nr;
+}
+
+int lectura_bd(char *file_name, bd_INEGI *Datos)
+{
+	long int nr;
+	FILE *fp;
+	nr = num_registros(file_name);
+	if(nr==0)
+		return 1;
+	fp = fopen(file_name, "rt");
+	if(fp==NULL)
+		return 2;
+	Datos->nr = nr;
+	Datos->cve_entidad=(int*)malloc(nr*sizeof(int));
+	if(Datos->cve_entidad==NULL)
+	{
+		fclose(fp);
+		return 3;
+	}
+	Datos->cve_municipio=(int*)malloc(nr*sizeof(int));
+	if(Datos->cve_municipio==NULL)
+	{
+		free(Datos->cve_entidad);
+		fclose(fp);
+		return 4;
+	}
+	Datos->id_indicador=(long int*)malloc(nr*sizeof(long int));
+	if(Datos->id_indicador==NULL)
+	{
+		free(Datos->cve_municipio);
+		free(Datos->cve_entidad);
+		fclose(fp);
+		return 5;
+	}
+	Datos->anio=(int*)malloc(nr*sizeof(int));
+	if(Datos->anio==NULL)
+	{
+		free(Datos->cve_municipio);
+		free(Datos->cve_entidad);
+		free(Datos->id_indicador);
+		fclose(fp);
+		return 6;
+	}
+	Datos->valor=(long int*)malloc(nr*sizeof(long int));
+	if(Datos->valor==NULL)
+	{
+		free(Datos->cve_municipio);
+		free(Datos->cve_entidad);
+		free(Datos->id_indicador);
+		free(Datos->anio);
+		fclose(fp);
+		return 7;
+	}
+	printf("Numero de registros: %ld\n", Datos->nr);
+	free(Datos->cve_municipio);
+	free(Datos->cve_entidad);
+	free(Datos->id_indicador);
+	free(Datos->anio);
+	free(Datos->valor);
+	fclose(fp);
+	return 0;
+}

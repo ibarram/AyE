@@ -21,6 +21,15 @@ typedef union dato{
 	char c[4];
 }dato;
 
+typedef struct bd_INEGI{
+	long int nr;
+	int *cve_entidad;
+	int *cve_municipio;
+	long int *id_indicador;
+	int *anio;
+	long int *valor;
+}bd_INEGI;
+
 float dist_norm(float md, float de);
 float suma_x2(float x[], float md, int n);
 float varianza2(float x[], int n);
@@ -62,5 +71,7 @@ int liberarD2(float **A, int NR);
 int multiplicar(float **A, float **B, float **C, int NR, int NC, int MR, int MC);
 void capturarM(float **A, int NR, int NC);
 void imprimirM(float **A, int NR, int NC);
+long int num_registros(char *file_name);
+int lectura_bd(char *file_name, bd_INEGI *Datos);
 
 #endif
