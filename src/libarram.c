@@ -467,7 +467,12 @@ long int num_registros(char *file_name)
 
 int lectura_bd(char *file_name, bd_INEGI *Datos)
 {
-	long int nr;
+	int nc;
+	long int nr, i, j, k, flag;
+	float fct;
+	char buffer[MAX_STR], c, **realloc_dic;
+	estados estado[9] = {conv_entero, cadena_s, conv_entero, separador, 
+		conv_enterol, separador, conv_entero, conv_enterol, sincronizacion};
 	FILE *fp;
 	nr = num_registros(file_name);
 	if(nr==0)
@@ -476,52 +481,114 @@ int lectura_bd(char *file_name, bd_INEGI *Datos)
 	if(fp==NULL)
 		return 2;
 	Datos->nr = nr;
-	Datos->cve_entidad=(int*)malloc(nr*sizeof(int));
-	if(Datos->cve_entidad==NULL)
+	Datos->mem = (int*)malloc(3*nr*sizeof(int)+2*nr*sizeof(long int));
+	if(Datos->mem==NULL)
 	{
 		fclose(fp);
 		return 3;
 	}
-	Datos->cve_municipio=(int*)malloc(nr*sizeof(int));
-	if(Datos->cve_municipio==NULL)
+	fct = (1.0*sizeof(long int))/sizeof(int);
+	Datos->cve_entidad=Datos->mem;
+	Datos->mem+=nr;
+	Datos->cve_municipio=Datos->mem;
+	Datos->mem+=nr;
+	Datos->id_indicador=(long int*)(Datos->mem);
+	Datos->mem+=((int)(fct*nr));
+	Datos->anio=Datos->mem;
+	Datos->mem+=nr;
+	Datos->valor=(long int*)(Datos->mem);
+	Datos->mem=Datos->cve_entidad;
+	Datos->desc_entidad.palabra = (char**)malloc(nr*sizeof(char*));
+	if(Datos->desc_entidad.palabra==NULL)
 	{
 		free(Datos->cve_entidad);
 		fclose(fp);
 		return 4;
 	}
-	Datos->id_indicador=(long int*)malloc(nr*sizeof(long int));
-	if(Datos->id_indicador==NULL)
+	Datos->desc_entidad.np = 0;
+	printf("Numero de registros: %ld\n", Datos->nr);
+	do{
+		c=getc(fp);
+	}while(c!='\n');
+	for(i=0; i<Datos->nr; i++)
 	{
-		free(Datos->cve_municipio);
-		free(Datos->cve_entidad);
-		fclose(fp);
-		return 5;
+		Datos->mem = Datos->cve_entidad;
+		for(k=0; k<9; k++)
+		{
+			j = 0;
+			flag = 0;
+			do{
+				buffer[j++] = getc(fp);
+				if(buffer[j-1]=='"')
+					flag = !flag;
+			}while(flag||(buffer[j-1]!=(estado[k]==sincronizacion?'\n':',')));
+			buffer[j-1] = '\0';
+			switch(estado[k])
+			{
+			case conv_entero:
+				Datos->mem[i] = atoi(buffer);
+				Datos->mem+=nr;
+				break;
+			case conv_enterol:
+				Datos->mem[(int)(fct*i)] = atol(buffer);
+				Datos->mem+=(int)(fct*nr);
+				break;
+			case cadena_s:
+				nc = strlen(buffer);
+				flag = !(Datos->desc_entidad.np);
+				if(Datos->desc_entidad.np)
+				{
+					j=0;
+					while(strcmp(Datos->desc_entidad.palabra[j++], buffer))
+						if(j==Datos->desc_entidad.np)
+						{
+							flag=1;
+							break;
+						}
+				}
+				if(flag)
+				{
+					Datos->desc_entidad.palabra[Datos->desc_entidad.np] = (char*)malloc((nc+1)*sizeof(char));
+					if(Datos->desc_entidad.palabra[Datos->desc_entidad.np]==NULL)
+					{
+						for(j=0; j<Datos->desc_entidad.np; j++)
+							free(Datos->desc_entidad.palabra[j]);
+						free(Datos->desc_entidad.palabra);
+						free(Datos->cve_entidad);
+						fclose(fp);
+						return 5;
+					}
+					strcpy(Datos->desc_entidad.palabra[Datos->desc_entidad.np], buffer);
+					Datos->desc_entidad.np++;
+				}
+				break;
+			default:
+				break;
+			}
+		}
 	}
-	Datos->anio=(int*)malloc(nr*sizeof(int));
-	if(Datos->anio==NULL)
+	realloc_dic = (char**)realloc(Datos->desc_entidad.palabra, (Datos->desc_entidad.np)*sizeof(char*));
+	if(realloc_dic==NULL)
 	{
-		free(Datos->cve_municipio);
 		free(Datos->cve_entidad);
-		free(Datos->id_indicador);
+		for(i=0; i<Datos->desc_entidad.np; i++)
+			free(Datos->desc_entidad.palabra[i]);
+		free(Datos->desc_entidad.palabra);
 		fclose(fp);
 		return 6;
 	}
-	Datos->valor=(long int*)malloc(nr*sizeof(long int));
-	if(Datos->valor==NULL)
-	{
-		free(Datos->cve_municipio);
-		free(Datos->cve_entidad);
-		free(Datos->id_indicador);
-		free(Datos->anio);
-		fclose(fp);
-		return 7;
-	}
-	printf("Numero de registros: %ld\n", Datos->nr);
-	free(Datos->cve_municipio);
-	free(Datos->cve_entidad);
-	free(Datos->id_indicador);
-	free(Datos->anio);
-	free(Datos->valor);
+	else
+		Datos->desc_entidad.palabra = realloc_dic;
 	fclose(fp);
+	return 0;
+}
+
+int liberar_bd(bd_INEGI Datos)
+{
+	long int i;
+	free(Datos.cve_entidad);
+	for(i=0; i<Datos.desc_entidad.np; i++)
+		free(Datos.desc_entidad.palabra[i]);
+	free(Datos.desc_entidad.palabra);
 	return 0;
 }

@@ -8,6 +8,7 @@
 #define CE (char[N_CE]){'!','#','$','%','&','\'','*','+','/','=','?','^','_','{','|','}','~','"','\0'}
 #define NS 256
 #define INTER(x,y){x^=y;y^=x;x^=y;}
+#define MAX_STR 200
 
 typedef struct Z
 {
@@ -21,14 +22,32 @@ typedef union dato{
 	char c[4];
 }dato;
 
+typedef struct diccionario_r{
+	char **palabra;
+	long int np;
+}diccionario_r;
+
+typedef struct diccionario_i{
+	long int *id;
+	char **palabra;
+	long int np;
+}diccionario_i;
+
 typedef struct bd_INEGI{
 	long int nr;
+	int *mem;
 	int *cve_entidad;
+	diccionario_r desc_entidad;
 	int *cve_municipio;
 	long int *id_indicador;
+	diccionario_i indicador;
 	int *anio;
 	long int *valor;
 }bd_INEGI;
+
+typedef enum estados{
+	separador, conv_entero, conv_enterol, cadena_s, sincronizacion
+}estados;
 
 float dist_norm(float md, float de);
 float suma_x2(float x[], float md, int n);
@@ -73,5 +92,6 @@ void capturarM(float **A, int NR, int NC);
 void imprimirM(float **A, int NR, int NC);
 long int num_registros(char *file_name);
 int lectura_bd(char *file_name, bd_INEGI *Datos);
+int liberar_bd(bd_INEGI Datos);
 
 #endif
