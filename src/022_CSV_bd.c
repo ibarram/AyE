@@ -16,10 +16,9 @@ int main(int argc, char *argv[])
 	}while(reg<0||reg>=Datos.nr);
 	printf("CVE entidad: %s (%d)\n", Datos.desc_entidad.palabra[Datos.cve_entidad[reg]], Datos.cve_entidad[reg]);
 	printf("CVE municipio: %d\n", Datos.cve_municipio[reg]);
-	printf("ID indicador: %ld\n", Datos.id_indicador[reg]);
+	printf("ID indicador: %s (%ld)\n", buscar(Datos.indicador, Datos.id_indicador[reg]), Datos.id_indicador[reg]);
 	printf("Año: %d\n", Datos.anio[reg]);
 	printf("Valor : %ld\n", Datos.valor[reg]);
-	printf("%ld\n", Datos.desc_entidad.np);
 	liberar_bd(Datos);
 	return 0;
 }

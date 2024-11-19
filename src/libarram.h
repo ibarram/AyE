@@ -46,7 +46,7 @@ typedef struct bd_INEGI{
 }bd_INEGI;
 
 typedef enum estados{
-	separador, conv_entero, conv_enterol, cadena_s, sincronizacion
+	separador, conv_entero, conv_enterol, cadena_s, cadena_i, sincronizacion
 }estados;
 
 float dist_norm(float md, float de);
@@ -92,6 +92,7 @@ void capturarM(float **A, int NR, int NC);
 void imprimirM(float **A, int NR, int NC);
 long int num_registros(char *file_name);
 int lectura_bd(char *file_name, bd_INEGI *Datos);
+char* buscar(diccionario_i dic, long int id);
 int liberar_bd(bd_INEGI Datos);
 
 #endif

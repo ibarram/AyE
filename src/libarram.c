@@ -468,11 +468,12 @@ long int num_registros(char *file_name)
 int lectura_bd(char *file_name, bd_INEGI *Datos)
 {
 	int nc;
-	long int nr, i, j, k, flag;
+	long int nr, i, j, k, flag, np, *realloc_id;
+	char **palabra;
 	float fct;
 	char buffer[MAX_STR], c, **realloc_dic;
 	estados estado[9] = {conv_entero, cadena_s, conv_entero, separador, 
-		conv_enterol, separador, conv_entero, conv_enterol, sincronizacion};
+		conv_enterol, cadena_i, conv_entero, conv_enterol, sincronizacion};
 	FILE *fp;
 	nr = num_registros(file_name);
 	if(nr==0)
@@ -506,6 +507,24 @@ int lectura_bd(char *file_name, bd_INEGI *Datos)
 		return 4;
 	}
 	Datos->desc_entidad.np = 0;
+	Datos->indicador.palabra = (char**)malloc(nr*sizeof(char*));
+	if(Datos->indicador.palabra==NULL)
+	{
+		free(Datos->cve_entidad);
+		free(Datos->desc_entidad.palabra);
+		fclose(fp);
+		return 5;
+	}
+	Datos->indicador.id = (long int*)malloc(nr*sizeof(long int));
+	if(Datos->indicador.id==NULL)
+	{
+		free(Datos->cve_entidad);
+		free(Datos->desc_entidad.palabra);
+		free(Datos->indicador.palabra);
+		fclose(fp);
+		return 6;
+	}
+	Datos->indicador.np = 0;
 	printf("Numero de registros: %ld\n", Datos->nr);
 	do{
 		c=getc(fp);
@@ -523,6 +542,7 @@ int lectura_bd(char *file_name, bd_INEGI *Datos)
 					flag = !flag;
 			}while(flag||(buffer[j-1]!=(estado[k]==sincronizacion?'\n':',')));
 			buffer[j-1] = '\0';
+			nc = strlen(buffer);
 			switch(estado[k])
 			{
 			case conv_entero:
@@ -534,13 +554,15 @@ int lectura_bd(char *file_name, bd_INEGI *Datos)
 				Datos->mem+=(int)(fct*nr);
 				break;
 			case cadena_s:
-				nc = strlen(buffer);
-				flag = !(Datos->desc_entidad.np);
-				if(Datos->desc_entidad.np)
+			case cadena_i:
+				np = estado[k]==cadena_s?Datos->desc_entidad.np:Datos->indicador.np;
+				palabra = estado[k]==cadena_s?Datos->desc_entidad.palabra:Datos->indicador.palabra;
+				flag = !np;
+				if(np)
 				{
 					j=0;
-					while(strcmp(Datos->desc_entidad.palabra[j++], buffer))
-						if(j==Datos->desc_entidad.np)
+					while(strcmp(palabra[j++], buffer))
+						if(j==np)
 						{
 							flag=1;
 							break;
@@ -548,18 +570,26 @@ int lectura_bd(char *file_name, bd_INEGI *Datos)
 				}
 				if(flag)
 				{
-					Datos->desc_entidad.palabra[Datos->desc_entidad.np] = (char*)malloc((nc+1)*sizeof(char));
-					if(Datos->desc_entidad.palabra[Datos->desc_entidad.np]==NULL)
+					palabra[np] = (char*)malloc((nc+1)*sizeof(char));
+					if(palabra[np]==NULL)
 					{
+						for(j=0; j<np; j++)
+							free(palabra[j]);
+						free(Datos->cve_entidad);
 						for(j=0; j<Datos->desc_entidad.np; j++)
 							free(Datos->desc_entidad.palabra[j]);
 						free(Datos->desc_entidad.palabra);
-						free(Datos->cve_entidad);
+						for(j=0; j<Datos->indicador.np; j++)
+							free(Datos->indicador.palabra[j]);
+						free(Datos->indicador.palabra);
+						free(Datos->indicador.id);
 						fclose(fp);
-						return 5;
+						return 7;
 					}
-					strcpy(Datos->desc_entidad.palabra[Datos->desc_entidad.np], buffer);
-					Datos->desc_entidad.np++;
+					strcpy(palabra[np], buffer);
+					if(estado[k]==cadena_i)
+						Datos->indicador.id[np] = Datos->id_indicador[i];
+					estado[k]==cadena_s?Datos->desc_entidad.np++:Datos->indicador.np++;
 				}
 				break;
 			default:
@@ -574,13 +604,59 @@ int lectura_bd(char *file_name, bd_INEGI *Datos)
 		for(i=0; i<Datos->desc_entidad.np; i++)
 			free(Datos->desc_entidad.palabra[i]);
 		free(Datos->desc_entidad.palabra);
+		for(i=0; i<Datos->indicador.np; i++)
+			free(Datos->indicador.palabra[i]);
+		free(Datos->indicador.palabra);
+		free(Datos->indicador.id);
 		fclose(fp);
-		return 6;
+		return 8;
 	}
 	else
 		Datos->desc_entidad.palabra = realloc_dic;
+	realloc_dic = (char**)realloc(Datos->indicador.palabra, (Datos->indicador.np)*sizeof(char*));
+	if(realloc_dic==NULL)
+	{
+		free(Datos->cve_entidad);
+		for(i=0; i<Datos->desc_entidad.np; i++)
+			free(Datos->desc_entidad.palabra[i]);
+		free(Datos->desc_entidad.palabra);
+		for(i=0; i<Datos->indicador.np; i++)
+			free(Datos->indicador.palabra[i]);
+		free(Datos->indicador.palabra);
+		free(Datos->indicador.id);
+		fclose(fp);
+		return 9;
+	}
+	else
+		Datos->indicador.palabra = realloc_dic;
+	realloc_id = (long int*)realloc(Datos->indicador.id, (Datos->indicador.np)*sizeof(long int));
+	if(realloc_id==NULL)
+	{
+		free(Datos->cve_entidad);
+		for(i=0; i<Datos->desc_entidad.np; i++)
+			free(Datos->desc_entidad.palabra[i]);
+		free(Datos->desc_entidad.palabra);
+		for(i=0; i<Datos->indicador.np; i++)
+			free(Datos->indicador.palabra[i]);
+		free(Datos->indicador.palabra);
+		free(Datos->indicador.id);
+		fclose(fp);
+		return 10;
+	}
+	else
+		Datos->indicador.id = realloc_id;
 	fclose(fp);
 	return 0;
+}
+
+char* buscar(diccionario_i dic, long int id)
+{
+	long int i;
+	i = 0;
+	while(dic.id[i++]!=id)
+		if(i>dic.np)
+			return NULL;
+	return dic.palabra[i];
 }
 
 int liberar_bd(bd_INEGI Datos)
@@ -590,5 +666,9 @@ int liberar_bd(bd_INEGI Datos)
 	for(i=0; i<Datos.desc_entidad.np; i++)
 		free(Datos.desc_entidad.palabra[i]);
 	free(Datos.desc_entidad.palabra);
+	for(i=0; i<Datos.indicador.np; i++)
+		free(Datos.indicador.palabra[i]);
+	free(Datos.indicador.palabra);
+	free(Datos.indicador.id);
 	return 0;
 }
