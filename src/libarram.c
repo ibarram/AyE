@@ -507,22 +507,57 @@ int lectura_bd(char *file_name, bd_INEGI *Datos)
 		return 4;
 	}
 	Datos->desc_entidad.np = 0;
+	Datos->desc_municipio.palabra = (char**)malloc(nr*sizeof(char*));
+	if(Datos->desc_municipio.palabra==NULL)
+	{
+		free(Datos->desc_entidad.palabra);
+		free(Datos->cve_entidad);
+		fclose(fp);
+		return 5;
+	}
+	Datos->desc_municipio.np = 0;
+	Datos->desc_municipio.id = (long int**)malloc(nr*sizeof(long int*));
+	if(Datos->desc_municipio.id==NULL)
+	{
+		free(Datos->desc_municipio.palabra);
+		free(Datos->desc_entidad.palabra);
+		free(Datos->cve_entidad);
+		fclose(fp);
+		return 6;
+	}
+	Datos->desc_municipio.ntid = 0;
+	Datos->desc_municipio.nid = (int*)calloc(nr,sizeof(int));
+	if(Datos->desc_municipio.nid==NULL)
+	{
+		free(Datos->desc_municipio.id);
+		free(Datos->desc_municipio.palabra);
+		free(Datos->desc_entidad.palabra);
+		free(Datos->cve_entidad);
+		fclose(fp);
+		return 7;
+	}
 	Datos->indicador.palabra = (char**)malloc(nr*sizeof(char*));
 	if(Datos->indicador.palabra==NULL)
 	{
+		free(Datos->desc_municipio.nid);
+		free(Datos->desc_municipio.id);
+		free(Datos->desc_municipio.palabra);
 		free(Datos->cve_entidad);
 		free(Datos->desc_entidad.palabra);
 		fclose(fp);
-		return 5;
+		return 8;
 	}
 	Datos->indicador.id = (long int*)malloc(nr*sizeof(long int));
 	if(Datos->indicador.id==NULL)
 	{
+		free(Datos->desc_municipio.nid);
+		free(Datos->desc_municipio.id);
+		free(Datos->desc_municipio.palabra);
 		free(Datos->cve_entidad);
 		free(Datos->desc_entidad.palabra);
 		free(Datos->indicador.palabra);
 		fclose(fp);
-		return 6;
+		return 9;
 	}
 	Datos->indicador.np = 0;
 	printf("Numero de registros: %ld\n", Datos->nr);
@@ -584,13 +619,60 @@ int lectura_bd(char *file_name, bd_INEGI *Datos)
 						free(Datos->indicador.palabra);
 						free(Datos->indicador.id);
 						fclose(fp);
-						return 7;
+						return 10;
 					}
 					strcpy(palabra[np], buffer);
 					if(estado[k]==cadena_i)
 						Datos->indicador.id[np] = Datos->id_indicador[i];
 					estado[k]==cadena_s?Datos->desc_entidad.np++:Datos->indicador.np++;
 				}
+				break;
+			case cadena_d:
+				flag = !(Data->desc_municipio.np);
+				j=0;
+				while(strcmp(Data->desc_municipio.palabra[j++], buffer))
+					if(j==Data->desc_municipio.np)
+					{
+						flag = 1;
+						break;
+					}
+				if(flag)
+				{
+					Data->desc_municipio.palabra[j] = (char*)malloc((nc+1)*sizeof(char));
+					if(Data->desc_municipio.palabra[j]==NULL)
+					{
+						for(j=0; j<Datos->indicador.np; j++)
+							free(Datos->indicador.palabra[j]);
+						free(Datos->cve_entidad);
+						for(j=0; j<Datos->desc_entidad.np; j++)
+							free(Datos->desc_entidad.palabra[j]);
+						free(Datos->desc_entidad.palabra);
+						for(j=0; j<Datos->indicador.np; j++)
+							free(Datos->indicador.palabra[j]);
+						free(Datos->indicador.palabra);
+						free(Datos->indicador.id);
+						fclose(fp);
+						return 11;
+					}
+					strcpy(Data->desc_municipio.palabra[j], buffer);
+					Data->desc_municipio.np++;
+				}
+				if(Datos->cve_entidad==Datos->desc_municipio.ntid)
+				{
+
+				}
+				Datos->cve_entidad
+				Datos->cve_municipio
+
+
+
+
+typedef struct diccionario_d{
+	long int **id;
+	int *nid;
+	long int ntid;
+}diccionario_d;
+
 				break;
 			default:
 				break;
@@ -662,6 +744,13 @@ char* buscar(diccionario_i dic, long int id)
 int liberar_bd(bd_INEGI Datos)
 {
 	long int i;
+	free(Datos.desc_municipio.nid);
+	for(i=0; i<Datos.desc_municipio.ntid; i++)
+		free(Datos.desc_municipio.id[i]);
+	free(Datos.desc_municipio.id);
+	for(i=0; i<Datos.desc_municipio.np; i++)
+		free(Datos.desc_municipio.palabra[i]);
+	free(Datos.desc_municipio.palabra);
 	free(Datos.cve_entidad);
 	for(i=0; i<Datos.desc_entidad.np; i++)
 		free(Datos.desc_entidad.palabra[i]);

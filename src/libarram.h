@@ -33,12 +33,21 @@ typedef struct diccionario_i{
 	long int np;
 }diccionario_i;
 
+typedef struct diccionario_d{
+	long int **id;
+	int *nid;
+	long int ntid;
+	char **palabra;
+	long int np;
+}diccionario_d;
+
 typedef struct bd_INEGI{
 	long int nr;
 	int *mem;
 	int *cve_entidad;
 	diccionario_r desc_entidad;
 	int *cve_municipio;
+	diccionario_d desc_municipio;
 	long int *id_indicador;
 	diccionario_i indicador;
 	int *anio;
@@ -46,7 +55,7 @@ typedef struct bd_INEGI{
 }bd_INEGI;
 
 typedef enum estados{
-	separador, conv_entero, conv_enterol, cadena_s, cadena_i, sincronizacion
+	separador, conv_entero, conv_enterol, cadena_s, cadena_i, cadena_d, sincronizacion
 }estados;
 
 float dist_norm(float md, float de);
