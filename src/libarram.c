@@ -628,18 +628,15 @@ int lectura_bd(char *file_name, bd_INEGI *Datos)
 				}
 				break;
 			case cadena_d:
-				flag = !(Data->desc_municipio.np);
+				flag = !(Datos->desc_municipio.np);
 				j=0;
-				while(strcmp(Data->desc_municipio.palabra[j++], buffer))
-					if(j==Data->desc_municipio.np)
-					{
+				while((!flag)&&strcmp(Datos->desc_municipio.palabra[j++], buffer))
+					if(j==Datos->desc_municipio.np)
 						flag = 1;
-						break;
-					}
 				if(flag)
 				{
-					Data->desc_municipio.palabra[j] = (char*)malloc((nc+1)*sizeof(char));
-					if(Data->desc_municipio.palabra[j]==NULL)
+					Datos->desc_municipio.palabra[j] = (char*)malloc((nc+1)*sizeof(char));
+					if(Datos->desc_municipio.palabra[j]==NULL)
 					{
 						for(j=0; j<Datos->indicador.np; j++)
 							free(Datos->indicador.palabra[j]);
@@ -654,25 +651,21 @@ int lectura_bd(char *file_name, bd_INEGI *Datos)
 						fclose(fp);
 						return 11;
 					}
-					strcpy(Data->desc_municipio.palabra[j], buffer);
-					Data->desc_municipio.np++;
+					strcpy(Datos->desc_municipio.palabra[j], buffer);
+					Datos->desc_municipio.np++;
 				}
-				if(Datos->cve_entidad==Datos->desc_municipio.ntid)
+				if(Datos->desc_municipio.ntid==Datos->cve_entidad[i])
 				{
-
+					Datos->desc_municipio.id[Datos->desc_municipio.ntid] = (long int *)malloc(NM_M*sizeof(long int));
+					if(Datos->desc_municipio.id[Datos->desc_municipio.ntid]==NULL)
+						return 12;
+					Datos->desc_municipio.ntid++;
 				}
-				Datos->cve_entidad
-				Datos->cve_municipio
-
-
-
-
-typedef struct diccionario_d{
-	long int **id;
-	int *nid;
-	long int ntid;
-}diccionario_d;
-
+				if(Datos->desc_municipio.nid[Datos->cve_entidad[i]]==Datos->cve_municipio[i])
+				{
+					Datos->desc_municipio.nid[Datos->cve_entidad[i]]++;
+					Datos->desc_municipio.id[Datos->cve_entidad[i]][Datos->cve_municipio[i]] = j;
+				}
 				break;
 			default:
 				break;

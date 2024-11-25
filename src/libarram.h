@@ -9,6 +9,7 @@
 #define NS 256
 #define INTER(x,y){x^=y;y^=x;x^=y;}
 #define MAX_STR 200
+#define NM_M 600
 
 typedef struct Z
 {
