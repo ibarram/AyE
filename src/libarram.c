@@ -754,7 +754,7 @@ void imprimir_di(diccionario_i dic)
 	long int i;
 	printf("%ld\n", dic.np);
 	for(i=0; i<dic.np; i++)
-		printf("%ld. %ld\t%s\n", i+1, dic.id[i], dic.palabra[i]);
+		printf("%ld. %ld\t%s\n", i, dic.id[i], dic.palabra[i]);
 }
 
 void imprimir_dd(diccionario_d dic)
@@ -762,11 +762,11 @@ void imprimir_dd(diccionario_d dic)
 	long int i, j;
 	printf("%ld\n", dic.np);
 	for(i=0; i<dic.np; i++)
-		printf("%ld. %s\n", i+1, dic.palabra[i]);
+		printf("%ld. %s\n", i, dic.palabra[i]);
 	printf("%ld\n", dic.ntid);
 	for(i=0; i<dic.ntid; i++)
 	{
-		printf("%ld. %d\t", i+1, dic.nid[i]);
+		printf("%ld. %d\t", i, dic.nid[i]);
 		for(j=0; j<dic.nid[i]; j++)
 			printf("%ld ", dic.id[i][j]);
 		printf("\n");
