@@ -10,9 +10,9 @@ int main(int argc, char *argv[])
 	char fn[] = "edr_valor_00.csv", *filename;
 	filename = (argc==2?argv[1]:fn);
 	lectura_bd(filename, &Datos);
-	imprimir_dr(Datos.desc_entidad);
-	imprimir_di(Datos.indicador);
-	imprimir_dd(Datos.desc_municipio);
+	//imprimir_dr(Datos.desc_entidad);
+	//imprimir_di(Datos.indicador);
+	//imprimir_dd(Datos.desc_municipio);
 	do{
 		printf("Ingrese el registro para consultar: ");
 		scanf("%ld", &reg);
@@ -28,6 +28,8 @@ int main(int argc, char *argv[])
 	printf("ID indicador: %s (%ld)\n", buscar(Datos.indicador, Datos.id_indicador[reg]), Datos.id_indicador[reg]);
 	printf("Año: %d\n", Datos.anio[reg]);
 	printf("Valor : %ld\n", Datos.valor[reg]);
-	liberar_bd(Datos);
+	liberar_mem(&Datos);
+	//liberar_bd(Datos);
+	//printf("%ld\n", Datos.nr);
 	return 0;
 }
