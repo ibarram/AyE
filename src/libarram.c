@@ -643,7 +643,7 @@ int lectura_bd(char *file_name, bd_INEGI *Datos)
 				if(Datos->desc_municipio.nid[l]==Datos->cve_municipio[i])
 				{
 					Datos->desc_municipio.nid[l]++;
-					Datos->desc_municipio.id[l][Datos->cve_municipio[i]] = j;
+					Datos->desc_municipio.id[l][Datos->cve_municipio[i]] = flag?j:j-1;
 				}
 				break;
 			default:
