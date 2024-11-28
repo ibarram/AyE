@@ -103,6 +103,12 @@ void imprimirM(float **A, int NR, int NC);
 long int num_registros(char *file_name);
 int lectura_bd(char *file_name, bd_INEGI *Datos);
 char* buscar(diccionario_i dic, long int id);
+int buscar_i(diccionario_r dic, char *palabra);
 int liberar_bd(bd_INEGI Datos);
+void imprimir_dr(diccionario_r dic);
+void imprimir_di(diccionario_i dic);
+void imprimir_dd(diccionario_d dic);
+int liberar_mem(bd_INEGI *Datos);
+int ini_bd(bd_INEGI *Datos);
 
 #endif
