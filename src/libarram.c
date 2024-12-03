@@ -642,6 +642,11 @@ int lectura_bd(char *file_name, bd_INEGI *Datos)
 				}
 				if(Datos->desc_municipio.nid[l]==Datos->cve_municipio[i])
 				{
+					if((Datos->cve_entidad[i]==9)&&!(Datos->desc_municipio.nid[l]))
+					{
+						Datos->desc_municipio.nid[l]++;
+						Datos->desc_municipio.id[l][Datos->cve_municipio[i]+1] = -1;
+					}
 					Datos->desc_municipio.nid[l]++;
 					Datos->desc_municipio.id[l][Datos->cve_municipio[i]] = flag?j:j-1;
 				}
@@ -872,3 +877,5 @@ int liberar_mem(bd_INEGI *Datos)
 	}
 	return 0;
 }
+
+

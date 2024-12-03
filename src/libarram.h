@@ -55,6 +55,15 @@ typedef struct bd_INEGI{
 	long int *valor;
 }bd_INEGI;
 
+typedef struct bd_C1{
+	int na;
+	int *anio;
+	int ne;
+	diccionario_r *desc_entidad;
+	int *estado;
+	float **datos;
+}bd_C1;
+
 typedef enum estados{
 	separador, conv_entero, conv_enterol, cadena_s, cadena_i, cadena_d, sincronizacion
 }estados;
@@ -110,5 +119,6 @@ void imprimir_di(diccionario_i dic);
 void imprimir_dd(diccionario_d dic);
 int liberar_mem(bd_INEGI *Datos);
 int ini_bd(bd_INEGI *Datos);
+int consultaC1(bd_INEGI Datos, bd_C1 *C1);
 
 #endif

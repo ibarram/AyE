@@ -10,9 +10,9 @@ int main(int argc, char *argv[])
 	char fn[] = "edr_valor_00.csv", *filename;
 	filename = (argc==2?argv[1]:fn);
 	lectura_bd(filename, &Datos);
-	//imprimir_dr(Datos.desc_entidad);
-	//imprimir_di(Datos.indicador);
-	//imprimir_dd(Datos.desc_municipio);
+	imprimir_dr(Datos.desc_entidad);
+	imprimir_di(Datos.indicador);
+	imprimir_dd(Datos.desc_municipio);
 	do{
 		printf("Ingrese el registro para consultar: ");
 		scanf("%ld", &reg);
