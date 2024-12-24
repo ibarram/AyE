@@ -38,7 +38,7 @@
 
 ## Conceptos fundamentales de algoritmos
 
-### 1. Cálculo de Seno con Serie de Taylor (Inicial): [001_seno_serie_ini.c](../../src/2024_1/001_seno_serie_ini.c)
+### 1. Cálculo de Seno con Serie de Taylor (Inicial): [001_seno_serie_ini.c](../../src/2024_2/001_seno_serie_ini.c)
    - **Descripción**: Este código calcula la aproximación del seno de $$x$$ en radianes utilizando la **serie de Taylor**. El número $$n$$ de términos de la serie es configurable.
 
    Utiliza la serie siguiente:
