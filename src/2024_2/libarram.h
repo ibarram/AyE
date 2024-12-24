@@ -60,8 +60,8 @@ typedef struct bd_C1{
 	int *anio;
 	int ne;
 	diccionario_r *desc_entidad;
-	int *estado;
-	float **datos;
+	float *pRel;
+	float **Rel;
 }bd_C1;
 
 typedef enum estados{
@@ -113,12 +113,15 @@ long int num_registros(char *file_name);
 int lectura_bd(char *file_name, bd_INEGI *Datos);
 char* buscar(diccionario_i dic, long int id);
 int buscar_i(diccionario_r dic, char *palabra);
-int liberar_bd(bd_INEGI Datos);
+long int buscar_id(diccionario_i dic, char *palabra);
+long int buscar_rd(bd_INEGI Datos, char *entidad, char *indicador);
 void imprimir_dr(diccionario_r dic);
 void imprimir_di(diccionario_i dic);
 void imprimir_dd(diccionario_d dic);
-int liberar_mem(bd_INEGI *Datos);
+int liberar_bd(bd_INEGI Datos);
 int ini_bd(bd_INEGI *Datos);
+int liberar_mem(bd_INEGI *Datos);
 int consultaC1(bd_INEGI Datos, bd_C1 *C1);
+int liberarC1(bd_C1 *C1);
 
 #endif

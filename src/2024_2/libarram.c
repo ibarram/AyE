@@ -746,6 +746,32 @@ int buscar_i(diccionario_r dic, char *palabra)
 	return i-1;
 }
 
+long int buscar_id(diccionario_i dic, char *palabra)
+{
+	long int i;
+	i = 0;
+	while(strcmp(dic.palabra[i++], palabra))
+		if(i==dic.np)
+			return -1;
+	return dic.id[i-1];
+}
+
+long int buscar_rd(bd_INEGI Datos, char *entidad, char *indicador)
+{
+	long int i, id_indicador;
+	int id_entidad;
+	id_entidad = buscar_i(Datos.desc_entidad, entidad);
+	id_indicador = buscar_id(Datos.indicador, indicador);
+	i = 0;
+	while((Datos.cve_entidad[i]!=id_entidad)||(Datos.id_indicador[i]!=id_indicador))
+	{
+		i++;
+		if(i==Datos.nr)
+			return -1;
+	}
+	return i;
+}
+
 void imprimir_dr(diccionario_r dic)
 {
 	long int i;
@@ -878,4 +904,82 @@ int liberar_mem(bd_INEGI *Datos)
 	return 0;
 }
 
+/*
+typedef struct bd_C1{
+	int na;
+	int *anio;
+	int ne;
+	diccionario_r *desc_entidad;
+	float *pRel;
+	float **Rel;
+}bd_C1;
+*/
 
+int consultaC1(bd_INEGI Datos, bd_C1 *C1)
+{
+	long int i;
+	if(Datos.nr == 0)
+		return -1;
+	C1->desc_entidad=&(Datos.desc_entidad);
+	C1->na = 1;
+	i = 1;
+	while(Datos.anio[i]>Datos.anio[i-1])
+	{
+		C1->na++;
+		i++;
+	}
+	C1->anio = (int*)calloc(C1->na, sizeof(int));
+	if(C1->anio==NULL)
+		return 1;
+	for(i=0; i<C1->na; i++)
+		C1->anio[i] = Datos.anio[i];
+	C1->ne = (int)(C1->desc_entidad->np-3);
+	C1->pRel = (float*)calloc(C1->na*C1->ne, sizeof(float));
+	if(C1->pRel==NULL)
+	{
+		free(C1->anio);
+		return 2;
+	}
+	C1->Rel = (float**)malloc(C1->ne*sizeof(float*));
+	if(C1->Rel==NULL)
+	{
+		free(C1->anio);
+		free(C1->pRel);
+		return 3;
+	}
+	for(i=0; i<C1->ne; i++)
+		C1->Rel[i] = C1->pRel+i*C1->na;
+	return 0;
+}
+
+int liberarC1(bd_C1 *C1)
+{
+	C1->na = 0;
+	free(C1->anio);
+	C1->ne = 0;
+	C1->desc_entidad = NULL;
+	free(C1->pRel);
+	free(C1->Rel);
+}
+
+/*
+typedef struct diccionario_r{
+	char **palabra;
+	long int np;
+}diccionario_r;
+*/
+
+/*
+typedef struct bd_INEGI{
+	long int nr;
+	int *mem;
+	int *cve_entidad;
+	diccionario_r desc_entidad;
+	int *cve_municipio;
+	diccionario_d desc_municipio;
+	long int *id_indicador;
+	diccionario_i indicador;
+	int *anio;
+	long int *valor;
+}bd_INEGI;
+*/
