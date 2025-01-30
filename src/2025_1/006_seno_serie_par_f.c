@@ -1,5 +1,31 @@
 #include <stdio.h>
-#include <stdlib.h>
+
+int str2int(char *str)
+{
+	int i, valor;
+	i = str[0]=='-';
+	valor = 0;
+	while(str[i]>='0'&&str[i]<='9')
+		valor = 10*valor + str[i++]-'0';
+	return str[0]=='-'?-valor:valor;
+}
+
+float str2float(char *str)
+{
+	int i;
+	float valor, p10=10;
+	i = str[0]=='-';
+	valor = 0;
+	while(str[i]>='0'&&str[i]<='9')
+		valor = 10*valor + str[i++]-'0';
+	if(str[i++]=='.')
+		while(str[i]>='0'&&str[i]<='9')
+		{
+			valor += (str[i++]-'0')/p10;
+			p10*=10;
+		}
+	return str[0]=='-'?-valor:valor;
+}
 
 float seno(float x, int n)
 {
@@ -33,11 +59,11 @@ int main(int argc, char *argv[])
 	case 2:
 		printf("Ingrese el valor de x: ");
 		scanf("%f", &x);
-		n = atoi(argv[1]);
+		n = str2int(argv[1]);
 		break;
 	case 3:
-		n = atoi(argv[1]);
-		x = atof(argv[2]);
+		n = str2int(argv[1]);
+		x = str2float(argv[2]);
 		break;
 	default:
 		printf("Error en el numero de argumentos.\n");
