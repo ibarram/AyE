@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 			}
 		if(Peso_max<=Capacidad&&Valor_max>Valor_opt)
 			Valor_opt = Valor_max;
-		printf("%d. %d\t%d\t%d\n", i+1, Peso_max, Valor_max, Valor_opt);
+//		printf("%d. %d\t%d\t%d\n", i+1, Peso_max, Valor_max, Valor_opt);
 	}
 	printf("Valor Optimo: %d\n", Valor_opt);
 	free(Pesos);
