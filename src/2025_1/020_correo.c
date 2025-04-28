@@ -9,7 +9,8 @@
 
 int validad_email(char *str)
 {
-	unsigned long int nc, ncpl, i;
+	unsigned long int nc, ncpl, i, j;
+	char c_val[] = "-_.ñ", flag;
 	char *lc, *ld;
 	nc = strlen(str);
 	if(nc>NC_MAX)
@@ -21,8 +22,17 @@ int validad_email(char *str)
 	if(ncpl>NC_PL||ncpl<1)
 		return 0;
 	for(i=0; i<ncpl; i++)
-		if(!isalnum(str[i]))
-			return 0;
+		if((!isalnum(str[i]))&&(strchr(c_val,str[i])==NULL))
+			/*
+			for(flag=1, j=0; j<ncv; j++)
+				if(str[i]==c_val[j])
+					flag=0;
+			if(flag)
+				return 0;
+				*/
+				return 0;
+	if(strstr(str, "..")!=NULL)
+		return 0;
 	ld = strchr(lc, C_DOM);
 	if(ld==NULL)
 		return 0;
