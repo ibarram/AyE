@@ -1,7 +1,18 @@
 #ifndef LIBARRAM_H
 #define LIBARRAM_H
 
-float suma(float a, float b);
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+
+#define SWAP(a, b) {\
+		max^=min;\
+		min^=max;\
+		max^=min;\
+		}
+
+//float suma(float a, float b);
 //long int factorial(long int n);
 int cambio(int E, int A, int B);
 int chocolate(int X, int Y, int A, int B);
@@ -11,5 +22,16 @@ float exp1(float x, int n);
 float factor(float x, int n);
 float exp3(float x, int n);
 float exp4(float x, int n);
+int* DU(int n, int min, int max);
+void imprimir_DU(int *d, int n);
+int suma(int *x, int n);
+int suma2(int *x, int n);
+float media(int *x, int n);
+float media2(int *x, int n);
+float varianza(int *x, int n);
+float varianza2(int *x, int n);
+int estInf(float md, float vr);
+int estSup(float md, float vr);
+int estN(int *x, int n);
 
 #endif // LIBARRAM_H
