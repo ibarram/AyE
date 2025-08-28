@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <string.h>
+#include <ctype.h>
+#include "libarram.h"
 
 /*
 float suma(float a, float b)
@@ -176,4 +179,61 @@ int estN(int *x, int n)
 	a = estInf(md, vr);
 	N = b - a + 1;
 	return N;
+}
+
+int esValido(char str[])
+{
+	int n, nl, i, j, v, nse;
+	char *pstr1, *pstr2, *pstr3;
+	const char str_esp[] = "!#$%&'*+/=?^_{|}~.";
+	nse = strlen(str_esp);
+	n = strlen(str);
+	if(n>N_MAX)
+		return 0;
+	pstr1 = strchr(str, '@');
+	if(pstr1==NULL)
+		return 0;
+	pstr2 = strchr(pstr1+1, '@');
+	if(pstr2!=NULL)
+		return 0;
+	nl = (int)(pstr1-str);
+	if(nl>N_local)
+		return 0;
+	if((n-nl)>N_dominio)
+		return 0;
+	pstr2 = strchr(pstr1, '.');
+	if(pstr2==NULL)
+		return 0;
+	pstr2 = strchr(str, '.');
+	while(pstr2!=NULL)
+	{
+		pstr3 = strchr(pstr2+1, '.');
+		if(pstr3!=NULL)
+		{
+			if((pstr3-pstr2)==1)
+				return 0;
+			else if((pstr3-pstr2)>N_punto)
+				return 0;
+		}
+		pstr2 = pstr3;
+	}
+	i=1;
+	while(pstr1[i]!='\0')
+	{
+		if(isalnum(pstr1[i])||pstr1[i]=='.')
+			i++;
+		else
+			return 0;
+	}
+	i=0;
+	while(str[i]!='@')
+	{
+		for(j=0, v=0; j<nse; j++)
+			v += str[i]==str_esp[j]?1:0;
+		if(isalnum(str[i])||v)
+			i++;
+		else
+			return 0;
+	}
+	return 1;
 }

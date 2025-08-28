@@ -11,6 +11,10 @@
 		min^=max;\
 		max^=min;\
 		}
+#define N_MAX 		254
+#define N_local 	64
+#define N_dominio	255
+#define N_punto		63
 
 //float suma(float a, float b);
 //long int factorial(long int n);
@@ -33,5 +37,6 @@ float varianza2(int *x, int n);
 int estInf(float md, float vr);
 int estSup(float md, float vr);
 int estN(int *x, int n);
+int esValido(char str[]);
 
 #endif // LIBARRAM_H
