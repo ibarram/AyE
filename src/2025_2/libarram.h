@@ -7,14 +7,18 @@
 #include <math.h>
 
 #define SWAP(a, b) {\
-		max^=min;\
-		min^=max;\
-		max^=min;\
+		a^=b;\
+		b^=a;\
+		a^=b;\
 		}
 #define N_MAX 		254
 #define N_local 	64
 #define N_dominio	255
 #define N_punto		63
+
+typedef struct{
+	float a, b;
+}Complejo;
 
 //float suma(float a, float b);
 //long int factorial(long int n);
@@ -38,5 +42,7 @@ int estInf(float md, float vr);
 int estSup(float md, float vr);
 int estN(int *x, int n);
 int esValido(char str[]);
+int RC4(char msg_1[], char clave[], char msg_2[]);
+Complejo sumaC(Complejo Z1, Complejo Z2);
 
 #endif // LIBARRAM_H

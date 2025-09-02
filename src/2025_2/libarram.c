@@ -237,3 +237,63 @@ int esValido(char str[])
 	}
 	return 1;
 }
+
+int RC4(char msg_1[], char clave[], char msg_2[])
+{
+	int nc, i, j, k, nM, NS, NC;
+	char *S;
+	nc = strlen(msg_1);
+	NC = strlen(clave);
+	nM = 'Z'-'A'+1;
+	for(i=0; i<nc; i++)
+	{
+		if(msg_1[i]<'a')
+			msg_1[i]-='A';
+		else
+			msg_1[i]-=('a'-nM);
+	}
+	NS = 2*nM;
+	S=(char*)malloc(NS*sizeof(char));
+	if(S==NULL)
+		return 1;
+	for(i=0; i<NS; i++)
+		S[i] = i;
+	for(i=0, j=0; i<NS; i++)
+	{
+		j = (j+S[i]+clave[i%NC])%NS;
+		SWAP(S[i], S[j]);
+	}
+	for(k=0, i=0, j=0; k<nc; k++)
+	{
+		i = ( i + 1 ) % NS;
+		j = ( j + S[i] ) % NS;
+		SWAP( S[i], S[j] );
+		msg_2[k] = msg_1[k] ^ S[ ( S[i] + S[j] ) % NS ];
+		printf("%d ", msg_2[k]);
+		if(msg_2[k]<nM)
+			msg_2[k]+='A';
+		else
+			msg_2[k]+=('a'-nM);
+	}
+	msg_2[k]='\0';
+	printf("\n");
+	free(S);
+	return 0;
+}
+
+Complejo sumaC(Complejo Z1, Complejo Z2)
+{
+	Complejo Z3;
+	Z3.a = Z1.a+Z2.a;
+	Z3.b = Z1.b+Z2.b;
+	return Z3;
+}
+
+
+
+
+
+
+
+
+
