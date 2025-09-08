@@ -289,6 +289,86 @@ Complejo sumaC(Complejo Z1, Complejo Z2)
 	return Z3;
 }
 
+int mayusculas(char str[])
+{
+	if(str[0]=='\0')
+		return 0;
+	else
+	{
+		str[0] = toupper(str[0]);
+		return mayusculas(str+1);
+	}
+}
+
+CURP capturarCURP(void)
+{
+	CURP X;
+	printf("Ingrese su apellido paterno: ");
+	scanf("%s", X.AP);
+	mayusculas(X.AP);
+	printf("Ingrese su apellido materno: ");
+	scanf("%s", X.AM);
+	mayusculas(X.AM);
+	printf("Ingrese su nombre: ");
+	scanf("%s", X.Nom);
+	mayusculas(X.Nom);
+	printf("Ingrese su fecha de nacimiento (Dia): ");
+	scanf("%d", &(X.fecha.dia));
+	printf("Ingrese su fecha de nacimiento (Mes): ");
+	scanf("%d", &(X.fecha.mes));
+	printf("Ingrese su fecha de nacimiento (Anio): ");
+	scanf("%d", &(X.fecha.anio));
+	printf("Ingrese su estado de nacimiento (XX): ");
+	scanf("%s", X.E);
+	mayusculas(X.E);
+	printf("Ingrese su genero [0: Hombre, 1: Mujer]: ");
+	scanf("%d", &(X.G));
+	return X;
+}
+
+void imprimirCURP(CURP X)
+{
+	char *str[] = {"Hombre", "Mujer"};
+	printf("Datos:\n");
+	printf("%s %s, %s\n", X.AP, X.AM, X.Nom);
+	printf("%02d/%02d/%02d\n", X.fecha.dia, X.fecha.mes, X.fecha.anio);
+	printf("Genero: %s\n", str[X.G]);
+}
+
+char vocal(char str[])
+{
+	if(str[0]=='A'||str[0]=='E'||str[0]=='I'||str[0]=='O'||str[0]=='U'||str[0]=='\0')
+		return str[0];
+	else
+		return vocal(str+1);
+}
+
+char consonate(char str[])
+{
+	if(str[0]=='A'||str[0]=='E'||str[0]=='I'||str[0]=='O'||str[0]=='U')
+		return consonate(str+1);
+	else
+		return str[0];
+}
+
+CURP generarCURP(CURP X)
+{
+	X.curp[0] = X.AP[0];
+	X.curp[1] = vocal(X.AP+1);
+	X.curp[2] = X.AM[0];
+	X.curp[3] = X.Nom[0];
+	sprintf(X.curp+4, "%02d%02d%02d", X.fecha.dia, X.fecha.mes, X.fecha.anio);
+	X.curp[10] = X.G?'M':'H';
+	X.curp[11] = X.E[0];
+	X.curp[12] = X.E[1];
+	X.curp[13] = consonate(X.AP+1);
+	X.curp[14] = consonate(X.AM+1);
+	X.curp[15] = consonate(X.Nom+1);
+	X.curp[16] = 'X';
+	X.curp[17] = 'X';
+	X.curp[18] = '\0';
+	return X;
+}
 
 
 

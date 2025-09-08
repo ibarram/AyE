@@ -15,10 +15,32 @@
 #define N_local 	64
 #define N_dominio	255
 #define N_punto		63
+#define N_MAX_C		30
+#define N_CURP		19
 
 typedef struct{
 	float a, b;
 }Complejo;
+
+typedef enum{
+	H, M
+}Genero;
+
+typedef struct{
+	int dia;
+	int mes;
+	int anio;
+}FN;
+
+typedef struct{
+	char AP[N_MAX_C];
+	char AM[N_MAX_C];
+	char Nom[N_MAX_C];
+	FN fecha;
+	char E[3];
+	Genero G;
+	char curp[N_CURP];
+}CURP;
 
 //float suma(float a, float b);
 //long int factorial(long int n);
@@ -44,5 +66,8 @@ int estN(int *x, int n);
 int esValido(char str[]);
 int RC4(char msg_1[], char clave[], char msg_2[]);
 Complejo sumaC(Complejo Z1, Complejo Z2);
+CURP capturarCURP(void);
+void imprimirCURP(CURP X);
+CURP generarCURP(CURP X);
 
 #endif // LIBARRAM_H
