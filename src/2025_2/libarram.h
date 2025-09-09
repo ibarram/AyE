@@ -69,5 +69,11 @@ Complejo sumaC(Complejo Z1, Complejo Z2);
 CURP capturarCURP(void);
 void imprimirCURP(CURP X);
 CURP generarCURP(CURP X);
+float** CrearMatrizO(int n, int m);
+float** CrearMatrizD(int n, int m);
+void liberarO(float **X);
+void liberarD(float **X, int n);
+void imprimirMat(float **X, int n, int m, char *str);
+float **multiplicarMat(float **X, int nX, int mX, float **Y, int nY, int mY);
 
 #endif // LIBARRAM_H

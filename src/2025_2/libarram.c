@@ -370,6 +370,92 @@ CURP generarCURP(CURP X)
 	return X;
 }
 
+float** CrearMatrizO(int n, int m)
+{
+	int i;
+	float **X, *pX;
+	pX = (float*)malloc(n*m*sizeof(float));
+	if(pX == NULL)
+		return NULL;
+	X = (float**)malloc(n*sizeof(float*));
+	if(X==NULL)
+	{
+		free(pX);
+		return NULL;
+	}
+	for(i=0; i<n; i++)
+		X[i] = pX+i*m;
+	return X;
+}
+
+float** CrearMatrizD(int n, int m)
+{
+	int i;
+	float **X;
+	X = (float**)malloc(n*sizeof(float*));
+	if(X==NULL)
+		return NULL;
+	for(i=0; i<n; i++)
+	{
+		X[i] = (float*)malloc(m*sizeof(float));
+		if(X[i]==NULL)
+		{
+			for(i--; i>-1; i--)
+				free(X[i]);
+			free(X);
+			return NULL;
+		}
+	}
+	return X;
+}
+
+void liberarO(float **X)
+{
+	free(X[0]);
+	free(X);
+}
+
+void liberarD(float **X, int n)
+{
+	int i;
+	for(i=0; i<n; i++)
+		free(X[i]);
+	free(X);
+}
+
+void imprimirMat(float **X, int n, int m, char *str)
+{
+	int i, j;
+	for(i=0; i<n; i++)
+		for(j=0; j<m; j++)
+			printf("%s[%d][%d] = %f\n", str, i+1, j+1, X[i][j]);
+}
+
+float **multiplicarMat(float **X, int nX, int mX, float **Y, int nY, int mY)
+{
+	float **Z;
+	int i, j, k;
+	if(mX!=nY)
+		return NULL;
+	Z = (float**)malloc(nX*sizeof(float*));
+	if(Z==NULL)
+		return NULL;
+	Z[0] = (float*)calloc(nX*mY,sizeof(float));
+	if(Z[0]==NULL)
+	{
+		free(Z);
+		return NULL;
+	}
+	for(i=1; i<nX, i++)
+		Z[i] = Z[i-1]+mY;
+	for(i=0; i<nX; i++)
+		for(j=0; j<mY; j++)
+			for(k=0; k<mX; k++)
+				Z[i][j] += X[i][k]*Y[k][j];
+	return Z;
+}
+
+
 
 
 
