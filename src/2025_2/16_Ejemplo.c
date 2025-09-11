@@ -4,17 +4,21 @@
 #include <math.h>
 #include "libarram.h"
 
+#define NP 4
+
 int main(int argc, char *argv[])
 {
 	float **A, **B, **C;
 	int nA, mA, nB, mB;
+	float** (*f)(int, int);
 	do{
 		printf("Ingrese el numero de renglones de A: ");
 		scanf("%d", &nA);
 		printf("Ingrese el numero de columnas de A: ");
 		scanf("%d", &mA);
 	}while(nA<1||mA<1);
-	A = CrearMatrizO(nA, mA);
+	f = nA<NP?CrearMatrizO:CrearMatrizD;
+	A = f(nA, mA);
 	if(A==NULL)
 		return 1;
 	capturarMat(A, nA, mA, "A");
@@ -25,10 +29,13 @@ int main(int argc, char *argv[])
 		printf("Ingrese el numero de columnas de B: ");
 		scanf("%d", &mB);
 	}while(nB<1||mB<1);
-	B = CrearMatrizD(nB, mB);
+	B = f(nB, mB);
 	if(B==NULL)
 	{
-		liberarO(A);
+		if(f==CrearMatrizO)
+			liberarO(A);
+		else
+			liberarD(A, nA);
 		return 2;
 	}
 	capturarMat(B, nB, mB, "B");
@@ -36,13 +43,30 @@ int main(int argc, char *argv[])
 	C = multiplicarMat(A, nA, mA, B, nB, mB);
 	if(C==NULL)
 	{
-		liberarO(A);
-		liberarD(B, nB);
+		if(f==CrearMatrizO)
+		{
+			liberarO(A);
+			liberarO(B);
+		}
+		else
+		{
+			liberarD(A, nA);
+			liberarD(B, nB);
+		}
 		return 3;
 	}
 	imprimirMat(C, nA, mB, "C");
-	liberarO(A);
-	liberarD(B, nB);
-	liberarO(C);
+	if(f==CrearMatrizO)
+	{
+		liberarO(A);
+		liberarO(B);
+		liberarO(C);
+	}
+	else
+	{
+		liberarD(A, nA);
+		liberarD(B, nB);
+		liberarD(C, nA);
+	}
 	return 0;
 }

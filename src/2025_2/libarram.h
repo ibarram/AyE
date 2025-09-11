@@ -75,5 +75,6 @@ void liberarO(float **X);
 void liberarD(float **X, int n);
 void imprimirMat(float **X, int n, int m, char *str);
 float **multiplicarMat(float **X, int nX, int mX, float **Y, int nY, int mY);
+void capturarMat(float **X, int nX, int mX, char *str);
 
 #endif // LIBARRAM_H

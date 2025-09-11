@@ -446,7 +446,7 @@ float **multiplicarMat(float **X, int nX, int mX, float **Y, int nY, int mY)
 		free(Z);
 		return NULL;
 	}
-	for(i=1; i<nX, i++)
+	for(i=1; i<nX; i++)
 		Z[i] = Z[i-1]+mY;
 	for(i=0; i<nX; i++)
 		for(j=0; j<mY; j++)
@@ -455,7 +455,16 @@ float **multiplicarMat(float **X, int nX, int mX, float **Y, int nY, int mY)
 	return Z;
 }
 
-
+void capturarMat(float **X, int nX, int mX, char *str)
+{
+	int i, j;
+	for(i=0; i<nX; i++)
+		for(j=0; j<mX; j++)
+		{
+			printf("%s[%d][%d] = ", str, i+1, j+1);
+			scanf("%f", X[i]+j);
+		}
+}
 
 
 
