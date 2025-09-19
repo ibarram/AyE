@@ -17,6 +17,7 @@
 #define N_punto		63
 #define N_MAX_C		30
 #define N_CURP		19
+#define N_INEGI		200
 
 typedef struct{
 	float a, b;
@@ -41,6 +42,24 @@ typedef struct{
 	Genero G;
 	char curp[N_CURP];
 }CURP;
+
+typedef struct{
+	int cve_entidad;
+	char desc_entidad[N_INEGI];
+	int cve_municipio;
+	char desc_municipio[N_INEGI];
+	long int id_indicador;
+	char indicador[N_INEGI];
+	int anio;
+	double valor;
+	char unidad_medida[N_INEGI/10];
+}INEGI_CSV;
+
+typedef struct{
+	FILE *fp;
+	long int nr;
+	INEGI_CSV *data;
+}INEGI;
 
 //float suma(float a, float b);
 //long int factorial(long int n);
@@ -76,5 +95,6 @@ void liberarD(float **X, int n);
 void imprimirMat(float **X, int n, int m, char *str);
 float **multiplicarMat(float **X, int nX, int mX, float **Y, int nY, int mY);
 void capturarMat(float **X, int nX, int mX, char *str);
+int read_csv(INEGI *info);
 
 #endif // LIBARRAM_H

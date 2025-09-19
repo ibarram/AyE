@@ -466,9 +466,54 @@ void capturarMat(float **X, int nX, int mX, char *str)
 		}
 }
 
+int read_csv(INEGI *info)
+{
+	char c, *str, *pstr1, *pstr2;
+	long int i;
+	rewind(info->fp);
+	while ((c = fgetc(info->fp)) != EOF)
+	{
+		if(c==10)
+			info->nr++;
+	}
+	info->nr-=2;
+	info->data = (INEGI_CSV*)malloc(info->nr*sizeof(INEGI_CSV));
+	if(info->data==NULL)
+		return 0;
+	rewind(info->fp);
+	while ((c = fgetc(info->fp)) != 10);
+	str = (char*)malloc(sizeof(INEGI_CSV)*sizeof(char));
+	if(str==NULL)
+	{
+		free(info->data);
+		return 0;
+	}
+//	for(i=0; i<info->nr; i++)
+	fgets(str, sizeof(INEGI_CSV), info->fp);
+	printf("%s\n", str);
+	pstr1 = strchr(str, ',');
+	*pstr1 = '\0';
+	pstr1++;
+	pstr2 = strchr(pstr1, ',');
+	*pstr2 = '\0';
+	pstr2++;
+	info->data[0].cve_entidad = atoi(str);
+	strcpy(info->data[0].desc_entidad, pstr1);
+	printf("%d\t%s\n", info->data[0].cve_entidad, info->data[0].desc_entidad);
+	return info->nr;
+}
 
-
-
+/*
+	int cve_entidad;
+	char desc_entidad[N_INEGI];
+	int cve_municipio;
+	char desc_municipio[N_INEGI];
+	long int id_indicador;
+	char indicador[N_INEGI];
+	int anio;
+	double valor;
+	char unidad_medida[N_INEGI/10];
+*/
 
 
 
