@@ -488,32 +488,69 @@ int read_csv(INEGI *info)
 		free(info->data);
 		return 0;
 	}
-//	for(i=0; i<info->nr; i++)
-	fgets(str, sizeof(INEGI_CSV), info->fp);
-	printf("%s\n", str);
-	pstr1 = strchr(str, ',');
-	*pstr1 = '\0';
-	pstr1++;
-	pstr2 = strchr(pstr1, ',');
-	*pstr2 = '\0';
-	pstr2++;
-	info->data[0].cve_entidad = atoi(str);
-	strcpy(info->data[0].desc_entidad, pstr1);
-	printf("%d\t%s\n", info->data[0].cve_entidad, info->data[0].desc_entidad);
+	for(i=0; i<info->nr; i++)
+	{
+		fgets(str, sizeof(INEGI_CSV), info->fp);
+		//printf("%s\n", str);
+		pstr1 = strchr(str, ',');
+		*pstr1 = '\0';
+		pstr1++;
+		pstr2 = strchr(pstr1, ',');
+		*pstr2 = '\0';
+		pstr2++;
+		info->data[i].cve_entidad = atoi(str);
+		strcpy(info->data[i].desc_entidad, pstr1);
+		pstr1 = strchr(pstr2, ',');
+		*pstr1 = '\0';
+		pstr1++;
+		info->data[i].cve_municipio = atoi(pstr2);
+		pstr2 = strchr(pstr1, ',');
+		*pstr2 = '\0';
+		pstr2++;
+		strcpy(info->data[i].desc_municipio, pstr1);
+		pstr1 = strchr(pstr2, ',');
+		*pstr1 = '\0';
+		pstr1++;
+		info->data[i].id_indicador = atol(pstr2);
+		pstr2 = strchr(pstr1, ',');
+		*pstr2 = '\0';
+		pstr2++;
+		strcpy(info->data[i].indicador, pstr1);
+		pstr1 = strchr(pstr2, ',');
+		*pstr1 = '\0';
+		pstr1++;
+		info->data[i].anio = atoi(pstr2);
+		pstr2 = strchr(pstr1, ',');
+		*pstr2 = '\0';
+		pstr2++;
+		info->data[i].valor = atof(pstr1);
+		strcpy(info->data[i].unidad_medida, pstr2);
+		/*
+		printf("%ld\t%d\t%s\t%d\t%s\t%ld\t%s\t%d\t%f\t%s\n", i, 
+			info->data[i].cve_entidad, info->data[i].desc_entidad,
+			info->data[i].cve_municipio, info->data[i].desc_municipio, 
+			info->data[i].id_indicador, info->data[i].indicador,
+			info->data[i].anio, info->data[i].valor, info->data[i].unidad_medida);
+			*/
+	}
+	free(str);
 	return info->nr;
 }
 
-/*
-	int cve_entidad;
-	char desc_entidad[N_INEGI];
-	int cve_municipio;
-	char desc_municipio[N_INEGI];
-	long int id_indicador;
-	char indicador[N_INEGI];
-	int anio;
+double consulta(INEGI *info, int cve_entidad, int cve_municipio, long int id_indicador, int anio)
+{
+	long int i, cmp;
 	double valor;
-	char unidad_medida[N_INEGI/10];
-*/
-
+	for(i=0; i<info->nr; i++)
+	{
+		cmp = 	((info->data[i].cve_entidad==cve_entidad)&&
+				(info->data[i].cve_municipio==cve_municipio)&&
+				(info->data[i].id_indicador==id_indicador)&&
+				(info->data[i].anio==anio));
+		if(cmp)
+			return info->data[i].valor;
+	}
+	return 0;
+}
 
 

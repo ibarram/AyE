@@ -96,5 +96,6 @@ void imprimirMat(float **X, int n, int m, char *str);
 float **multiplicarMat(float **X, int nX, int mX, float **Y, int nY, int mY);
 void capturarMat(float **X, int nX, int mX, char *str);
 int read_csv(INEGI *info);
+double consulta(INEGI *info, int cve_entidad, int cve_municipio, long int id_indicador, int anio);
 
 #endif // LIBARRAM_H
