@@ -61,6 +61,11 @@ typedef struct{
 	INEGI_CSV *data;
 }INEGI;
 
+typedef struct lt1{
+	float x;
+	struct lt1 *s;
+}lt1;
+
 //float suma(float a, float b);
 //long int factorial(long int n);
 int cambio(int E, int A, int B);
@@ -97,5 +102,9 @@ float **multiplicarMat(float **X, int nX, int mX, float **Y, int nY, int mY);
 void capturarMat(float **X, int nX, int mX, char *str);
 int read_csv(INEGI *info);
 double consulta(INEGI *info, int cve_entidad, int cve_municipio, long int id_indicador, int anio);
+int imprimir_lt(lt1 *plt);
+int liberar_lt(lt1 *plt);
+lt1* crearNodo(lt1 *plt);
+lt1* unir_lt(lt1 *plt, lt1 *new, int op);
 
 #endif // LIBARRAM_H

@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
 		return 1;
 	info.nr = 0;
 	info.data = NULL;
+	printf("Lectura de datos.\n");
 	nr=read_csv(&info);
 	printf("Numero de registros: %ld\n", nr);
 	ev_pob = (double*)calloc(66, sizeof(double));
@@ -59,13 +60,15 @@ int main(int argc, char *argv[])
 		fclose(info.fp);
 		return 3;
 	}
+	printf("Consulta de informacion.\n");
 	for(i=0; i<6; i++)
 		for(j=0; j<21; j++)
 		{
-			valor = consulta(&info, 0, 0, id[j], anio[i]);
+			valor = consulta(&info, 11, 0, id[j], anio[i]);
 			ev_pob[11*i+j/2] += valor;
 			pot_tot[i] += valor;
 		}
+	printf("Impresion.\n");
 	printf("\t");
 	for(i=0; i<6; i++)
 		printf("%04d\t", anio[i]);
@@ -80,9 +83,23 @@ int main(int argc, char *argv[])
 		}
 		printf("\n");
 	}
+	fclose(info.fp);
+	if(argc==2)
+	{
+		info.fp = fopen(argv[1], "wb");
+		if(info.fp==NULL)
+		{
+			free(pot_tot);
+			free(ev_pob);
+			free(info.data);
+			return 4;
+		}
+		fwrite(&info.nr, sizeof(long int), 1, info.fp);
+		fwrite(info.data, sizeof(INEGI_CSV), info.nr, info.fp);
+	}
+	fclose(info.fp);
 	free(pot_tot);
 	free(ev_pob);
 	free(info.data);
-	fclose(info.fp);
 	return 0;
 }

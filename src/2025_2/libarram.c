@@ -553,4 +553,108 @@ double consulta(INEGI *info, int cve_entidad, int cve_municipio, long int id_ind
 	return 0;
 }
 
+int imprimir_lt(lt1 *plt)
+{
+	if(plt!=NULL)
+	{
+		printf("%f\n", plt->x);
+		return imprimir_lt(plt->s);
+	}
+	else
+		return 0;
+}
+
+int liberar_lt(lt1 *plt)
+{
+	if(plt!=NULL)
+	{
+		liberar_lt(plt->s);
+		free(plt);
+		return 1;
+	}
+	else
+		return 0;
+}
+
+lt1* crearNodo(lt1 *plt)
+{
+	lt1 *new;
+	new = (lt1*)malloc(sizeof(lt1));
+	if(new==NULL)
+	{
+		liberar_lt(plt);
+		return NULL;
+	}
+	new -> s = NULL;
+	return new;
+}
+
+lt1* unir_lt(lt1 *plt, lt1 *new, int op)
+{
+	// 0 -> pila
+	// 1 -> cola
+	// 2 -> ascendente
+	// . -> descendente
+	lt1 *pB = plt;
+	switch(op)
+	{
+	case 0:
+		new->s = plt;
+		return new;
+	case 1:
+		if(plt==NULL)
+			return new;
+		while(pB->s!=NULL)
+			pB = pB->s;
+		pB->s=new;
+		return plt;
+	case 2:
+		if(plt==NULL)
+			return new;
+		else if(plt->s==NULL)
+		{
+			if(new->x<plt->x)
+			{
+				new->s = plt;
+				return new;
+			}
+			else
+			{
+				plt->s=new;
+				return plt;
+			}
+		}
+		else
+		{
+			if(new->x<plt->x)
+			{
+				new->s = plt;
+				return new;
+			}
+			else
+			{
+				pB = plt;
+				while(new->x>pB->s->x)
+				{
+					pB = pB->s;
+					if(pB->s==NULL)
+						break;
+				}
+				if(pB->s==NULL)
+				{
+					if(new->x>pB->x)
+						pB->s = new;
+				}
+				else
+				{
+					new->s=pB->s;
+					pB->s=new;
+				}
+				return plt;
+			}
+		}
+	default:
+		break;
+	}
+}
 
