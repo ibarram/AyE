@@ -654,7 +654,127 @@ lt1* unir_lt(lt1 *plt, lt1 *new, int op)
 			}
 		}
 	default:
-		break;
+		if(plt==NULL)
+			return new;
+		else if(plt->s==NULL)
+		{
+			if(new->x>plt->x)
+			{
+				new->s = plt;
+				return new;
+			}
+			else
+			{
+				plt->s=new;
+				return plt;
+			}
+		}
+		else
+		{
+			if(new->x>plt->x)
+			{
+				new->s = plt;
+				return new;
+			}
+			else
+			{
+				pB = plt;
+				while(new->x<pB->s->x)
+				{
+					pB = pB->s;
+					if(pB->s==NULL)
+						break;
+				}
+				if(pB->s==NULL)
+				{
+					if(new->x<pB->x)
+						pB->s = new;
+				}
+				else
+				{
+					new->s=pB->s;
+					pB->s=new;
+				}
+				return plt;
+			}
+		}
+		return plt;
 	}
 }
 
+lt2* inicio(lt2 *plt)
+{
+	if(plt!=NULL)
+	{
+		while(plt->a!=NULL)
+			plt=plt->a;
+	}
+	return plt;
+}
+
+lt2* fin(lt2 *plt)
+{
+	if(plt!=NULL)
+	{
+		while(plt->s!=NULL)
+			plt=plt->s;
+	}
+	return plt;
+}
+
+int imprimir_lt2(lt2 *plt, int dir)
+{
+	if(plt!=NULL)
+	{
+		printf("%f\n", plt->x);
+		return imprimir_lt2(dir?plt->s:plt->a, dir);
+	}
+	else
+		return 0;
+}
+
+int liberar_lt2(lt2 *plt)
+{
+	plt = inicio(plt);
+	while(plt->s!=NULL)
+	{
+		plt=plt->s;
+		free(plt->a);
+	}
+	free(plt);
+	return 0;
+}
+
+lt2* crearNodo2(lt2 *plt)
+{
+	lt2 *new;
+	new = (lt2*)malloc(sizeof(lt2));
+	if(new==NULL)
+	{
+		liberar_lt2(plt);
+		return NULL;
+	}
+	new -> s = NULL;
+	new -> a = NULL;
+	return new;
+}
+
+lt2* unir_lt2(lt2 *plt, lt2 *new, int op)
+{
+	// 1 -> pila/cola
+	// . -> ascendente/descendente
+	if(op)
+	{
+		if(plt!=NULL)
+		{
+			plt = inicio(plt);
+			new->s = plt;
+			plt->a = new;
+		}
+		return new;
+	}
+	else
+	{
+		return new;
+	}
+}

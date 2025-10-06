@@ -4,17 +4,18 @@
 int main(int argc, char *argv[])
 {
 	int i, op;
-	lt1 *pH, *pN;
+	lt2 *pH, *pN;
 	printf("Selecciones el orden: ");
 	scanf("%d", &op);
 	pH = NULL;
 	do{
-		pN = crearNodo(pH);
+		pN = crearNodo2(pH);
 		printf("Ingrese el valor de x: ");
 		scanf("%f", &(pN->x));
-		pH = unir_lt(pH, pN, op);
+		pH = unir_lt2(pH, pN, op<2);
 	}while(pN->x>=0);
-	imprimir_lt(pH);
-	liberar_lt(pH);
+	pH = op?inicio(pH):fin(pH);
+	imprimir_lt2(pH, op);
+	liberar_lt2(pH);
 	return 0;
 }

@@ -66,6 +66,11 @@ typedef struct lt1{
 	struct lt1 *s;
 }lt1;
 
+typedef struct lt2{
+	float x;
+	struct lt2 *a, *s;
+}lt2;
+
 //float suma(float a, float b);
 //long int factorial(long int n);
 int cambio(int E, int A, int B);
@@ -106,5 +111,11 @@ int imprimir_lt(lt1 *plt);
 int liberar_lt(lt1 *plt);
 lt1* crearNodo(lt1 *plt);
 lt1* unir_lt(lt1 *plt, lt1 *new, int op);
+lt2* inicio(lt2 *plt);
+lt2* fin(lt2 *plt);
+int imprimir_lt2(lt2 *plt, int dir);
+int liberar_lt2(lt2 *plt);
+lt2* crearNodo2(lt2 *plt);
+lt2* unir_lt2(lt2 *plt, lt2 *new, int op);
 
 #endif // LIBARRAM_H
