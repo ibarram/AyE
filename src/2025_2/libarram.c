@@ -778,3 +778,95 @@ lt2* unir_lt2(lt2 *plt, lt2 *new, int op)
 		return new;
 	}
 }
+
+lt_IHME *read_csv2(FILE *fp)
+{
+	char c;
+	char str[N_MAX], *str_1, *str_2;
+	int i, nc;
+	lt_IHME *lt1;
+	lt1 = NULL;
+	if(fp==NULL)
+		return NULL;
+	rewind(fp);
+	while ((c = fgetc(fp)) != 10);
+	while(c!=EOF)
+	{
+		i = 0;
+		while((c = fgetc(fp)) != 10)
+		{
+			if(c==EOF)
+				break;
+			str[i++] = c;
+		}
+		str[i] = '\0';
+		if(lt1==NULL)
+		{
+			lt1 = (lt_IHME*)malloc(sizeof(lt_IHME));
+			if(lt1==NULL)
+				return NULL;
+			lt1->s = NULL;
+			lt1->a = NULL;
+		}
+		else
+		{
+			while(lt1->s!=NULL)
+				lt1=lt1->s;
+			lt1->s = (lt_IHME*)malloc(sizeof(lt_IHME));
+			if(lt1->s==NULL)
+			{
+				liberar_IHME(lt1);
+				return NULL;
+			}
+			lt1 -> s -> a = lt1;
+			lt1 = lt1->s;
+			lt1->s = NULL;
+		}
+		str_1 = str;
+		str_2 = strchr(str1, ',');
+		*str_2 = '\0';
+		str2++;
+		lt1->measure_id = atoi(str1);
+		str_1 = strchr(str2, ',');
+		*str_1 = '\0';
+		str1++;
+		nc = strlen(str2);
+		lt1->measure_name = (char*)malloc((nc+1)*sizeof(char));
+		strcpy(lt1->measure_name, str2);
+
+	}
+	return NULL;
+}
+
+typedef struct lt_IHME{
+	int location_id;
+	char *location_name;
+	int sex_id;
+	char *sex_name;
+	int age_id;
+	char *age_name;
+	int cause_id;
+	char *cause_name;
+	int rei_id;
+	char *rei_name;
+	int metric_id;
+	char *metric_name;
+	int year
+	double val, upper, lower;
+	struct lt_IHME *a, *s;
+}lt_IHME;
+
+int num_registros(lt_IHME *lt1)
+{
+	return 0;
+}
+
+lt_IHME *inicio_IHME(lt_IHME *lt1)
+{
+	return NULL;
+}
+
+
+
+
+

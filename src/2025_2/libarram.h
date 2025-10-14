@@ -71,6 +71,26 @@ typedef struct lt2{
 	struct lt2 *a, *s;
 }lt2;
 
+typedef struct lt_IHME{
+	int measure_id;
+	char *measure_name;
+	int location_id;
+	char *location_name;
+	int sex_id;
+	char *sex_name;
+	int age_id;
+	char *age_name;
+	int cause_id;
+	char *cause_name;
+	int rei_id;
+	char *rei_name;
+	int metric_id;
+	char *metric_name;
+	int year
+	double val, upper, lower;
+	struct lt_IHME *a, *s;
+}lt_IHME;
+
 //float suma(float a, float b);
 //long int factorial(long int n);
 int cambio(int E, int A, int B);
@@ -117,5 +137,8 @@ int imprimir_lt2(lt2 *plt, int dir);
 int liberar_lt2(lt2 *plt);
 lt2* crearNodo2(lt2 *plt);
 lt2* unir_lt2(lt2 *plt, lt2 *new, int op);
+lt_IHME *read_csv2(FILE *fp);
+int num_registros(lt_IHME *lt1);
+lt_IHME *inicio_IHME(lt_IHME *lt1);
 
 #endif // LIBARRAM_H
