@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 		return 2;
 	lt1 = read_csv2(fp);
 	if(lt1==NULL)
-		retunr 3;
+		return 3;
 	printf("Num. registros: %d\n", num_registros(lt1));
 	fclose(fp);
 	return 0;

@@ -86,7 +86,7 @@ typedef struct lt_IHME{
 	char *rei_name;
 	int metric_id;
 	char *metric_name;
-	int year
+	int year;
 	double val, upper, lower;
 	struct lt_IHME *a, *s;
 }lt_IHME;
@@ -140,5 +140,6 @@ lt2* unir_lt2(lt2 *plt, lt2 *new, int op);
 lt_IHME *read_csv2(FILE *fp);
 int num_registros(lt_IHME *lt1);
 lt_IHME *inicio_IHME(lt_IHME *lt1);
+int liberar_IHME(lt_IHME *lt1);
 
 #endif // LIBARRAM_H

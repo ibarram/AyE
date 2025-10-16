@@ -783,13 +783,15 @@ lt_IHME *read_csv2(FILE *fp)
 {
 	char c;
 	char str[N_MAX], *str_1, *str_2;
-	int i, nc;
+	int i, j, k, nc;
 	lt_IHME *lt1;
+	char *ptr, **pptr;
 	lt1 = NULL;
 	if(fp==NULL)
 		return NULL;
 	rewind(fp);
 	while ((c = fgetc(fp)) != 10);
+	k = 0;
 	while(c!=EOF)
 	{
 		i = 0;
@@ -822,48 +824,87 @@ lt_IHME *read_csv2(FILE *fp)
 			lt1 = lt1->s;
 			lt1->s = NULL;
 		}
-		str_1 = str;
-		str_2 = strchr(str1, ',');
+		printf("%d\n", k++);
+		for(i=0, ptr=(char*)lt1, str_1 = str; i<7; i++)
+		{
+			str_2 = strchr(str_1, ',');
+			*str_2 = '\0';
+			str_2++;
+			//lt1->measure_id = atoi(str_1);
+			*ptr = atoi(str_1);
+			str_1 = strchr(str_2, ',');
+			*str_1 = '\0';
+			str_1++;
+			nc = strlen(str_2);
+			ptr+=sizeof(void*);
+			//lt1->measure_name = (char*)malloc((nc+1)*sizeof(char));
+			pptr = (char**)ptr;
+			*pptr = (char*)malloc((nc+1)*sizeof(char));
+			//strcpy(lt1->measure_name, str_2);
+			strcpy(*pptr, str_2);
+			ptr+=sizeof(void*);
+		}
+		str_2 = strchr(str_1, ',');
 		*str_2 = '\0';
-		str2++;
-		lt1->measure_id = atoi(str1);
-		str_1 = strchr(str2, ',');
+		str_2++;
+		lt1->year = atoi(str_1);
+		str_1 = strchr(str_2, ',');
 		*str_1 = '\0';
-		str1++;
-		nc = strlen(str2);
-		lt1->measure_name = (char*)malloc((nc+1)*sizeof(char));
-		strcpy(lt1->measure_name, str2);
-
+		str_1++;
+		lt1->val = atof(str_2);
+		str_2 = strchr(str_1, ',');
+		*str_2 = '\0';
+		str_2++;
+		lt1->upper = atof(str_1);
+		lt1->lower = atof(str_2);
 	}
-	return NULL;
+	return lt1;
 }
-
-typedef struct lt_IHME{
-	int location_id;
-	char *location_name;
-	int sex_id;
-	char *sex_name;
-	int age_id;
-	char *age_name;
-	int cause_id;
-	char *cause_name;
-	int rei_id;
-	char *rei_name;
-	int metric_id;
-	char *metric_name;
-	int year
-	double val, upper, lower;
-	struct lt_IHME *a, *s;
-}lt_IHME;
 
 int num_registros(lt_IHME *lt1)
 {
-	return 0;
+	int n;
+	lt1 = inicio_IHME(lt1);
+	n = 1;
+	while(lt1->s!=NULL)
+	{
+		lt1 = lt1->s;
+		n++;
+	}
+	return n;
 }
 
 lt_IHME *inicio_IHME(lt_IHME *lt1)
 {
-	return NULL;
+	while(lt1->a!=NULL)
+		lt1 = lt1->a;
+	return lt1;
+}
+
+int liberar_IHME(lt_IHME *lt1)
+{
+	char** ptr;
+	int i;
+	lt1 = inicio_IHME(lt1);
+	while(lt1->s!=NULL)
+	{
+		lt1 = lt1->s;
+		ptr = &(lt1->a->measure_name);
+		for(i=0; i<7; i++)
+		{
+			free(*ptr);
+			ptr+=(2*sizeof(void*));
+		}
+		free(lt1->a);
+	}
+	ptr = &(lt1->measure_name);
+	for(i=0; i<7; i++)
+	{
+		free(*ptr);
+		ptr+=(2*sizeof(void*));
+	}
+	free(lt1);
+	return 0;
 }
 
 
