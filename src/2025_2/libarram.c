@@ -795,13 +795,18 @@ lt_IHME *read_csv2(FILE *fp)
 	while(c!=EOF)
 	{
 		i = 0;
+		nc = 0;
 		while((c = fgetc(fp)) != 10)
 		{
 			if(c==EOF)
 				break;
+			if(c==',')
+				nc++;
 			str[i++] = c;
 		}
 		str[i] = '\0';
+		if(strlen(str)<35||nc!=17)
+			break;
 		if(lt1==NULL)
 		{
 			lt1 = (lt_IHME*)malloc(sizeof(lt_IHME));
@@ -824,7 +829,6 @@ lt_IHME *read_csv2(FILE *fp)
 			lt1 = lt1->s;
 			lt1->s = NULL;
 		}
-		printf("%d\n", k++);
 		for(i=0, ptr=(char*)lt1, str_1 = str; i<7; i++)
 		{
 			str_2 = strchr(str_1, ',');
@@ -881,6 +885,20 @@ lt_IHME *inicio_IHME(lt_IHME *lt1)
 	return lt1;
 }
 
+u_IHME *inicio_u_IHME(u_IHME *lt1)
+{
+	while(lt1->a!=NULL)
+		lt1 = lt1->a;
+	return lt1;
+}
+
+u_IHME *fin_u_IHME(u_IHME *lt1)
+{
+	while(lt1->s!=NULL)
+		lt1 = lt1->s;
+	return lt1;
+}
+
 int liberar_IHME(lt_IHME *lt1)
 {
 	char** ptr;
@@ -907,7 +925,78 @@ int liberar_IHME(lt_IHME *lt1)
 	return 0;
 }
 
+u_IHME *unique_IHME(lt_IHME *lt1, int indice)
+{
+	u_IHME *lt_u_IHME;
+	lt_u_IHME = NULL;
+	if(lt1==NULL)
+		return NULL;
+	lt1 = inicio_IHME(lt1);
+	lt_u_IHME = (u_IHME*)malloc(sizeof(u_IHME));
+	if(lt_u_IHME==NULL)
+		return NULL;
+	lt_u_IHME->a=NULL;
+	lt_u_IHME->s=NULL;
+	printf("%p\t%p\n", &(lt1->measure_id), &(lt1->location_id));
+	if(indice==0)
+	{
+		lt_u_IHME->id = lt1->measure_id;
+		lt_u_IHME->name = lt1->measure_name;
+	}
+	else
+	{
+		lt_u_IHME->id = lt1->location_id;
+		lt_u_IHME->name = lt1->location_name;
+	}
+	while(lt1->s!=NULL)
+	{
+		lt1=lt1->s;
+		lt_u_IHME = fin_u_IHME(lt_u_IHME);
+		if(!buscar_u_IHME(lt_u_IHME, indice==0?lt1->measure_id:lt1->location_id))
+		{
+			lt_u_IHME->s = (u_IHME*)malloc(sizeof(u_IHME));
+			if(lt_u_IHME->s==NULL)
+				return NULL;
+			lt_u_IHME->s->a=lt_u_IHME;
+			lt_u_IHME = lt_u_IHME->s;
+			if(indice==0)
+			{
+				lt_u_IHME->id = lt1->measure_id;
+				lt_u_IHME->name = lt1->measure_name;
+			}
+			else
+			{
+				lt_u_IHME->id = lt1->location_id;
+				lt_u_IHME->name = lt1->location_name;
+			}
+			lt_u_IHME->s = NULL;
+		}
+	}
+	return lt_u_IHME; 
+}
 
+int buscar_u_IHME(u_IHME *lt_u_IHME, int id)
+{
+	if(lt_u_IHME->id==id)
+		return 1;
+	while(lt_u_IHME->a!=NULL)
+	{
+		lt_u_IHME = lt_u_IHME->a;
+		if(lt_u_IHME->id==id)
+			return 1;
+	}
+	return 0;
+}
 
+int imprimir_u_IHME(u_IHME *lt_u_IHME)
+{
+	lt_u_IHME = inicio_u_IHME(lt_u_IHME);
+	while(lt_u_IHME!=NULL)
+	{
+		printf("%d. %s\n", lt_u_IHME->id, lt_u_IHME->name);
+		lt_u_IHME=lt_u_IHME->s;
+	}
+	return 0;
+}
 
 

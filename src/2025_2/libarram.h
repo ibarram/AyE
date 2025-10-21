@@ -91,6 +91,12 @@ typedef struct lt_IHME{
 	struct lt_IHME *a, *s;
 }lt_IHME;
 
+typedef struct u_IHME{
+	int id;
+	char *name;
+	struct u_IHME *a, *s;
+}u_IHME;
+
 //float suma(float a, float b);
 //long int factorial(long int n);
 int cambio(int E, int A, int B);
@@ -141,5 +147,8 @@ lt_IHME *read_csv2(FILE *fp);
 int num_registros(lt_IHME *lt1);
 lt_IHME *inicio_IHME(lt_IHME *lt1);
 int liberar_IHME(lt_IHME *lt1);
+u_IHME *unique_IHME(lt_IHME *lt1, int indice);
+int buscar_u_IHME(u_IHME *lt_u_IHME, int id);
+int imprimir_u_IHME(u_IHME *lt_u_IHME);
 
 #endif // LIBARRAM_H
