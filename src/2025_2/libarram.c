@@ -786,6 +786,7 @@ lt_IHME *read_csv2(FILE *fp)
 	int i, j, k, nc;
 	lt_IHME *lt1;
 	char *ptr, **pptr;
+	int *ptr_i;
 	lt1 = NULL;
 	if(fp==NULL)
 		return NULL;
@@ -835,7 +836,8 @@ lt_IHME *read_csv2(FILE *fp)
 			*str_2 = '\0';
 			str_2++;
 			//lt1->measure_id = atoi(str_1);
-			*ptr = atoi(str_1);
+			ptr_i = (int*)ptr;
+			*ptr_i = atoi(str_1);
 			str_1 = strchr(str_2, ',');
 			*str_1 = '\0';
 			str_1++;
@@ -927,7 +929,10 @@ int liberar_IHME(lt_IHME *lt1)
 
 u_IHME *unique_IHME(lt_IHME *lt1, int indice)
 {
+	int df, dm;
 	u_IHME *lt_u_IHME;
+	void *p1, *p2;
+	char **p3;
 	lt_u_IHME = NULL;
 	if(lt1==NULL)
 		return NULL;
@@ -937,38 +942,36 @@ u_IHME *unique_IHME(lt_IHME *lt1, int indice)
 		return NULL;
 	lt_u_IHME->a=NULL;
 	lt_u_IHME->s=NULL;
-	printf("%p\t%p\n", &(lt1->measure_id), &(lt1->location_id));
-	if(indice==0)
-	{
-		lt_u_IHME->id = lt1->measure_id;
-		lt_u_IHME->name = lt1->measure_name;
-	}
-	else
-	{
-		lt_u_IHME->id = lt1->location_id;
-		lt_u_IHME->name = lt1->location_name;
-	}
+	p1 = (void*)(&(lt1->measure_id));
+	p2 = (void*)(&(lt1->location_id));
+	df = p2-p1;
+	p2 = (void*)(&(lt1->measure_name));
+	dm = p2-p1;
+	p1 = &(lt1->measure_id);
+	p1 += (indice*df);
+	lt_u_IHME->id = *((int*)p1);
+	p2 = p1+dm;
+	p3 = (char**)p2;
+	lt_u_IHME->name = *p3;
 	while(lt1->s!=NULL)
 	{
 		lt1=lt1->s;
+		p1 = (void*)(&(lt1->measure_id));
+		p1 += (indice*df);
 		lt_u_IHME = fin_u_IHME(lt_u_IHME);
-		if(!buscar_u_IHME(lt_u_IHME, indice==0?lt1->measure_id:lt1->location_id))
+		if(!buscar_u_IHME(lt_u_IHME, *((int*)p1)))
 		{
 			lt_u_IHME->s = (u_IHME*)malloc(sizeof(u_IHME));
 			if(lt_u_IHME->s==NULL)
 				return NULL;
 			lt_u_IHME->s->a=lt_u_IHME;
 			lt_u_IHME = lt_u_IHME->s;
-			if(indice==0)
-			{
-				lt_u_IHME->id = lt1->measure_id;
-				lt_u_IHME->name = lt1->measure_name;
-			}
-			else
-			{
-				lt_u_IHME->id = lt1->location_id;
-				lt_u_IHME->name = lt1->location_name;
-			}
+			p1 = &(lt1->measure_id);
+			p1 += (indice*df);
+			lt_u_IHME->id = *((int*)p1);
+			p2 = p1+dm;
+			p3 = (char**)p2;
+			lt_u_IHME->name = *p3;
 			lt_u_IHME->s = NULL;
 		}
 	}
@@ -999,4 +1002,23 @@ int imprimir_u_IHME(u_IHME *lt_u_IHME)
 	return 0;
 }
 
+double consulta_IHME(lt_IHME *lt1, int val[])
+{
+	void *p1, *p2;
+	int df, flag, i;
+	p1 = (void*)(&lt1->measure_id);
+	p2 = (void*)(&lt1->location_id);
+	df = p2-p1;
+	lt1 = inicio_IHME(lt1);
+	while(lt1!=NULL)
+	{
+		p1 = (void*)(&lt1->measure_id);
+		for(i=0, flag=1; i<(N_C_MAX+1); i++)
+			flag&=(*((int*)(p1+i*df))==val[i]);
+		if(flag)
+			return lt1->val;
+		lt1=lt1->s;
+	}
+	return 0;
+}
 

@@ -3,6 +3,8 @@
 
 int main(int argc, char *argv[])
 {
+	int indice, val[8] = {2,4647,3,7,571,169,3,2020};
+	double valor;
 	FILE *fp;
 	lt_IHME *lt1;
 	u_IHME *lt_measure;
@@ -15,13 +17,23 @@ int main(int argc, char *argv[])
 	if(lt1==NULL)
 		return 3;
 	printf("Num. registros: %d\n", num_registros(lt1));
-	lt_measure = unique_IHME(lt1, 1);
-	if(lt_measure==NULL)
+	indice = 0;
+	while(indice>-1&&indice<N_C_MAX)
 	{
-		lt_IHME(lt1);
-		return 4;
+		lt_measure = unique_IHME(lt1, indice);
+		if(lt_measure==NULL)
+		{
+			fclose(fp);
+			return 4;
+		}
+		imprimir_u_IHME(lt_measure);
+		printf("Ingrese el indice: ");
+		scanf("%d", &indice);
 	}
-	imprimir_u_IHME(lt_measure);
+	valor = consulta_IHME(lt1, val);
+	printf("%lf\n", valor);
+//	2,4645,1,18,571,169,3,2020,
+//  2,4647,3,7,571,169,3,2020,70.33780119676
 	fclose(fp);
 	return 0;
 }

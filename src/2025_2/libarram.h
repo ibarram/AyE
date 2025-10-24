@@ -18,6 +18,7 @@
 #define N_MAX_C		30
 #define N_CURP		19
 #define N_INEGI		200
+#define N_C_MAX		7
 
 typedef struct{
 	float a, b;
@@ -150,5 +151,6 @@ int liberar_IHME(lt_IHME *lt1);
 u_IHME *unique_IHME(lt_IHME *lt1, int indice);
 int buscar_u_IHME(u_IHME *lt_u_IHME, int id);
 int imprimir_u_IHME(u_IHME *lt_u_IHME);
+double consulta_IHME(lt_IHME *lt1, int val[]);
 
 #endif // LIBARRAM_H
