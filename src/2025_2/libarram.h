@@ -98,6 +98,11 @@ typedef struct u_IHME{
 	struct u_IHME *a, *s;
 }u_IHME;
 
+typedef struct u_year{
+	int y;
+	struct u_year *a, *s;
+}u_year;
+
 //float suma(float a, float b);
 //long int factorial(long int n);
 int cambio(int E, int A, int B);
@@ -149,8 +154,14 @@ int num_registros(lt_IHME *lt1);
 lt_IHME *inicio_IHME(lt_IHME *lt1);
 int liberar_IHME(lt_IHME *lt1);
 u_IHME *unique_IHME(lt_IHME *lt1, int indice);
+u_year *inicio_year(u_year *lty);
+int buscar_y(u_year *lty, int year);
+int imprimir_u_year(u_year *lty);
+int n_u_year(u_year *lty);
+u_year *unique_year(lt_IHME *lt1);
 int buscar_u_IHME(u_IHME *lt_u_IHME, int id);
 int imprimir_u_IHME(u_IHME *lt_u_IHME);
 double consulta_IHME(lt_IHME *lt1, int val[]);
+int reporte(char *reporte, char *figura);
 
 #endif // LIBARRAM_H

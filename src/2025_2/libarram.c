@@ -978,6 +978,78 @@ u_IHME *unique_IHME(lt_IHME *lt1, int indice)
 	return lt_u_IHME; 
 }
 
+u_year *inicio_year(u_year *lty)
+{
+	while(lty->a!=NULL)
+		lty=lty->a;
+	return lty;
+}
+
+int buscar_y(u_year *lty, int year)
+{
+	lty = inicio_year(lty);
+	while(lty!=NULL)
+	{
+		if(lty->y==year)
+			return 1;
+		lty=lty->s;
+	}
+	return 0;
+}
+
+int imprimir_u_year(u_year *lty)
+{
+	int i;
+	lty = inicio_year(lty);
+	i=1;
+	while(lty!=NULL)
+	{
+		printf("%d. %d\n", i++, lty->y);
+		lty=lty->s;
+	}
+	return 0;
+}
+
+int n_u_year(u_year *lty)
+{
+	int i=0;
+	lty = inicio_year(lty);
+	while(lty!=NULL)
+	{
+		i++;
+		lty=lty->s;
+	}
+	return i;
+}
+
+u_year *unique_year(lt_IHME *lt1)
+{
+	u_year *lty=NULL;
+	lt1 = inicio_IHME(lt1);
+	lty = (u_year*)malloc(sizeof(u_year));
+	if(lty==NULL)
+		return NULL;
+	lty->a = NULL;
+	lty->s = NULL;
+	lty->y = lt1->year;
+	lt1=lt1->s;
+	while(lt1!=NULL)
+	{
+		if(!buscar_y(lty, lt1->year))
+		{
+			lty->s=(u_year*)malloc(sizeof(u_year));
+			if(lty->s==NULL)
+				return NULL;
+			lty->s->a=lty;
+			lty = lty->s;
+			lty->y = lt1->year;
+			lty->s = NULL;
+		}
+		lt1=lt1->s;
+	}
+	return lty;
+}
+
 int buscar_u_IHME(u_IHME *lt_u_IHME, int id)
 {
 	if(lt_u_IHME->id==id)
@@ -1019,6 +1091,30 @@ double consulta_IHME(lt_IHME *lt1, int val[])
 			return lt1->val;
 		lt1=lt1->s;
 	}
+	return 0;
+}
+
+int reporte(char reporte[], char figura[])
+{
+	FILE *gp = popen("gnuplot", "w");
+	if(!gp)
+		return 1;
+	fprintf(gp, "set datafile separator ','\n");
+	fprintf(gp, "set terminal pdfcairo size 5in,3in enhanced font 'Arial,12'\n");
+	fprintf(gp, "set output '%s'\n", figura);
+	fprintf(gp, "set title \"Histograma de Datos por Año\"\n");
+	fprintf(gp, "set xlabel \"Año\"\n");
+	fprintf(gp, "set ylabel \"Valor\"\n");
+	fprintf(gp, "set grid ytics\n\n");
+	fprintf(gp, "set style data histograms\n");
+	fprintf(gp, "set style fill solid 0.6 border -1\n");
+	fprintf(gp, "set boxwidth 0.7\n");
+	fprintf(gp, "set key off\n\n");
+	fprintf(gp, "set xtics rotate by -45\n\n");
+	fprintf(gp, "plot '%s' using 2:xtic(1) title 'Datos'\n", reporte);
+	fprintf(gp, "unset output\n");
+	fflush(gp);
+	pclose(gp);
 	return 0;
 }
 
