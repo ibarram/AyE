@@ -1074,6 +1074,18 @@ int imprimir_u_IHME(u_IHME *lt_u_IHME)
 	return 0;
 }
 
+int n_u_IHME(u_IHME *lt_u_IHME)
+{
+	int n=0;
+	lt_u_IHME = inicio_u_IHME(lt_u_IHME);
+	while(lt_u_IHME!=NULL)
+	{
+		lt_u_IHME = lt_u_IHME->s;
+		n++;
+	}
+	return n;
+}
+
 double consulta_IHME(lt_IHME *lt1, int val[])
 {
 	void *p1, *p2;

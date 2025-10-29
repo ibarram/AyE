@@ -152,6 +152,7 @@ lt2* unir_lt2(lt2 *plt, lt2 *new, int op);
 lt_IHME *read_csv2(FILE *fp);
 int num_registros(lt_IHME *lt1);
 lt_IHME *inicio_IHME(lt_IHME *lt1);
+u_IHME *inicio_u_IHME(u_IHME *lt1);
 int liberar_IHME(lt_IHME *lt1);
 u_IHME *unique_IHME(lt_IHME *lt1, int indice);
 u_year *inicio_year(u_year *lty);
@@ -161,6 +162,7 @@ int n_u_year(u_year *lty);
 u_year *unique_year(lt_IHME *lt1);
 int buscar_u_IHME(u_IHME *lt_u_IHME, int id);
 int imprimir_u_IHME(u_IHME *lt_u_IHME);
+int n_u_IHME(u_IHME *lt_u_IHME);
 double consulta_IHME(lt_IHME *lt1, int val[]);
 int reporte(char *reporte, char *figura);
 
