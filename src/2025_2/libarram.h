@@ -165,5 +165,6 @@ int imprimir_u_IHME(u_IHME *lt_u_IHME);
 int n_u_IHME(u_IHME *lt_u_IHME);
 double consulta_IHME(lt_IHME *lt1, int val[]);
 int reporte(char *reporte, char *figura);
+int reporte_2(char reporte[]);
 
 #endif // LIBARRAM_H

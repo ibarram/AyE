@@ -1130,3 +1130,25 @@ int reporte(char reporte[], char figura[])
 	return 0;
 }
 
+int reporte_2(char reporte[])
+{
+	FILE *gp = popen("gnuplot", "w");
+	if(!gp)
+		return 1;
+	fprintf(gp, "set terminal pngcairo size 1600,1200\n");
+	fprintf(gp, "set output 'bigotes.png'\n");
+	fprintf(gp, "set datafile separator \",\"\n\n");
+	fprintf(gp, "set style data yerrorbars\n");
+	fprintf(gp, "set boxwidth 0.5\n");
+	fprintf(gp, "set style fill solid 0.4\n");
+	fprintf(gp, "set title \"Gráfica de Bigotes\"\n");
+	fprintf(gp, "set xlabel \"Estados\"\n");
+	fprintf(gp, "set ylabel \"AVD (Años Vividos con Discapacidad)\"\n\n");
+	fprintf(gp, "set grid ytics\n\n");
+	fprintf(gp, "set xtics rotate by 60\n");
+	fprintf(gp, "set grid xtics ytics mxtics mytics\n");
+	fprintf(gp, "plot 'temp.csv' using 0:2:3:4:xtic(1) every ::1 with yerrorbars lc rgb \"blue\" lw 2 title \"Medias ± rango\"\n");
+	return 0;
+}
+
+//AVD (Años Vividos con Discapacidad)
