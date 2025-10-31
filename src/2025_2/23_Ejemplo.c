@@ -89,19 +89,6 @@ int main(int argc, char *argv[])
 		}
 		grafica[3*i]/=ny;
 	}
-/*	fp = fopen("temp.csv", "wt");
-	if(fp==NULL)
-		return 9;
-	lt_location = inicio_u_IHME(lt_location);
-	lt_location = lt_location->s;
-	fprintf(fp, "Estados,media,minimo,maximo\n");
-	for(i=0; i<nl;i++)
-	{
-		fprintf(fp, "%s,%lf,%lf,%lf\n", lt_location->name, grafica[3*i], grafica[3*i+1], grafica[3*i+2]);
-		if(lt_location->s!=NULL)
-			lt_location = lt_location->s;
-	}
-	fclose(fp);*/
 	reporte_2(lt_location, grafica, argv[3]);
 	fp = fopen(argv[2], "wt");
 	if(fp==NULL)
