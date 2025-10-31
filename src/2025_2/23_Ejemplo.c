@@ -5,10 +5,9 @@
 
 int main(int argc, char *argv[])
 {
-	int indice, val[8] = {3,130,3,22,571,169,1,2020}, ny, i, j, nr, nl;
+	int val[8] = {3,130,3,22,571,169,1,2020}, ny, nr, nl, i, j;
 	double **valor, max, min, rg, *grafica;
 	char **estados;
-	int *anios;
 	FILE *fp;
 	lt_IHME *lt1;
 	u_IHME *lt_location;
@@ -90,7 +89,7 @@ int main(int argc, char *argv[])
 		}
 		grafica[3*i]/=ny;
 	}
-	fp = fopen("temp.csv", "wt");
+/*	fp = fopen("temp.csv", "wt");
 	if(fp==NULL)
 		return 9;
 	lt_location = inicio_u_IHME(lt_location);
@@ -102,8 +101,8 @@ int main(int argc, char *argv[])
 		if(lt_location->s!=NULL)
 			lt_location = lt_location->s;
 	}
-	fclose(fp);
-	reporte_2(argv[3]);
+	fclose(fp);*/
+	reporte_2(lt_location, grafica, argv[3]);
 	fp = fopen(argv[2], "wt");
 	if(fp==NULL)
 		return 10;

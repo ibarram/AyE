@@ -1130,24 +1130,47 @@ int reporte(char reporte[], char figura[])
 	return 0;
 }
 
-int reporte_2(char reporte[])
+int reporte_2(u_IHME *lt_location, double *grafica, char reporte[])
 {
+	FILE *fp;
 	FILE *gp = popen("gnuplot", "w");
+	int i;
+	char filename[10] = "temp.csv";
 	if(!gp)
 		return 1;
-	fprintf(gp, "set terminal pngcairo size 1600,1200\n");
-	fprintf(gp, "set output 'bigotes.png'\n");
+	fp = fopen(filename, "wt");
+	if(fp==NULL)
+		return 2;
+	lt_location = inicio_u_IHME(lt_location);
+	lt_location = lt_location->s;
+	fprintf(fp, "Estados,media,minimo,maximo\n");
+	i=0;
+	while(lt_location!=NULL)
+	{
+		fprintf(fp, "%s,%lf,%lf,%lf\n", lt_location->name, grafica[3*i], grafica[3*i+1], grafica[3*i+2]);
+		i++;
+		lt_location = lt_location->s;
+	}
+	fclose(fp);
+	fprintf(gp, "set terminal pdfcairo size 10in,6in\n");
+	fprintf(gp, "set output '%s'\n", reporte);
 	fprintf(gp, "set datafile separator \",\"\n\n");
 	fprintf(gp, "set style data yerrorbars\n");
 	fprintf(gp, "set boxwidth 0.5\n");
 	fprintf(gp, "set style fill solid 0.4\n");
-	fprintf(gp, "set title \"Gráfica de Bigotes\"\n");
+	fprintf(gp, "set title \"AVD de la depresión por estado entre los años 2020 a 2023.\"\n");
 	fprintf(gp, "set xlabel \"Estados\"\n");
 	fprintf(gp, "set ylabel \"AVD (Años Vividos con Discapacidad)\"\n\n");
-	fprintf(gp, "set grid ytics\n\n");
-	fprintf(gp, "set xtics rotate by 60\n");
-	fprintf(gp, "set grid xtics ytics mxtics mytics\n");
-	fprintf(gp, "plot 'temp.csv' using 0:2:3:4:xtic(1) every ::1 with yerrorbars lc rgb \"blue\" lw 2 title \"Medias ± rango\"\n");
+	fprintf(gp, "set grid xtics ytics mxtics mytics\n\n");
+	fprintf(gp, "set rmargin 28\n");
+	fprintf(gp, "set xtics rotate by 60 offset 0,-1\n");
+	fprintf(gp, "unset key\n");
+	fprintf(gp, "LEG = system(\"awk -F, 'NR>1{printf \\\"%%d = %%s\\\\n\\\", NR-1, $1}' temp.csv\")\n");
+	fprintf(gp, "set label 100 LEG at graph 1.02,1 left front tc rgb \"black\" boxed offset 1,-1\n");
+	fprintf(gp, "plot 'temp.csv' using ($0+1):2:3:4:xtic(sprintf(\"%%d\",$0+1)) every ::1 \\\n");
+	fprintf(gp, "     with yerrorbars lc rgb \"blue\" lw 2 notitle\n");
+	pclose(gp);
+	remove(filename);
 	return 0;
 }
 
