@@ -4,6 +4,7 @@
 #include <math.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdint.h>
 #include "libarram.h"
 
 /*
@@ -1174,4 +1175,58 @@ int reporte_2(u_IHME *lt_location, double *grafica, char reporte[])
 	return 0;
 }
 
-//AVD (Años Vividos con Discapacidad)
+int ordenamiento_dir(int16_t *x, int n)
+{
+	int i;
+	od *lt1=NULL, *ltn;
+	lt1=(od*)malloc(sizeof(od));
+	if(lt1==NULL)
+		return 1;
+	lt1->x = x[0];
+	lt1->a = NULL;
+	lt1->s = NULL;
+	if(x[0]<x[1])
+	{
+		lt1->s = (od*)malloc(sizeof(od));
+		if(lt1->s==NULL)
+			return 2;
+		lt1->s->s = NULL;
+		lt1->s->a = lt1;
+		lt1->s->x = x[1];
+	}
+	else
+	{
+		lt1->a = (od*)malloc(sizeof(od));
+		if(lt1->a==NULL)
+			return 3;
+		lt1->a->a = NULL;
+		lt1->a->s = lt1;
+		lt1->a->x = x[1];
+	}
+	for(i=2; i<n; i++)
+	{
+		ltn = (od*)malloc(sizeof(od));
+		if(ltn==NULL)
+			return 4;
+		ltn->x = x[i];
+		if(lt1->x<x[i])
+		{
+			while((lt1->x<x[i])&&(lt1->s!=NULL))
+				lt1=lt1->s;
+			ltn->s = NULL;
+			ltn->a = lt1;
+			lt1->s = ltn;
+		}
+		else
+		{
+
+		}
+		while(lt1->x!=x[i])
+		{
+			if(lt1->s!=NULL)
+
+		}
+		x[i]
+	}
+	return 0;
+}

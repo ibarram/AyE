@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <stdint.h>
 
 #define SWAP(a, b) {\
 		a^=b;\
@@ -103,6 +104,11 @@ typedef struct u_year{
 	struct u_year *a, *s;
 }u_year;
 
+typedef struct od{
+	int16_t x;
+	struct od *a, *s;
+}od;
+
 //float suma(float a, float b);
 //long int factorial(long int n);
 int cambio(int E, int A, int B);
@@ -166,5 +172,6 @@ int n_u_IHME(u_IHME *lt_u_IHME);
 double consulta_IHME(lt_IHME *lt1, int val[]);
 int reporte(char *reporte, char *figura);
 int reporte_2(u_IHME *lt_location, double *grafica, char reporte[]);
+int ordenamiento_dir(int16_t *x, int n);
 
 #endif // LIBARRAM_H
