@@ -1215,6 +1215,7 @@ int ordenamiento_dir(int16_t *x, int n)
 	{
 		ltn->s = NULL;
 		ltn->a = lt1;
+		ltn->a->s = ltn;
 	}
 	else
 	{
@@ -1236,30 +1237,57 @@ int ordenamiento_dir(int16_t *x, int n)
 	}
 	lts = lt1;
 //	for(i=2; i<n; i++)
-	for(i=3; i<3; i++)
+	for(i=3; i<6; i++)
 	{
+		lt1 = lts;
 		ltn = (od*)malloc(sizeof(od));
 		if(ltn==NULL)
-			return 4;
+			return 5;
 		ltn->x = x[i];
-		if(lt1->x<x[i])
+		while(ltn->x>lt1->x)
 		{
-			while((lt1->x<x[i])&&(lt1->s!=NULL))
-				lt1=lt1->s;
+			printf("%p\t%d\t%d\n", lt1, lt1->x, ltn->x);
+			if(lt1->s==NULL)
+				break;
+			lt1 = lt1->s;
+		}
+		while(ltn->x<lt1->x)
+		{
+			printf("%p\t%d\t%d\n", lt1, lt1->x, ltn->x);
+			if(lt1->a==NULL)
+				break;
+			lt1 = lt1->a;
+		}
+		printf("%p\t%d\t%d\n", lt1, lt1->x, ltn->x);
+		if(ltn->x<lt1->x)
+		{
+			lt1->a = ltn;
+			ltn->s = lt1;
+			ltn->a = NULL;
+		}
+		else if(ltn->x>lt1->x)
+		{
 			ltn->s = NULL;
 			ltn->a = lt1;
-			lt1->s = ltn;
+			ltn->a->s = ltn;
 		}
 		else
 		{
-
+			ltn->s = lt1->s;
+			ltn->a = lt1;
+			ltn->s->a = ltn;
+			ltn->a->s = ltn;
+			lt1 = ltn;
 		}
-		while(lt1->x!=x[i])
-		{
-			if(lt1->s!=NULL);
 
-		}
-//		x[i];
+
+
+
+
+/*
+		lt1->x<ltn->x
+		lt1->s->x>ltn->x
+		*/
 	}
 	while(lts->a!=NULL)
 		lts=lts->a;
@@ -1269,8 +1297,9 @@ int ordenamiento_dir(int16_t *x, int n)
 		x[i] = lts->x;
 		lts = lts->s;
 		i++;
-	}
+	}	
 	x[i] = lts->x;
+	printf("%d\n", i);
 	return 0;
 }
 
