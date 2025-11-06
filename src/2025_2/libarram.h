@@ -173,5 +173,6 @@ double consulta_IHME(lt_IHME *lt1, int val[]);
 int reporte(char *reporte, char *figura);
 int reporte_2(u_IHME *lt_location, double *grafica, char reporte[]);
 int ordenamiento_dir(int16_t *x, int n);
+long long file_size_bytes(FILE *fp);
 
 #endif // LIBARRAM_H

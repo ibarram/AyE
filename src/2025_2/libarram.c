@@ -1178,13 +1178,15 @@ int reporte_2(u_IHME *lt_location, double *grafica, char reporte[])
 int ordenamiento_dir(int16_t *x, int n)
 {
 	int i;
-	od *lt1=NULL, *ltn;
+	od *lt1=NULL, *ltn, *lts;
 	lt1=(od*)malloc(sizeof(od));
 	if(lt1==NULL)
 		return 1;
+	// Primer muestra
 	lt1->x = x[0];
 	lt1->a = NULL;
 	lt1->s = NULL;
+	// Segunda muestra
 	if(x[0]<x[1])
 	{
 		lt1->s = (od*)malloc(sizeof(od));
@@ -1193,6 +1195,7 @@ int ordenamiento_dir(int16_t *x, int n)
 		lt1->s->s = NULL;
 		lt1->s->a = lt1;
 		lt1->s->x = x[1];
+		lt1 = lt1->s;
 	}
 	else
 	{
@@ -1203,7 +1206,37 @@ int ordenamiento_dir(int16_t *x, int n)
 		lt1->a->s = lt1;
 		lt1->a->x = x[1];
 	}
-	for(i=2; i<n; i++)
+	// Tercera muestra
+	ltn = (od*)malloc(sizeof(od));
+	if(ltn==NULL)
+		return 4;
+	ltn->x = x[2];
+	if(lt1->x<x[2])
+	{
+		ltn->s = NULL;
+		ltn->a = lt1;
+	}
+	else
+	{
+		lt1 = lt1->a;
+		if(lt1->x<x[2])
+		{
+			ltn->s = lt1->s;
+			ltn->a = lt1;
+			ltn->s->a = ltn;
+			ltn->a->s = ltn;
+			lt1 = ltn;
+		}
+		else
+		{
+			lt1->a = ltn;
+			ltn->s = lt1;
+			ltn->a = NULL;
+		}
+	}
+	lts = lt1;
+//	for(i=2; i<n; i++)
+	for(i=3; i<3; i++)
 	{
 		ltn = (od*)malloc(sizeof(od));
 		if(ltn==NULL)
@@ -1223,10 +1256,38 @@ int ordenamiento_dir(int16_t *x, int n)
 		}
 		while(lt1->x!=x[i])
 		{
-			if(lt1->s!=NULL)
+			if(lt1->s!=NULL);
 
 		}
-		x[i]
+//		x[i];
 	}
+	while(lts->a!=NULL)
+		lts=lts->a;
+	i = 0;
+	while(lts->s!=NULL)
+	{
+		x[i] = lts->x;
+		lts = lts->s;
+		i++;
+	}
+	x[i] = lts->x;
 	return 0;
+}
+
+long long int file_size_bytes(FILE *fp)
+{
+	long long int pos, size;
+    if (!fp)
+    	return 1;
+    pos = ftello(fp);
+    if (pos == -1)
+    	return 2;
+    if (fseeko(fp, 0, SEEK_END) != 0)
+    	return 3;
+    size = ftello(fp);
+    if (size == -1)
+    	return 4;
+    if (fseeko(fp, pos, SEEK_SET) != 0)
+    	return 5;
+    return size;
 }
