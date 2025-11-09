@@ -1175,9 +1175,10 @@ int reporte_2(u_IHME *lt_location, double *grafica, char reporte[])
 	return 0;
 }
 
-int ordenamiento_dir(int16_t *x, int n)
+int ordenamiento_dir(int16_t *x, long int n, int flag_update)
 {
-	int i;
+	long int i;
+	int flag;
 	od *lt1=NULL, *ltn, *lts;
 	lt1=(od*)malloc(sizeof(od));
 	if(lt1==NULL)
@@ -1230,42 +1231,42 @@ int ordenamiento_dir(int16_t *x, int n)
 		}
 		else
 		{
-			lt1->a = ltn;
 			ltn->s = lt1;
 			ltn->a = NULL;
+			lt1->a = ltn;
 		}
 	}
 	lts = lt1;
-//	for(i=2; i<n; i++)
-	for(i=3; i<6; i++)
+	for(i=3; i<n; i++)
 	{
 		lt1 = lts;
 		ltn = (od*)malloc(sizeof(od));
 		if(ltn==NULL)
 			return 5;
 		ltn->x = x[i];
+		if(ltn->x>lt1->x)
+			flag = 1;
+		else
+			flag = 0;
 		while(ltn->x>lt1->x)
 		{
-			printf("%p\t%d\t%d\n", lt1, lt1->x, ltn->x);
 			if(lt1->s==NULL)
 				break;
 			lt1 = lt1->s;
 		}
 		while(ltn->x<lt1->x)
 		{
-			printf("%p\t%d\t%d\n", lt1, lt1->x, ltn->x);
 			if(lt1->a==NULL)
 				break;
 			lt1 = lt1->a;
 		}
-		printf("%p\t%d\t%d\n", lt1, lt1->x, ltn->x);
-		if(ltn->x<lt1->x)
+		if((ltn->x<lt1->x)&&(lt1->a==NULL))
 		{
 			lt1->a = ltn;
 			ltn->s = lt1;
 			ltn->a = NULL;
 		}
-		else if(ltn->x>lt1->x)
+		else if((ltn->x>=lt1->x)&&(lt1->s==NULL))
 		{
 			ltn->s = NULL;
 			ltn->a = lt1;
@@ -1279,18 +1280,28 @@ int ordenamiento_dir(int16_t *x, int n)
 			ltn->a->s = ltn;
 			lt1 = ltn;
 		}
-
-
-
-
+		if(flag_update)
+		{
+			if(flag)
+				lts = lts->s;
+			else
+				lts = lts->a;
+		}
+		if(!(i%(n/50)))
+		{
+			printf("*");
+			fflush(stdout);
+		}
 
 /*
 		lt1->x<ltn->x
 		lt1->s->x>ltn->x
 		*/
 	}
+	printf("\n");
 	while(lts->a!=NULL)
 		lts=lts->a;
+	lt1 = lts;
 	i = 0;
 	while(lts->s!=NULL)
 	{
@@ -1299,7 +1310,6 @@ int ordenamiento_dir(int16_t *x, int n)
 		i++;
 	}	
 	x[i] = lts->x;
-	printf("%d\n", i);
 	return 0;
 }
 
