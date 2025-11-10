@@ -1347,15 +1347,16 @@ long long int file_size_bytes(FILE *fp)
 	long long int pos, size;
     if (!fp)
     	return 1;
-    pos = ftello(fp);
+    pos = FTELL(fp);
     if (pos == -1)
     	return 2;
-    if (fseeko(fp, 0, SEEK_END) != 0)
+    if (FSEEK(fp, 0, SEEK_END) != 0)
     	return 3;
-    size = ftello(fp);
+    size = FTELL(fp);
     if (size == -1)
     	return 4;
-    if (fseeko(fp, pos, SEEK_SET) != 0)
+    if (FSEEK(fp, pos, SEEK_SET) != 0)
     	return 5;
     return size;
 }
+

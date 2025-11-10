@@ -22,6 +22,23 @@
 #define N_C_MAX		7
 #define N_ORD_D		100
 
+#if defined _WIN32
+	#define FTELL ftell
+	#define FSEEK fseek
+#elif defined _WIN64
+	#define FTELL ftell
+	#define FSEEK fseek
+#elif defined __APPLE__
+	#define FTELL ftello
+	#define FSEEK fseeko
+#elif defined __linux__
+	#define FTELL ftello
+	#define FSEEK fseeko
+#else
+	#define FTELL ftell
+	#define FSEEK fseeko
+#endif
+
 typedef struct{
 	float a, b;
 }Complejo;
