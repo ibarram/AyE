@@ -1177,8 +1177,8 @@ int reporte_2(u_IHME *lt_location, double *grafica, char reporte[])
 
 int ordenamiento_dir(int16_t *x, long int n, int flag_update)
 {
-	long int i;
-	int flag;
+	long int i, j;
+	int flag, weight, sg_w, move, sg_m, mg_m;
 	od *lt1=NULL, *ltn, *lts;
 	lt1=(od*)malloc(sizeof(od));
 	if(lt1==NULL)
@@ -1237,6 +1237,7 @@ int ordenamiento_dir(int16_t *x, long int n, int flag_update)
 		}
 	}
 	lts = lt1;
+	move = 0;
 	for(i=3; i<n; i++)
 	{
 		lt1 = lts;
@@ -1248,17 +1249,22 @@ int ordenamiento_dir(int16_t *x, long int n, int flag_update)
 			flag = 1;
 		else
 			flag = 0;
+		weight = 0;
 		while(ltn->x>lt1->x)
 		{
 			if(lt1->s==NULL)
 				break;
 			lt1 = lt1->s;
+			weight++;
+			move++;
 		}
 		while(ltn->x<lt1->x)
 		{
 			if(lt1->a==NULL)
 				break;
 			lt1 = lt1->a;
+			weight--;
+			move--;
 		}
 		if((ltn->x<lt1->x)&&(lt1->a==NULL))
 		{
@@ -1280,14 +1286,37 @@ int ordenamiento_dir(int16_t *x, long int n, int flag_update)
 			ltn->a->s = ltn;
 			lt1 = ltn;
 		}
-		if(flag_update)
+		sg_w = (weight>0?1:-1);
+		weight*=sg_w;
+		switch(flag_update)
 		{
-			if(flag)
-				lts = lts->s;
-			else
-				lts = lts->a;
+		case 1:
+			lts = (flag?lts->s:lts->a);
+			break;
+		case 2:
+			weight/=N_ORD_D;
+			for(j=0; j<weight; j++)
+			{
+				if((sg_w==1?lts->s:lts->a)==NULL)
+					break;
+				lts = (sg_w==1?lts->s:lts->a);
+			}
+			break;
+		case 3:
+			mg_m = move/(50*N_ORD_D);
+			sg_m = (move>0?1:-1);
+			mg_m *= sg_m;
+			for(j=0; j<mg_m; j++)
+			{
+				if((sg_m==1?lts->s:lts->a)==NULL)
+					break;
+				lts = (sg_m==1?lts->s:lts->a);
+			}
+			break;
+		default:
+			break;
 		}
-		if(!(i%(n/50)))
+		if(!(i%(n/20)))
 		{
 			printf("*");
 			fflush(stdout);

@@ -20,6 +20,7 @@
 #define N_CURP		19
 #define N_INEGI		200
 #define N_C_MAX		7
+#define N_ORD_D		100
 
 typedef struct{
 	float a, b;
