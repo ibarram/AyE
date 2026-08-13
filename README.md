@@ -191,7 +191,7 @@ Puedes consultar el listado completo de códigos y sus explicaciones en el sigui
 
 [Dr. M.-A. Ibarra-Manzano](mailto:ibarram@ugto.mx?subject=[GitHub]%2020242%20AyE) - [DICIS-UG](http://www.posgrados.ugto.mx/Profesores/Perfil.aspx?id=20150) - [ORCID: 0000-0003-4317-0248](https://orcid.org/0000-0003-4317-0248) - [SCOPUS: 15837259000](https://www.scopus.com/authid/detail.uri?authorId=15837259000)
 
-Unidad de Aprendizaje Link: [20241AyE](https://github.com/ibarram/AyE/)
+Unidad de Aprendizaje Link: [20262AyE](https://github.com/ibarram/AyE/)
 
 ## Bibliografía
 - Cormen, T. H. Leiserson, C. E. Rivest, R. L., Stein, C. (2022). Introduction to Algorithms. MIT Press. ISBN: 978-0-2620-4630-5.
