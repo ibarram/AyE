@@ -30,7 +30,7 @@ long int fibonacci_3(long int n)
 
 long int fibonacci_TD(long int n, long int m[])
 {
-	if(n<=1&&n>0)
+	if(n<=1&&n>-1)
 		return n;
 	if(m[n]==-1)
 		m[n] = fibonacci_TD(n-1, m)+fibonacci_TD(n-2, m);
