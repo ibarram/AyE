@@ -20,5 +20,6 @@ float varianza(int x[], int n);
 int limite_inf(int x[], int n);
 int limite_sup(int x[], int n);
 int cardinalidad(int x[], int n);
+float fnormal(float media, float de);
 
 #endif // libarram_H

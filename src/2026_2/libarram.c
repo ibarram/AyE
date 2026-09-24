@@ -151,3 +151,13 @@ int normal(float x[], int n, float media, float de, unsigned int seed)
 	}
 	return 0;
 }
+
+float fnormal(float media, float de)
+{
+	float X, Z, U1, U2;
+	U1 = (float)rand()/RAND_MAX;
+	U2 = (float)rand()/RAND_MAX;
+	Z = sqrt(-2*log(U1))*cos(2*PI*U2);
+	X = media+de*Z;
+	return X;
+}
