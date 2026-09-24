@@ -1,35 +1,70 @@
-# ---- Configuración ----
-CC      := gcc
-CFLAGS  := -std=c11 -Wall -Wextra -O2 -Iinclude
-LDFLAGS :=
-LDLIBS  :=
+# ============================================================
+#  Makefile para mingw32-make (MinGW / Windows)
+#
+#  Uso:
+#    mingw32-make                                   -> compila con valores por defecto
+#    mingw32-make TARGET=Ejemplo0xx                 -> otro programa
+#    mingw32-make LIBNAME=milib                     -> otra librería (milib.c -> libmilib.lib)
+#    mingw32-make TARGET=Ejemplo0xx LIBNAME=milib   -> ambos
+#    mingw32-make lib LIBNAME=milib                 -> solo construye la librería
+#    mingw32-make run TARGET=Ejemplo0xx             -> compila y ejecuta
+#    mingw32-make clean                             -> borra objetos, librería y ejecutable
+# ============================================================
 
-TARGET  := demo.exe
-SRCDIR  := 
-OBJDIR  := build
+# ---- Parámetros seleccionables ------------------------------
+TARGET  ?= Ejemplo009
+LIBNAME ?= libarram
 
-SRCS := $(wildcard $(SRCDIR)/*.c)
-OBJS := $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
+# ---- Herramientas y banderas --------------------------------
+CC      = gcc
+AR      = ar
+CFLAGS  ?= -Wall -O2
+LDFLAGS = -L.
+LDLIBS  = -l$(LIBNAME) -lm
 
-# ---- Etiquetas ----
-.PHONY: all clean run rebuild
+# ---- Archivos derivados -------------------------------------
+LIBSRC  = $(LIBNAME).c
+LIBOBJ  = $(LIBNAME).o
+LIBFILE = lib$(LIBNAME).lib
+SRC     = $(TARGET).c
+EXE     = $(TARGET).exe
 
-all: $(TARGET)
+# ---- Comando de borrado (cmd.exe o sh) ----------------------
+ifeq ($(OS),Windows_NT)
+  ifeq ($(findstring sh,$(SHELL)),sh)
+    RM = rm -f
+  else
+    RM = del /Q /F
+  endif
+else
+  RM = rm -f
+endif
 
-$(TARGET): $(OBJS)
-	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+.PHONY: all lib run clean help
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
+all: $(EXE)
+
+lib: $(LIBFILE)
+
+# Objeto de la librería
+$(LIBOBJ): $(LIBSRC)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJDIR):
-	if not exist "$(OBJDIR)" mkdir "$(OBJDIR)"
+# Librería estática
+$(LIBFILE): $(LIBOBJ)
+	$(AR) rcs $@ $^
+
+# Ejecutable (se reconstruye si cambia la librería)
+$(EXE): $(SRC) $(LIBFILE)
+	$(CC) $(CFLAGS) $(SRC) $(LDFLAGS) $(LDLIBS) -o $@
+
+run: $(EXE)
+	.\$(EXE)
 
 clean:
-	if exist "$(OBJDIR)" rmdir /S /Q "$(OBJDIR)"
-	if exist "$(TARGET)" del /Q "$(TARGET)"
+	-$(RM) $(LIBOBJ) $(LIBFILE) $(EXE)
 
-run: $(TARGET)
-	.\$(TARGET)
-
-rebuild: clean all
+help:
+	@echo Uso: mingw32-make [all^|lib^|run^|clean] [TARGET=nombre] [LIBNAME=nombre]
+	@echo   TARGET  actual: $(TARGET)
+	@echo   LIBNAME actual: $(LIBNAME)

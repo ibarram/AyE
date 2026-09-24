@@ -7,7 +7,7 @@
 int main(int argc, char *argv[])
 {
 	float altura[N] = {155, 165, 175, 185};
-	int m, i, M[N+1], id, c[N], b[N-1];
+	int m, i, M[N+1], id;
 	float media, de, X;
 	do{
 		printf("Ingrese la estatura promedio: ");
@@ -27,17 +27,11 @@ int main(int argc, char *argv[])
 	for(i=0; i<m; i++)
 	{
 		X = fnormal(media, de);
-		c[0] = X<altura[3];
-		c[1] = X<altura[2];
-		c[2] = X<altura[1];
-		c[3] = X<altura[0];
-		b[0] = ((!c[3])&&c[2])||((!c[1])&&c[0]);
-		b[1] = (!c[2])&&c[0];
-		b[2] = !c[0];
-		id = (b[2]<<2)|(b[1]<<1)|(b[0]);
+		id = ((X>=altura[3])<<2)|
+			(((X>=altura[1])&(X<altura[3]))<<1)|
+			(((X>=altura[0])&(X<altura[1]))|
+				((X>=altura[2])&(X<altura[3])));
 		M[id]++;
-		printf("%d, %f, %d%d%d%d, %d (%d%d%d)\n", 
-			i, X, c[3], c[2], c[1], c[0], id, b[2], b[1], b[0]);
 	}
 	for(i=0; i<N+1; i++)
 		printf("M[%d] = %d\n", i+1, M[i]);
