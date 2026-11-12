@@ -14,6 +14,45 @@ lt* fin(lt *lt1, int opt)
 	return lt1;
 }
 
+int liberar_lt(lt *lt1, int opt)
+{
+	lt *lt2;
+	while(lt1!=NULL)
+	{
+		lt2 = lt1;
+		lt1 = opt?lt1->sp:lt1->sc;
+		free(lt2);
+	}
+	return 0;
+}
+
+lt* push(lt *lt1, float dato, int opt)
+{
+	lt *nv;
+	nv = (lt*)malloc(sizeof(lt));
+	nv->sc = NULL;
+	nv->sp = NULL;
+	if(nv==NULL)
+	{
+		liberar_lt(lt1, opt);
+		return NULL;
+	}
+	nv->dato = dato;
+	if(lt1==NULL)
+		return nv;
+	else if(opt)
+	{
+		nv->sp = lt1;
+		return nv;
+	}
+	else
+	{
+		nv->sc = NULL;
+		fin(lt1, opt)->sc = nv;
+		return lt1;
+	}
+}
+
 lt* cola(lt* lt1, lt* nv)
 {
 	lt *lt2;
@@ -43,72 +82,43 @@ lt* pila(lt* lt_p, lt* nv)
 	return lt_p;
 }
 
-int liberar_lt(lt *lt1)
-{
-	lt *lt2;
-	while(lt1!=NULL)
-	{
-		lt2 = lt1;
-		lt1 = lt1->sc;
-		free(lt2);
-	}
-	return 0;
-}
-
 int contar_lt(lt *lt1, int opt)
 {
-	return (lt1==NULL)?0:1+contar_lt(opt?lt1->sp:lt1->sc);
+	return (lt1==NULL)?0:1+contar_lt(opt?lt1->sp:lt1->sc, opt);
 }
 
-int imprimir_lt(lt *lt1)
+int imprimir_lt(lt *lt1, int opt)
 {
 	int i, n;
-	n = contar_lt(lt1);
+	n = contar_lt(lt1, opt);
 	printf("Lista enlazada simple (%p).\n", lt1);
 	for(i=0; i<n; i++)
 	{
-		printf("lt[%d] = %f\n", i+1, lt1->dato);
-		lt1 = lt1->s;
+		printf("%d. lt[%p, %p, %p] = %f\n", i+1, lt1, 
+			lt1->sc, lt1->sp, lt1->dato);
+		lt1 = opt?lt1->sp:lt1->sc;
 	}
 	return 0;
 }
 
 int main(int argc, char *argv[])
 {
-	lt *lt_c, *lt_p, *nv_c, *nv_p;
-	int op, nc, np;
-	lt_c = NULL;
-	lt_p = NULL;
+	lt *lt1;
+	int op, ne, opt;
+	float dato;
+	lt1 = NULL;
+	printf("Ingrese el tipo de estructura: ");
+	scanf("%d", &opt);
 	do{
-		nv_c = (lt*)malloc(sizeof(lt));
-		if(nv_c==NULL)
-		{
-			liberar_lt(lt_c);
-			liberar_lt(lt_p);
-			return 1;
-		}
-		nv_p = (lt*)malloc(sizeof(lt));
-		if(nv_p==NULL)
-		{
-			liberar_lt(lt_c);
-			liberar_lt(lt_p);
-			return 2;
-		}
 		printf("Ingrese el valor: ");
-		scanf("%f", &(nv_c->dato));
-		nv_p->dato = nv_c->dato;
-		lt_c = cola(lt_c, nv_c);
-		lt_p = pila(lt_p, nv_p);
+		scanf("%f", &dato);
+		lt1 = push(lt1, dato, opt);
 		printf("Agregar otro dato: ");
 		scanf("%d", &op);
 	}while(op);
-	nc = contar_lt(lt_c);
-	np = contar_lt(lt_p);
-	printf("Numero de elementos (Cola): %d\n", nc);
-	printf("Numero de elementos (Pila): %d\n", np);
-	imprimir_lt(lt_c);
-	imprimir_lt(lt_p);
-	liberar_lt(lt_c);
-	liberar_lt(lt_p);
+	ne = contar_lt(lt1, opt);
+	printf("Numero de elementos: %d\n", ne);
+	imprimir_lt(lt1, opt);
+	liberar_lt(lt1, opt);
 	return 0;
 }
