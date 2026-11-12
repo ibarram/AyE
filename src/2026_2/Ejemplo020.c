@@ -9,6 +9,12 @@ typedef struct lt_u{
 }lt_u;
 typedef lt_u *plt_u;
 
+typedef struct nodo{
+	char c;
+	struct nodo *i, *d;
+}nodo;
+typedef nodo *pnodo;
+
 int capturar(char *str)
 {
 	int n = 0;
@@ -182,12 +188,88 @@ int max_h(int *h_c, int nh)
 	return i_max;
 }
 
+int liberar_a(pnodo nodo)
+{
+	if(nodo->i!=NULL)
+		liberar_a(nodo->i);
+	if(nodo->d!=NULL)
+		liberar_a(nodo->d);
+	free(nodo);
+	return 0;
+}
+
+pnodo construir_arbol(plt_u lt1, int *h_c, int nh)
+{
+	int i, i_max;
+	pnodo root=NULL, nuevo, ni, nd, nr;
+	for(i=0; i<(2*nh-1); i++)
+	{
+		nuevo = (pnodo)malloc(sizeof(nodo));
+		if(nuevo==NULL)
+		{
+			liberar_a(root);
+			return NULL;
+		}
+		if(root==NULL)
+			root = nuevo;
+		if(i%2)
+		{
+			if(i!=(2*nh-2))
+				nuevo->c = '\0';
+			else
+			{
+				i_max = max_h(h_c, nh);
+				nuevo->c = consulta(lt1, i_max);
+				nuevo->i = NULL;
+				nuevo->d = NULL;
+			}
+			nd = nuevo;
+			if(i>1)
+			{
+				nr->i = ni;
+				nr->d = nd;
+			}
+			nr = nuevo;
+		}
+		else
+		{
+			nuevo->i = NULL;
+			nuevo->d = NULL;
+			i_max = max_h(h_c, nh);
+			nuevo->c = consulta(lt1, i_max);
+			h_c[i_max] = 0;
+			ni = nuevo;
+		}
+	}
+	return root;
+}
+
+int imprimir_a(pnodo nodo)
+{
+	if((nodo->i==NULL)&&(nodo->d==NULL))
+	{
+		printf("%c ", nodo->c);
+		return 0;
+	}
+	else if(nodo->d==NULL)
+		return imprimir_a(nodo->i);
+	else if(nodo->i==NULL)
+		return imprimir_a(nodo->d);
+	else
+	{
+		imprimir_a(nodo->i);
+		imprimir_a(nodo->d);
+		return 0;
+	}
+}
+
 int main(int argc, char *argv[])
 {
 	char str[N];
 	int *h_c;
 	int n, nh, i_max;
 	plt_u lt1;
+	pnodo root;
 	n = capturar(str);
 	printf("MSG: %s (%d)\n", str, n);
 	lt1 = unicos(str);
@@ -205,7 +287,10 @@ int main(int argc, char *argv[])
 	nh = contar_lt(lt1);
 	i_max = max_h(h_c, nh);
 	printf("MAX: %d\t%c\n", h_c[i_max], consulta(lt1, i_max));
+	root = construir_arbol(lt1, h_c, nh);
+	imprimir_a(root);
 	liberar(lt1);
 	free(h_c);
+	liberar_a(root);
 	return 0;
 }
